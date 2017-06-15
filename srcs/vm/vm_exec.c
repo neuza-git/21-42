@@ -27,9 +27,9 @@ int		vm_exec(t_cmd *cmd, int flags, t_vm *vm)
 		if (cmd->next && tc_sigstat(0))
 			ret = vm_exec(cmd->next, flags, vm);
 		else
-			return (0);
+			ret = 0;
 	}
-	if ((flags & LFT_PIPE))
+	else if ((flags & LFT_PIPE))
 	{
 		cmd->flags = flags;
 		if (cmd->next)

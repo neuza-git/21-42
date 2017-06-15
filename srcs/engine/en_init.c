@@ -47,7 +47,9 @@ void		en_loop(t_engine *engine)
 				if (engine->flags & EF_PRINTAST)
 					en_print_ast(ast);
 				vm_loadast(engine->vm, ast);
+				tc_stop_signals();
 				vm_readast(engine->vm, ast);
+				tc_listen_signals();
 			}
 		}
 		enx_free(&lexer, engine);

@@ -8,15 +8,12 @@ int		vm_execentry(t_ast *entry, t_vm *vm)
 	ret = 0;
 	if (vm->reg & VRF_SKIP)
 		return (0);
-	tc_stop_signals();
-	if (entry && (entry->flags & LFD_CMD) && tc_sigstat(0))
+	if (entry && (entry->flags & LFD_CMD))
 	{
 		vm->work = (t_cmd *)entry->data;
 		ret = (vm_exec((t_cmd *)entry->data, entry->flags, vm));
 		vm->work = NULL;
 	}
-	//tc_sigstat(1);
-	tc_listen_signals();
 	return (ret);
 }
 

@@ -7,7 +7,10 @@ char	*en_getline()
 	int		ret;
 
 	line = NULL;
-	ft_putstr("$>");
+	if (tc_sigstat(1) == -1)
+		ft_putstr("\n$>");
+	else
+		ft_putstr("$>");
 	if ((ret = get_next_line(0, &line)) > 0)//a voir un gros bug si on depasse 8086 chars
 	{
 		if (ft_strlen(line) >= CMD_MAX)
