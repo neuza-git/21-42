@@ -34,7 +34,10 @@ static int	get_nl_pointer(int fd, char **old_buffer, char **chr_ptr)
 	if (*chr_ptr)
 		return (1);
 	if (**old_buffer)
+	{
+		ft_putchar('\n');
 		return (1);
+	}
 	return ((readed > 0) ? 1 : readed);
 }
 

@@ -48,15 +48,15 @@
 #define LFT_ANDRDOSET 0x40000
 #define LFT_ANDRDOADD 0x20000
 #define LFT_RDOSETAND 0x10000
-#define LFT_PIPE 0x800 // [cmd]|[cmd]
-#define LFT_RDOSET 0x400 // [cmd]>[file]
-#define LFT_RDOADD 0x200 // [cmd]>>[file]
-#define LFT_RDISET 0x100 // [cmd]<[file]
-#define LFT_RDRDOC 0x80 // [cmd]<<[user input]
-#define LFT_RDOAND 0x40 // [cmd]>&[fd]
+#define LFT_PIPE 0x800
+#define LFT_RDOSET 0x400
+#define LFT_RDOADD 0x200
+#define LFT_RDISET 0x100
+#define LFT_RDRDOC 0x80
+#define LFT_RDOAND 0x40
 #define LFT_TOKEN 0x20
 #define LFT_WORD 0x10
-#define LFT_SEP 0x8//0x6 and 0x4 ar used for data flags
+#define LFT_SEP 0x8
 #define LFT_RDAV 0x2
 #define LFT_PIPEERR 0x1
 
@@ -91,8 +91,9 @@ int				lx_applytoken(t_token *tok);
 int				lx_verifytokens(t_token *tok);
 void			lx_free(t_lexer **lx);
 int				lx_get_flag(char *data);
-int				is_wdpart(int stat);//todo rename with lx_
+int				is_wdpart(int stat);
 int				get_stat(char *c);
 int				is_token(char c);
+void			lx_remove_uslesstoken(t_token **tokens);
 
 #endif

@@ -37,6 +37,7 @@ void		en_loop(t_engine *engine)
 		lexer->ptr = lexer->buff;
 		lexer->stat = LXS_DEF;
 		lx_gettokens(lexer);
+		lx_remove_uslesstoken(&lexer->tokens);
 		if (lexer->tokens && lexer->tokens->value && lexer->tokens->value[0] != '\0')
 		{
 			if (lx_verifytokens(lexer->tokens) && (ast = ast_build(lexer->tokens)))
