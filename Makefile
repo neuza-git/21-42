@@ -1,59 +1,33 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/03/22 12:51:15 by tgascoin          #+#    #+#              #
-#    Updated: 2017/06/15 10:26:30 by tgascoin         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+#a refaire
 
-CC = gcc
+NAME			= minishell
+LIB				=	./libft/libft.a
+_SRC			= 	main.c \
+					ast/ast_ast.c ast/ast_build.c ast/ast_insert.c \
+					builtins/ft_cd.c builtins/ft_echo.c builtins/ft_env.c builtins/ft_setenv.c builtins/ft_unsetenv.c \
+					engine/en_free.c engine/en_getline.c engine/en_init.c engine/en_print.c \
+					env/env_dup.c env/env_entries.c env/env_getbin.c env/env_init.c \
+					lexer/lx_applytoken.c lexer/lx_gettokens.c lexer/lx_token.c \
+					term/tc_utils.c term/tc_signal.c \
+					vm/vm_free.c vm/vm_exec.c vm/vm_exec_redir.c vm/vm_fork.c vm/vm_forkcallback.c vm/vm_init.c vm/vm_isbuiltin.c vm/vm_readast.c vm/vm_exec_rdout.c vm/vm_exec_rdin.c
 
-NAME = 21sh
+INCLUDES		= -I ./includes/
+SRC				= $(addprefix ./srcs/,$(_SRC))
+CFLAGS			= -Wall -Wextra -Werror
 
-PATH_SRC = Srcs
+all:
+	make -C ./libft
+	clang $(SRC) $(LIB) $(CFLAGS) -o $(NAME) $(INCLUDES)
 
-SRC = Srcs/linedit/ft_huge_move.c Srcs/linedit/ft_getline.c \
-	  Srcs/linedit/ft_small_move.c Srcs/linedit/ft_edit_line.c \
-	  Srcs/linedit/ft_advanced_move.c Srcs/linedit/ft_selection.c \
-	  Srcs/linedit/ft_init_term.c Srcs/linedit/ft_keys_action.c \
-	  Srcs/linedit/ft_keys_assign.c Srcs/linedit/ft_cursor.c
+debug:
+	make -C ./libft
+	clang -fsanitize=address -Wall -Werror -Wextra $(SRC) $(LIB) -I includes/ && ASAN_OPTIONS=symbolize=1 ASAN_SYMBOLIZER_PATH=/usr/bin/llvm-symbolizer-3.5 ./minishell
 
-OBJ = $(patsubst $(PATH_SRC)/%.c, obj/%.o, $(SRC))
+clean:
+	make clean -C libft
 
-FLAGS = -g -Wall -Wextra -Werror -I Includes
+fclean:	clean
+	make fclean -C libft
+	rm minishell
 
-LIBS = -L./libft -lft -ltermcap
-
-HEADERS = Includes/21sh.h Includes/libft.h
-
-.SILENT :
-
-all : $(NAME)
-
-$(NAME) : $(OBJ)
-	make -C libft/
-	$(CC) $(FLAGS) $(OBJ) -o $(NAME) $(LIBS)
-	echo "\033[33mCreating  \033[32m[✔] \033[0m$(NAME)"
-
-obj/%.o : $(PATH_SRC)/%.c $(HEADERS)
-	mkdir -p obj/linedit
-	$(CC) $(FLAGS) -c $< -o $@
-	echo "\033[33mCompiling \033[32m[✔] \033[0m$<"
-
-.PHONY : clean fclean
-
-clean :
-	make -C libft/ clean
-	/bin/rm -rf obj/
-	echo "\033[31mRemoving  \033[32m[✔] \033[0mObject files"
-
-fclean : clean
-	make -C libft/ fclean
-	/bin/rm -f $(NAME)
-	echo "\033[31mRemoving  \033[32m[✔] \033[0m$(NAME)"
-
-re : fclean all
+re: fclean all
