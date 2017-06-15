@@ -56,7 +56,7 @@ int		vm_readast(t_vm	*vm, t_ast *ptr)
 	{
 		if (ptr->flags & LFT_OROR && ptr->right && ptr->right->left)
 			ptr = vm_exec_orentry(ptr, vm);
-		else if (ptr->flags & LFT_ANDAND)// && ptr->right && ptr->right->left)
+		else if (ptr->flags & LFT_ANDAND)
 			ptr = vm_exec_andentry(ptr, vm);
 		else
 			vm_execentry(ptr->left, vm);

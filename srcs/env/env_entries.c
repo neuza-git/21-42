@@ -12,6 +12,28 @@
 
 #include "env.h"
 
+
+static int	can_replace(t_envent *root, char *name, char *value)
+{
+	char	*fptr;
+
+	while (root && name)
+	{
+		if (ft_strcmp(root->name, name) == 0)
+		{
+			fptr = root->value;
+			root->value = (value) ? ft_strdup(value) : NULL;
+			ft_strdel(&fptr);
+			return (1);
+		}
+		if (root->next)
+			root = root->next;
+		else
+			break ;
+	}
+	return (0);
+}
+
 void		env_free_entry(t_envent *entry)
 {
 	if (!entry)
@@ -63,23 +85,10 @@ void			env_setentry(char *name, char *value, t_envent **en)
 {
 	t_envent	*new;
 	t_envent	*root;
-	char		*fptr;
 
 	root = *en;
-	while (root && name)
-	{
-		if (ft_strcmp(root->name, name) == 0)
-		{
-			fptr = root->value;
-			root->value = (value) ? ft_strdup(value) : NULL;
-			ft_strdel(&fptr);
-			return ;
-		}
-		if (root->next)
-			root = root->next;
-		else
-			break ;
-	}
+	if (can_replace(root, name, value))
+		return ;
 	if (!name || !(new = ft_memalloc(sizeof(t_envent))))
 		return ;
 	new->name = ft_strdup(name);

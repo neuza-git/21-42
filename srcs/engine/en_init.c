@@ -39,13 +39,9 @@ void		en_loop(t_engine *engine)
 		lx_gettokens(lexer);
 		if (lexer->tokens && lexer->tokens->value && lexer->tokens->value[0] != '\0')
 		{
-			if (engine->flags & EF_PRINTLEX)
-				en_print_lex(lexer);
 			if (lx_verifytokens(lexer->tokens) && (ast = ast_build(lexer->tokens)))
 			{
 				vm_duplocals(engine->vm->local, &lexer->tokens);
-				if (engine->flags & EF_PRINTAST)
-					en_print_ast(ast);
 				vm_loadast(engine->vm, ast);
 				tc_stop_signals();
 				vm_readast(engine->vm, ast);

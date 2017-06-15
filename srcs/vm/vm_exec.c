@@ -32,11 +32,9 @@ int		vm_exec(t_cmd *cmd, int flags, t_vm *vm)
 	else if ((flags & LFT_PIPE))
 	{
 		cmd->flags = flags;
-		if (cmd->next)
-			vm_pipe_cmd(cmd);
+		(cmd->next) ? (vm_pipe_cmd(cmd)) : NULL;
 		ret = (vm_fork_cmd(path, cmd, vm, &vm_fcb_piped));
-		if (!cmd->next)
-			vm_kill_cmds(vm->work);
+		(!cmd->next) ? (vm_kill_cmds(vm->work)) : NULL;
 	}
 	else
 		ret = vm_fork_cmd(path, cmd, vm, &vm_fcb_def);

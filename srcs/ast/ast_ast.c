@@ -1,56 +1,5 @@
 #include "ast.h"
 
-static void	ast_lstfree(t_list *lst)
-{
-	t_list	*fptr;
-
-	while (lst)
-	{
-		fptr = lst;
-		lst = lst->next;
-		if (fptr->content)
-			free(fptr->content);
-		free(fptr);
-	}
-}
-
-static char	**get_avs(t_list *av)
-{
-	t_list	*tmp;
-	char	**ret;
-	int		len;
-
-	len = 1;
-	tmp = av;
-	while (tmp && ++len)
-		tmp = tmp->next;
-	if (!(ret = malloc(sizeof(char *) * len)))
-		return (NULL);
-	ret[--len] = NULL;
-	len = 0;
-	tmp = av;
-	while (tmp)
-	{
-		ret[len++] = ft_strdup((char *)tmp->content);
-		tmp = tmp->next;
-	}
-	return (ret);
-}
-
-static void	ast_freecmdavs(char **lst)
-{
-	char **fptr;
-
-	fptr = lst;
-	while (*fptr)
-	{
-		free(*fptr);
-		fptr++;
-	}
-	if (lst)
-		free(lst);
-}
-
 t_ast	*ast_newast(void *data, t_ast *left, t_ast *right, int flag)
 {
 	t_ast	*new;
@@ -64,35 +13,16 @@ t_ast	*ast_newast(void *data, t_ast *left, t_ast *right, int flag)
 	return (new);
 }
 
-t_cmd	*ast_newcmd(t_list *av, t_ast *redir)
+void 	ast_lstfree(t_list *lst)
 {
-	t_cmd	*new;
+	t_list	*fptr;
 
-	if (!(new = malloc(sizeof(t_cmd))))
-		return (NULL);
-	new->av = get_avs(av);
-	ast_lstfree(av);
-	new->next = NULL;
-	new->stdin = 0;
-	new->stdout = 0;
-	new->pid = 0;
-	new->flags = 0;
-	new->redir = redir;
-	return (new);
-}
-
-void	ast_freecmd(t_cmd *cmd)
-{
-	t_cmd	*fptr;
-	t_ast	*fast;
-
-	while (cmd)
+	while (lst)
 	{
-		fptr = cmd;
-		cmd = cmd->next;
-		ast_freecmdavs(fptr->av);
-		fast = fptr->redir;
-		ast_freeast(&fast);
+		fptr = lst;
+		lst = lst->next;
+		if (fptr->content)
+			free(fptr->content);
 		free(fptr);
 	}
 }

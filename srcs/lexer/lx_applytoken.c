@@ -2,8 +2,6 @@
 
 int		lx_get_flag(char *data)
 {
-	if (!data)
-		return (LXS_NONE);
 	if (ft_strequ(data, LST_RDOADD))
 		return (LFT_RDOADD);
 	if (ft_strequ(data, LST_RDOSET))
@@ -28,7 +26,7 @@ int		lx_get_flag(char *data)
 		return (LFT_ANDRDOSET);
 	if (ft_strequ(data, LST_PIPEAND))
 		return (LFT_PIPE | LFT_PIPEERR);
-	return (0);
+	return (LXS_NONE);
 }
 
 int			lx_applytoken(t_token *tok)

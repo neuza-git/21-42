@@ -33,7 +33,9 @@ void				ast_inright(t_ast **root, t_ast *elem);
 void				ast_inleft(t_ast **root, t_ast *elem);
 void				ast_freecmd(t_cmd *cmd);
 
+t_cmd				*cmd_parse(t_token **tk);
 t_ast				*ast_build(t_token *tokens);
+void 				ast_lstfree(t_list *lst);
 void				ast_freeast(t_ast **ast);
 
 #endif

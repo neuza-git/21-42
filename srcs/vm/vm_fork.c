@@ -21,29 +21,26 @@ int			vm_fork_cmd(char *path, t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_
 
 int			vm_fork(char *path, t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *))
 {
-	pid_t	pid;//todo use directly cmd->pid
 	int		res;
 
-	pid = fork();
+	cmd->pid = fork();
 	res = 0;
-	if (pid < 0)
+	if (cmd->pid < 0)
 	{
 		ft_perror(NULL, ERR_FORK);
 		return (1);
 	}
-	else if (pid == 0)
+	else if (cmd->pid == 0)
 	{
-		if ((f)(cmd, pid, vm))
+		if ((f)(cmd, cmd->pid, vm))
 			execve(path, cmd->av, env_dup(vm->env));
 		exit(EXIT_FAILURE);
 	}
-	else if (pid > 0)
+	else if (cmd->pid > 0)
 	{
-		cmd->pid = pid;
 		(f)(cmd, -2, vm);
-		waitpid(pid, &res, 0);
-		cmd->pid = 0;
-		(f)(cmd, pid, vm);
+		waitpid(cmd->pid, &res, 0);
+		(f)(cmd, cmd->pid, vm);
 		return (WEXITSTATUS(res));
 	}
 	return (0);
@@ -51,32 +48,26 @@ int			vm_fork(char *path, t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *
 
 int			vm_fork_builtin(t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *))
 {
-	pid_t	pid;
 	int		res;
 
 	res = 0;
-	pid = fork();
-	if (pid < 0)
+	cmd->pid = fork();
+	if (cmd->pid < 0)
 	{
 		ft_perror(NULL, ERR_FORK);
 		return (1);
 	}
-	else if (pid == 0)
+	else if (cmd->pid == 0)
 	{
-		if ((f)(cmd, pid, vm))
+		if ((f)(cmd, cmd->pid, vm))
 			res = do_builtin(cmd);
-		if (res)
-			exit(EXIT_SUCCESS);
-		else
-			exit(EXIT_FAILURE);
+		exit((res) ? EXIT_SUCCESS : EXIT_FAILURE);
 	}
-	else if (pid > 0)
+	else if (cmd->pid > 0)
 	{
-		cmd->pid = pid;
 		(f)(cmd, -2, vm);
-		waitpid(pid, &res, 0);
-		cmd->pid = 0;
-		(f)(cmd, pid, vm);
+		waitpid(cmd->pid, &res, 0);
+		(f)(cmd, cmd->pid, vm);
 		return (WEXITSTATUS(res));
 	}
 	return (0);

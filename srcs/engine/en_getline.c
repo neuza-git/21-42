@@ -11,7 +11,7 @@ char	*en_getline()
 		ft_putstr("\n$>");
 	else
 		ft_putstr("$>");
-	if ((ret = get_next_line(0, &line)) > 0)//a voir un gros bug si on depasse 8086 chars
+	if ((ret = get_next_line(0, &line)) > 0)
 	{
 		if (ft_strlen(line) >= CMD_MAX)
 		{
