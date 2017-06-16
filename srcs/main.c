@@ -1,5 +1,5 @@
 #include "engine.h"
-#include "term.h"
+#include "shell.h"
 
 /*
 ** BASH +- posix
