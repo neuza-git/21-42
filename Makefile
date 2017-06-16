@@ -12,45 +12,6 @@ DIRS =	obj/ast \
 		obj/term \
 		obj/lexer
 
-SRC =	srcs/ast/ast_build.c \
-		srcs/ast/ast_build_cmd.c \
-		srcs/ast/ast_cmd.c \
-		srcs/ast/ast_insert.c \
-		srcs/builtins/ft_cd.c \
-		srcs/builtins/ft_echo.c \
-		srcs/builtins/ft_env.c \
-		srcs/builtins/ft_export.c \
-		srcs/builtins/ft_setenv.c \
-		srcs/builtins/ft_unset.c \
-		srcs/builtins/ft_unsetenv.c \
-		srcs/engine/en_free.c \
-		srcs/engine/en_getline.c \
-		srcs/engine/en_init.c \
-		srcs/engine/en_print.c \
-		srcs/env/env_dup.c \
-		srcs/env/env_entries.c \
-		srcs/env/env_getbin.c \
-		srcs/env/env_init.c \
-		srcs/lexer/lx_applytoken.c \
-		srcs/lexer/lx_gettokens.c \
-		srcs/lexer/lx_token.c \
-		srcs/term/tc_signal.c \
-		srcs/term/tc_utils.c \
-		srcs/vm/vm_duplocals.c \
-		srcs/vm/vm_exec.c \
-		srcs/vm/vm_exec_rdin.c \
-		srcs/vm/vm_exec_rdout.c \
-		srcs/vm/vm_exec_redir.c \
-		srcs/vm/vm_fork.c \
-		srcs/vm/vm_forkcallback.c \
-		srcs/vm/vm_free.c \
-		srcs/vm/vm_init.c \
-		srcs/vm/vm_isbuiltin.c \
-		srcs/vm/vm_kill_cmds.c \
-		srcs/vm/vm_open_dup.c \
-		srcs/vm/vm_readast.c \
-		srcs/main.c
-
 SRC = srcs/ast/ast_ast.c \
 	  srcs/ast/ast_build.c \
 	  srcs/ast/ast_build_cmd.c \
