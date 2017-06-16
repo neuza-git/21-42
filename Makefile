@@ -25,7 +25,6 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/builtins/ft_unset.c \
 	  srcs/builtins/ft_unsetenv.c \
 	  srcs/engine/en_free.c \
-	  srcs/engine/en_getline.c \
 	  srcs/engine/en_init.c \
 	  srcs/engine/en_print.c \
 	  srcs/env/env_dup.c \
