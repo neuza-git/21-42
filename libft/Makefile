@@ -6,7 +6,7 @@
 #    By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/11 17:02:02 by acorbeau          #+#    #+#              #
-#    Updated: 2017/04/26 12:41:09 by acorbeau         ###   ########.fr        #
+#    Updated: 2017/06/16 14:00:12 by tgascoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,10 @@ SRCS = ft_atoi.c \
 		ft_lstsort.c \
 		get_next_line.c \
 		ft_memdup.c \
-		ft_lstaddfront.c
+		ft_lstaddfront.c \
+		ft_strjoin_at.c \
+		ft_sc.c \
+		ft_snc.c
 
 OBJS = $(SRCS:.c=.o)
 
