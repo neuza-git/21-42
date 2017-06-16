@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 16:00:09 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/15 10:36:09 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/06/16 14:12:54 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_key_size_2(char *key, t_pos *pos)
 	if (key[0] == -49 && key[1] == -128)
 		return (ft_paste_selection(pos));
 	if (key[0] == 27 && key[1] == 107)
-		ft_putstr_fd(pos->tfd, tgetstr("cl", NULL));
+		ft_putstr_fd(tgetstr("cl", NULL), pos->tfd);
 	return (1);
 }
 
