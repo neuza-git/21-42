@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 16:21:50 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/16 14:10:44 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/06/16 15:40:41 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ static char		*leave_get_line(char *keys, t_pos pos, int m)
 	//if (out == 4)
 		//ft_error(NULL, "syntax error", 13);
 	g_sig = 0;
+	if (out == 1)
+		ft_putstr_fd("exit", pos.tfd);
+	ft_putstr_fd("\n", pos.tfd);
 	if (out == 1)
 		return (NULL);
 	if (out == 3 || pos.str == NULL)
@@ -122,32 +125,33 @@ static int		ft_leave_while(t_pos pos, char *keys, int size, char *rest)
 	return (0);
 }
 
-char			*get_line(t_s *s)
+char			*get_line(t_engine *engine)
 {
 	int		size;
 	char	buffer[1024];
 	char	*keys;
 	t_pos	pos;
 
-	init_get_line(s, &pos, &keys);
+	init_get_line(engine, &pos, &keys);
 	//dprintf(open("/dev//ttys004", O_WRONLY), "\n\n");
+	write(pos.tfd, "$> ", 3);
 	while (1)
 	{
-		if (s->rest == NULL)
+		if (engine->rest == NULL)
 		{
 			ft_memset(buffer, '\0', sizeof(buffer));
 			size = read(0, buffer, sizeof(buffer));
 			keys = ft_strndup(buffer, size);
 		}
-		if (s->rest != NULL || ft_sc(keys, '\n') > 1)
-			keys = ft_create_rest(&s->rest, (s->rest != NULL) ? NULL : keys);
+		if (engine->rest != NULL || ft_sc(keys, '\n') > 1)
+			keys = ft_create_rest(&engine->rest, (engine->rest != NULL) ? NULL : keys);
 		if (!window_size_changed(&pos.width, &pos.h, &pos.uh, pos.ps))
 			ft_process_key(&pos, keys, &size);
-		if (ft_leave_while(pos, keys, size, s->rest))
+		if (ft_leave_while(pos, keys, size, engine->rest))
 			break ;
 		//dprintf(open("/dev//ttys003", O_WRONLY), "[%s]\n", pos.str);
 		//ft_get(keys);
 	}
-	s->cp = pos.cp;
-	return (leave_get_line(keys, pos, ((s->rest == NULL) ? 0 : 1)));
+	engine->cp = pos.cp;
+	return (leave_get_line(keys, pos, ((engine->rest == NULL) ? 0 : 1)));
 }

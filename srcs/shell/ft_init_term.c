@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 10:55:13 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/14 16:35:58 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/06/16 16:03:49 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int         window_size_changed(int *width, int *height, int *uheight, char *ps)
 	return (1);
 }
 
-void        init_get_line(t_s *s, t_pos *pos, char **keys)
+void        init_get_line(t_engine *engine, t_pos *pos, char **keys)
 {
 	*keys = NULL;
 	pos->width = 0;
@@ -54,24 +54,27 @@ void        init_get_line(t_s *s, t_pos *pos, char **keys)
 	pos->uh = 0;
 	pos->hd = 0;
 	pos->sq = 0;
+	pos->head = NULL;
 	pos->bq = 0;
 	pos->dq = 0;
-	window_size_changed(&pos->width, &pos->h, &pos->uh, s->ps);
+	window_size_changed(&pos->width, &pos->h, &pos->uh, "$>");
+	/*
 	if ((pos->head = s->hs) != NULL)
 	{
 		while (pos->head->next != NULL)
 			pos->head = pos->head->next;
-	}
-	ft_set_term();
+	}*/
+	//ft_set_term();
 	//pos->iw = ft_get_cursor('w');
 	//dprintf(open("/dev/ttys005", O_WRONLY), "s %d\n", pos->iw);
-	pos->cp = s->cp;
-	pos->ps = s->ps;
+	pos->cp = engine->cp;
+	//pos->ps = engine->ps;
+	pos->ps = NULL;
 	pos->str = NULL;
 	pos->s = 0;
 	pos->ss = 0;
 	pos->se = 0;
-	pos->tfd = s->tfd;
+	pos->tfd = engine->tfd;
 	pos->i = 0;
 	pos->imax = 0;
 }

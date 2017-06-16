@@ -1,25 +1,20 @@
 #include "shell.h"
 
-//TODO signaux refactor
-
 int			last_signal;
 int			waitsig;
 
-static void	tc_handle_sigint()
+void		tc_handle_signals(int sig)
 {
-	last_signal = SIGINT;
+	struct termios  tattr;
+
 	if (waitsig)
-		ft_putstr("\n$>");
-	else
-		last_signal = -1;
+	{
+		tcgetattr(0, &tattr);
+		ioctl(0, TIOCSTI, &tattr.c_cc[VEOF]);
+		if (sig == SIGINT || sig == SIGWINCH)
+			g_sig = sig;
+	}
 }
-
-static void	tc_handle_signals(int sign)
-{
-	if (sign == SIGINT)
-		tc_handle_sigint();
-}
-
 int			tc_sigstat(int reset)
 {
 	int	tmp;
