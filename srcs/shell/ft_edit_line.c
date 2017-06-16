@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 10:38:42 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/16 10:32:39 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/06/16 14:31:36 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,14 +126,14 @@ int			ft_key_backspace(t_pos *pos, int *i, char **str, int m)
 		if (((*i + (pos->uh - pos->h)) % pos->uh) == (pos->uh - 1))
 			ft_putstr_fd(tgetstr("ce", NULL), pos->tfd);
 		else
-			ft_putstr_fd(pos->tfd, tgetstr("dc", NULL));
+			ft_putstr_fd(tgetstr("dc", NULL), pos->tfd);
 		(str != NULL) ? ft_delete(str, *i, pos->imax, m) : "";
 		pos->imax -= (str != NULL) ? 1 : 0;
-		ft_putstr_fd(pos->tfd, tgetstr("ed", NULL));
+		ft_putstr_fd(tgetstr("ed", NULL), pos->tfd);
 		if (ft_changeline(*i, *pos, 'd'))
 			return (2);
 	}
 	else
-		ft_putstr_fd(pos->tfd, tgetstr("bl", NULL));
+		ft_putstr_fd(tgetstr("bl", NULL), pos->tfd);
 	return (1);
 }
