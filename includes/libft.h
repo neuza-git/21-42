@@ -6,7 +6,7 @@
 /*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 17:39:11 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/06/16 13:58:03 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/06/16 14:06:37 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ void				ft_lstrev(t_list **alst);
 char				*ft_strjoin_at(char *s1, char *s2, int i);
 int					ft_sc(char *str, char c);
 int					ft_snc(char *str, char c, int size);
+int					ft_pow(int n, int p);
+char				*ft_strndup(const char *s1, size_t size);
 
 int					get_next_line(int fd, char **line);
 

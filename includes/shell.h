@@ -7,13 +7,24 @@
 # include <termios.h>
 # include <term.h>
 # include <curses.h>
-# include "libft.h"
+#include "libft.h"
+
+int 		g_sig;
 
 int			tc_sigstat(int reset);
 void		tc_stop_signals();
 void		tc_listen_signals();
 void		tc_check_sin();
 int			tc_check_caps();
+
+typedef struct      s_getcursor
+{
+	char            b[128];
+	int             i;
+	int             hw;
+	int             in;
+	int             size;
+}					t_getcursor;
 
 typedef struct      s_hs
 {
@@ -74,6 +85,7 @@ int                 ft_changeline(int index, t_pos pos, int m);
 int                 window_size_changed(int *width, int *height, int *uheight,\
 		char *ps);
 void                init_get_line(t_s *s, t_pos *pos, char **keys);
+int					ft_clear_line(int *i, t_pos *pos, char **str, int m);
 
 int                 ft_keysassign(char *key, t_pos *pos, int size);
 int                 ft_key_size_1(char *key, t_pos *pos);
