@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <term.h>
+#include <shell.h>
 
 char		*ft_copy_selection(t_pos *pos, int m)
 {

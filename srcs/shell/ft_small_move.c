@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <term.h>
+#include <shell.h>
 
 static void	ft_leftheredoc(int idx, t_pos pos)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <term.h>
+#include <shell.h>
 
 int     ft_key_beginning(int *index, t_pos pos)
 {

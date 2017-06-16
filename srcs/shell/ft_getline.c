@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <term.h>
+#include <shell.h>
 
 static char		*ft_create_rest(char **rest, char *keys)
 {

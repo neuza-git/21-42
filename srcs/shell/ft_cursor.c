@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <term.h>
+#include <shell.h>
 
 static void		ft_init_get_cursor(t_getcursor *s, int m)
 {
