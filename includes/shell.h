@@ -1,6 +1,7 @@
 #ifndef TERM_H
 # define TERM_H
 
+# include <engine.h>
 # include <unistd.h>
 # include <signal.h>
 # include <sys/ioctl.h>
@@ -15,6 +16,7 @@
 
 int 		g_sig;
 
+void		tc_handle_signals(int sig);
 int			tc_sigstat(int reset);
 void		tc_stop_signals();
 void		tc_listen_signals();
@@ -81,6 +83,7 @@ typedef struct      s_pos
 	int             uh;
 }					t_pos;
 
+char				*get_line(t_engine *engine);
 void                ft_set_term(void);
 void        ft_get(char *new); //for debug purpose
 
@@ -88,7 +91,7 @@ int                 ft_get_cursor(int m);
 int                 ft_changeline(int index, t_pos pos, int m);
 int                 window_size_changed(int *width, int *height, int *uheight,\
 		char *ps);
-void                init_get_line(t_s *s, t_pos *pos, char **keys);
+void                init_get_line(t_engine *engine, t_pos *pos, char **keys);
 int					ft_clear_line(int *i, t_pos *pos, char **str, int m);
 
 int                 ft_keysassign(char *key, t_pos *pos, int size);

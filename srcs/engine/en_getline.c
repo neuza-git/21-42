@@ -7,10 +7,6 @@ char	*en_getline()
 	int		ret;
 
 	line = NULL;
-	if (tc_sigstat(1) == -1)
-		ft_putstr("\n$>");
-	else
-		ft_putstr("$>");
 	if ((ret = get_next_line(0, &line)) > 0)
 	{
 		if (ft_strlen(line) >= CMD_MAX)

@@ -11,6 +11,7 @@ static void	enx_free(t_lexer **lexer, t_engine *engine)
 t_engine	*en_init(int flags, char **env)
 {
 	t_engine	*engine;
+	char		buf[1024];
 
 	if (!(engine = malloc(sizeof(t_engine))))
 		return (NULL);
@@ -19,6 +20,13 @@ t_engine	*en_init(int flags, char **env)
 		free(engine);
 		return (NULL);
 	}
+	engine->cp = NULL;
+	engine->rest = NULL;
+	tcgetattr(0, &engine->default_term);
+	tgetent(buf, getenv("TERM"));
+	ft_set_term();
+	//if (ft_genv(s->env, "TERM", 1) == NULL || tcgetattr(0, &s->satt) == -1)
+	engine->tfd = open(ttyname(0), O_WRONLY);;
 	engine->buffer = NULL;
 	engine->flags = flags;
 	return (engine);
@@ -29,7 +37,8 @@ void		en_loop(t_engine *engine)
 	t_lexer	*lexer;
 	t_ast	*ast;
 
-	while ((engine->buffer = en_getline()))
+	//while ((engine->buffer = en_getline()))
+	while ((engine->buffer = get_line(engine)))
 	{
 		if (!(lexer = ft_memalloc(sizeof(t_lexer))))
 			return ;
