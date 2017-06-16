@@ -1,5 +1,5 @@
 #include "engine.h"
-#include "term.h"
+#include "shell.h"
 
 static void	enx_free(t_lexer **lexer, t_engine *engine)
 {

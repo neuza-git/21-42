@@ -1,5 +1,5 @@
 #include "vm.h"
-#include "term.h"
+#include "shell.h"
 
 int		vm_execentry(t_ast *entry, t_vm *vm)
 {

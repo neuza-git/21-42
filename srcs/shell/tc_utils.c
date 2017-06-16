@@ -1,4 +1,4 @@
-#include "term.h"
+#include "shell.h"
 
 void		tc_check_sin()
 {

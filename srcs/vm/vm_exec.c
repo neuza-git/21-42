@@ -1,5 +1,5 @@
 #include "vm.h"
-#include "term.h"
+#include "shell.h"
 
 void	vm_pipe_cmd(t_cmd *cmd)
 {

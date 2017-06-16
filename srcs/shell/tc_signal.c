@@ -1,4 +1,4 @@
-#include "term.h"
+#include "shell.h"
 
 //TODO signaux refactor
 
