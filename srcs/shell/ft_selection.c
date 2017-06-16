@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/17 16:32:32 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/05/19 14:45:06 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/06/16 14:32:52 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int			ft_paste_selection(t_pos *pos)
 	char *new;
 
 	if (pos->cp != NULL && (((pos->imax + 1 + (pos->uh - pos->h)) \
-	+ ft_strlen(pos->cp)) / pos->uh) < pos->width)
+	+ (int)ft_strlen(pos->cp)) / pos->uh) < pos->width)
 	{
 		if (pos->str != NULL)
 		{
