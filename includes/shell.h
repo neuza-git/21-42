@@ -7,6 +7,10 @@
 # include <termios.h>
 # include <term.h>
 # include <curses.h>
+
+# include <fcntl.h>
+# include <sys/stat.h>
+
 #include "libft.h"
 
 int 		g_sig;
