@@ -11,6 +11,7 @@ typedef struct	s_engine
 {
 	t_vm		*vm;
 	char		*buffer;
+	char		*cp;
 	int			flags;
 }				t_engine;
 
