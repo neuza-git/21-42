@@ -1,6 +1,6 @@
 CC = gcc
 
-NAME = minishell
+NAME = 21sh
 
 PATH_SRC = srcs
 
@@ -68,7 +68,7 @@ PATH_SRC = srcs
 
 OBJ = $(patsubst $(PATH_SRC)/%.c, obj/%.o, $(SRC))
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 LIBS = -L./libft -lft -ltermcap
 
