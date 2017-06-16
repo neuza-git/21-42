@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 16:21:50 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/16 10:33:21 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/06/16 14:10:44 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ static char		*leave_get_line(char *keys, t_pos pos, int m)
 	ft_strdel(&keys);
 	if (out == 4)
 		ft_putstr_fd("\n", pos.tfd);
-	if (out == 4)
-		ft_error(NULL, "syntax error", 13);
+	//if (out == 4)
+		//ft_error(NULL, "syntax error", 13);
 	g_sig = 0;
 	if (out == 1)
 		return (NULL);
@@ -112,7 +112,7 @@ static int		ft_leave_while(t_pos pos, char *keys, int size, char *rest)
 			|| (g_sig == SIGINT)
 			|| (g_sig != SIGWINCH && keys[0] == 4 && pos.str == NULL) \
 			|| (g_sig != SIGWINCH && keys[0] == 4 && pos.str[0] == '\0' \
-				&& size == ft_strlen(pos.str)) \
+				&& size == (int)ft_strlen(pos.str)) \
 			|| (rest != NULL) \
 			|| (g_sig != SIGWINCH && keys[0] == 4 \
 				&& (pos.sq || pos.dq || pos.bq)))
