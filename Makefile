@@ -64,8 +64,6 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/vm/vm_readast.c \
 	  srcs/main.c
 
-NAME = minishell
-
 PATH_SRC = srcs
 
 OBJ = $(patsubst $(PATH_SRC)/%.c, obj/%.o, $(SRC))
