@@ -2,14 +2,12 @@
 
 void		tc_check_sin()
 {
-	if (!isatty(0))
+	struct termios def;
+
+	tcgetattr(0, &def);
+	if (!isatty(0) || getenv("TERM") == NULL || tcgetattr(0, &def) == -1)
 	{
-		ft_putendl("This shell needs a sin terminal connected.");
+		ft_putendl("This shell needs a sdtin terminal connected.");
 		exit(1);
 	}
-}
-
-int			tc_check_caps()
-{
-	return (1);
 }
