@@ -3,6 +3,7 @@
 
 # include <fcntl.h>
 # include <string.h>
+#include <signal.h>
 # include "env.h"
 # include "ast.h"
 # include "builtins.h"

@@ -1,10 +1,10 @@
 #include "term.h"
 
-void		tc_check_stdin()
+void		tc_check_sin()
 {
 	if (!isatty(0))
 	{
-		ft_putendl("This shell needs a stdin terminal connected.");
+		ft_putendl("This shell needs a sin terminal connected.");
 		exit(1);
 	}
 }

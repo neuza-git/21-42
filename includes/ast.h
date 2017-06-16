@@ -18,8 +18,8 @@ typedef struct		s_cmd
 {
 	char			**av;
 	t_ast			*redir;
-	int				stdin;
-	int				stdout;
+	int				sin;
+	int				sout;
 	int				flags;
 	pid_t			pid;
 	struct s_cmd	*next;

@@ -46,8 +46,8 @@ t_cmd	*ast_newcmd(t_list *av, t_ast *redir)
 	new->av = get_avs(av);
 	ast_lstfree(av);
 	new->next = NULL;
-	new->stdin = 0;
-	new->stdout = 0;
+	new->sin = 0;
+	new->sout = 0;
 	new->pid = 0;
 	new->flags = 0;
 	new->redir = redir;

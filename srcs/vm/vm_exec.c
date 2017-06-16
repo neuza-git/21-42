@@ -8,8 +8,8 @@ void	vm_pipe_cmd(t_cmd *cmd)
 	if (!cmd->next)
 		return ;
 	pipe(fds);
-	cmd->stdout = fds[1];
-	cmd->next->stdin = fds[0];
+	cmd->sout = fds[1];
+	cmd->next->sin = fds[0];
 	cmd->next->flags = cmd->flags;
 }
 

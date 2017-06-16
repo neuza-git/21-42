@@ -26,7 +26,7 @@ int		main(int ac, char **av, char **env)
 	t_engine	*engine;
 
 	ft_errset("minishell");
-	tc_check_stdin();
+	tc_check_sin();
 	tc_listen_signals();
 	engine = en_init(get_cmd_flags(ac, av), env);
 	en_loop(engine);

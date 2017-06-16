@@ -2,17 +2,17 @@
 
 static int	fcb_pid0(t_cmd *cmd, t_vm *vm)
 {
-	if (cmd->stdin)
+	if (cmd->sin)
 	{
-		dup2(cmd->stdin, 0);
-		close(cmd->stdin);
+		dup2(cmd->sin, 0);
+		close(cmd->sin);
 	}
-	if (cmd->stdout)
+	if (cmd->sout)
 	{
-		dup2(cmd->stdout, 1);
+		dup2(cmd->sout, 1);
 		if (cmd->flags & LFT_PIPEERR)
-			dup2(cmd->stdout, 2);
-		close (cmd->stdout);
+			dup2(cmd->sout, 2);
+		close (cmd->sout);
 	}
 	return (vm_exec_redir(cmd, cmd->redir, vm));
 }
@@ -23,10 +23,10 @@ int			vm_fcb_piped(t_cmd *cmd, int pid, t_vm *vm)
 		return (fcb_pid0(cmd, vm));
 	if (pid == -2)
 	{
-		if (cmd->stdout)
+		if (cmd->sout)
 		{
-			close(cmd->stdout);
-			cmd->stdin = 0;
+			close(cmd->sout);
+			cmd->sin = 0;
 		}
 		if (cmd->next)
 		{
