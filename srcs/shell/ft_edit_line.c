@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 10:38:42 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/16 14:31:36 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/06/19 12:54:40 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,25 +89,6 @@ void		ft_delete(char **str, int i, int imax, int m)
 	new[ni - ((m == 0) ? 0 : 1)] = '\0';
 	ft_strdel(str);
 	*str = new;
-}
-
-int			ft_clear_line(int *i, t_pos *pos, char **str, int m)
-{
-	int		ni;
-
-	ni = *i;
-	while (*i < pos->imax)
-		ft_key_right(i, pos);
-	ft_putstr_fd(tgetstr("ce", NULL), pos->tfd);
-	while (*i > 0)
-		ft_key_backspace(pos, i, (m == 0) ? NULL : str, 0);
-	ft_putstr_fd(*str, pos->tfd);
-	*i = pos->imax;
-	if (m == 0 && *i != 0 && ((*i + (pos->uh - pos->h)) % pos->uh) == 0)
-		ft_putchar_fd('\n', pos->tfd);
-	while (m == 0 && *i != ni)
-		ft_key_left(i, *pos);
-	return (1);
 }
 
 int			ft_key_backspace(t_pos *pos, int *i, char **str, int m)

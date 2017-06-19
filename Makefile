@@ -46,6 +46,7 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/shell/ft_keys_assign.c \
 	  srcs/shell/ft_selection.c \
 	  srcs/shell/ft_small_move.c \
+	  srcs/shell/ft_clear_line.c \
 	  srcs/shell/tc_signal.c \
 	  srcs/shell/tc_utils.c \
 	  srcs/vm/vm_duplocals.c \
@@ -67,7 +68,7 @@ PATH_SRC = srcs
 
 OBJ = $(patsubst $(PATH_SRC)/%.c, obj/%.o, $(SRC))
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -g #-Wall -Wextra -Werror
 
 LIBS = -L./libft -lft -ltermcap
 
