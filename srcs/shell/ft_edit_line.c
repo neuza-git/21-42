@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 10:38:42 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/19 12:54:40 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/06/20 15:41:18 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,14 @@ void		ft_delete(char **str, int i, int imax, int m)
 	ni = 0;
 	oi = 0;
 	new = (char*)malloc(sizeof(char) * imax);
-	while (ni < (imax - ((m == 0) ? 1 : 0)))
+	while (ni < imax - m)
 	{
 		if (oi == i)
 			oi++;
 		else
 			new[ni++] = old[oi++];
 	}
-	new[ni - ((m == 0) ? 0 : 1)] = '\0';
+	new[ni - ((m == 1) ? 0 : 1)] = '\0';
 	ft_strdel(str);
 	*str = new;
 }
@@ -96,14 +96,12 @@ int			ft_key_backspace(t_pos *pos, int *i, char **str, int m)
 	char 	*cur;
 
 	cur = (str == NULL) ? NULL : *str;
-	//dprintf(open("/dev//ttys003", O_WRONLY), "%d, %d\n", *i, ft_get_position('h'));
-	if (((m == 0 && *i > 0) || (m == 1 && *i < pos->imax)) && cur != NULL \
-		&& !((cur[*i - ((m == 0) ? 1 : 0)]) == '\n' && ft_get_cursor('h') == 3))
+	if (((m == 1 && *i > 0) || (m == 0 && *i < pos->imax)) && cur != NULL \
+		&& !((cur[*i - m]) == '\n' && ft_get_cursor('h') == 3))
 	{
 		ft_putstr_fd(tgetstr("dm", NULL), pos->tfd);
-		(m == 0) ? (void)ft_key_left(i, *pos) : "";
-		if (cur[*i] == '\'' || cur[*i] == '"' || cur[*i] == '`') //PASBON
-			ft_fill_quotes(*i, cur, pos);
+		(m == 1) ? (void)ft_key_left(i, *pos) : "";
+		ft_fill_quotes(*i, cur, pos);
 		if (((*i + (pos->uh - pos->h)) % pos->uh) == (pos->uh - 1))
 			ft_putstr_fd(tgetstr("ce", NULL), pos->tfd);
 		else
@@ -111,7 +109,7 @@ int			ft_key_backspace(t_pos *pos, int *i, char **str, int m)
 		(str != NULL) ? ft_delete(str, *i, pos->imax, m) : "";
 		pos->imax -= (str != NULL) ? 1 : 0;
 		ft_putstr_fd(tgetstr("ed", NULL), pos->tfd);
-		if (ft_changeline(*i, *pos, 'd'))
+		if (ft_changeline(*i, *pos, *str, 'd'))
 			return (2);
 	}
 	else

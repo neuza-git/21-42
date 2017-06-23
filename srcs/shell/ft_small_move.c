@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 10:39:55 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/16 10:41:22 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/06/19 17:05:53 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int			ft_key_left(int *i, t_pos pos)
 		r = -1;
 		//if (((*i + (pos.uh - pos.h)) / \
 		//			pos.uh) > ((*i + (pos.uh - pos.h) - 1) / pos.uh))
-		if (ft_changeline(*i, pos, 'l'))
+		if (ft_changeline(*i, pos, pos.str, 'l'))
 		{
 			ft_putstr_fd(tgetstr("up", NULL), pos.tfd);
 			while (r++ <= pos.uh)
@@ -83,7 +83,7 @@ int			ft_key_right(int *i, t_pos *pos)
 	if (*i < pos->imax)
 	{
 			//if (((*i + (pos->uh - pos->h)) / pos->uh) < ((*i + (pos->uh - pos->h) + 1) / pos->uh))
-			if (ft_changeline(*i, *pos, 'r'))
+			if (ft_changeline(*i, *pos, pos->str, 'r'))
 				ft_putstr_fd(tgetstr("do", NULL), pos->tfd);
 			else if (pos->str[*i] == '\n' && *i != pos->imax)
 				ft_rightheredoc(*i, *pos);

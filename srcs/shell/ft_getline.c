@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 16:21:50 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/16 15:40:41 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/06/20 15:16:58 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,10 @@ char			*get_line(t_engine *engine)
 			size = read(0, buffer, sizeof(buffer));
 			keys = ft_strndup(buffer, size);
 		}
-		if (engine->rest != NULL || ft_sc(keys, '\n') > 1)
-			keys = ft_create_rest(&engine->rest, (engine->rest != NULL) ? NULL : keys);
+		if (!pos.sq && !pos.dq && !pos.bq && !pos.hd && ((engine->rest != NULL) \
+			|| (ft_sc(keys, '\n') > 0 && !(keys[0] == 10 && keys[1] == '\0'))))
+			keys = ft_create_rest(&engine->rest, (engine->rest != NULL) \
+					? NULL : keys);
 		if (!window_size_changed(&pos.width, &pos.h, &pos.uh, pos.ps))
 			ft_process_key(&pos, keys, &size);
 		if (ft_leave_while(pos, keys, size, engine->rest))

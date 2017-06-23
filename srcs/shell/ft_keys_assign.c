@@ -6,13 +6,13 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 16:00:09 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/16 14:32:25 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/06/20 16:17:49 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-static int	ft_endofline(char *keys, t_pos pos)
+static int	ft_endofline(char *keys, t_pos *pos)
 {
 	int		i;
 
@@ -21,13 +21,14 @@ static int	ft_endofline(char *keys, t_pos pos)
 	{
 		if (ft_isprint(keys[i]) == 0 && keys[i] != 10)
 			return (1);
-		if (pos.str != NULL && keys[0] == 10 && keys[1] == '\0' \
-				&& pos.str[pos.i] != '\0')
+		if (pos->str != NULL && keys[0] == 10 && keys[1] == '\0' \
+				&& pos->str[pos->i] != '\0')
 		{
-			return (1);
+			ft_key_end(&pos->i, *pos);
+			return (0);
 		}
 		if (keys[0] == 10 && keys[1] == '\0' \
-				&& pos.sq == 0 && pos.dq == 0 && pos.bq == 0)
+				&& pos->sq == 0 && pos->dq == 0 && pos->bq == 0)
 			return (1);
 		i++;
 	}
@@ -47,24 +48,23 @@ void		ft_fill_quotes(int index, char *keys, t_pos *pos)
 			pos->bq = (pos->bq) ? 0 : 1;
 		if (keys[i] == '`' && pos->sq == 0 && pos->bq == 0)
 			pos->dq = (pos->dq) ? 0 : 1;
-		if (index == -1)
+		if (index != -1)
 			break ;
 		else
 			i++;
 	}
 }
 
-int			ft_changeline(int index, t_pos pos, int m)
+int			ft_changeline(int index, t_pos pos, char *str, int m)
 {
 	int		i;
 
 	i = index;
-	while (i > 0 && pos.str[i] != '\n')
+	while (i > 0 && str != NULL && str[i] != '\n')
 		i--;
 	if (i != 0)
 		i += 2;
 	i = index - i;
-	//dprintf(open("/dev//ttys003", O_WRONLY), "%d, %d\n", i, index);
 	if (m == 'n' && (i != 0 \
 				&& ((i + (pos.uh - pos.h)) % pos.uh) == 0))
 		return (1);
@@ -97,10 +97,11 @@ int			ft_char_input(t_pos *pos, char *keys)
 		pos->imax += ft_strlen(keys);
 		ft_fill_quotes(-1, keys, pos);
 		//if (pos->i != 0 && ((pos->i + (pos->uh - pos->h)) % pos->uh) == 0)
-		if (ft_changeline(pos->i, *pos, 'n'))
+		if (ft_changeline(pos->i, *pos, pos->str, 'n'))
 			ft_putchar_fd('\n', pos->tfd);
-		if (pos->s == 1 || (((pos->i + (pos->uh - pos->h)) / \
-						pos->uh) != ((pos->imax + (pos->uh - pos->h)) / pos->uh)))
+		if (((int)ft_strlen(keys) > 1) || pos->s == 1 \
+			|| (((pos->i + (pos->uh - pos->h)) / pos->uh) \
+			!= ((pos->imax + (pos->uh - pos->h)) / pos->uh)))
 		{
 			pos->s = 0;
 			return (2);
@@ -121,7 +122,7 @@ int			ft_keysassign(char *keys, t_pos *pos, int size)
 	}
 	//if (!ft_endofline(keys, *pos) && ((pos->imax + ft_strlen(keys) + \
 	//				(pos->uh - pos->h) + 1) / pos->uh) < pos->width)
-	if (!ft_endofline(keys, *pos))
+	if (!ft_endofline(keys, pos))
 		return (ft_char_input(pos, keys));
 	if (size == 1)
 		return (ft_key_size_1(keys, pos));

@@ -23,12 +23,14 @@ t_engine	*en_init(int flags, char **env)
 	engine->cp = NULL;
 	engine->rest = NULL;
 	tcgetattr(0, &engine->default_term);
-	tgetent(buf, getenv("TERM"));
+	tgetent(buf, NULL);
 	ft_set_term();
 	//if (ft_genv(s->env, "TERM", 1) == NULL || tcgetattr(0, &s->satt) == -1)
 	engine->tfd = open(ttyname(0), O_WRONLY);;
 	engine->buffer = NULL;
 	engine->flags = flags;
+	if (env_getentry("PATH", engine->vm->env) && env_getentry("PATH", engine->vm->env)->value)
+		engine->vm->binaries = ht_loadbinaries(env_getentry("PATH", engine->vm->env)->value);
 	return (engine);
 }
 
@@ -37,7 +39,6 @@ void		en_loop(t_engine *engine)
 	t_lexer	*lexer;
 	t_ast	*ast;
 
-	//while ((engine->buffer = en_getline()))
 	while ((engine->buffer = get_line(engine)))
 	{
 		if (!(lexer = ft_memalloc(sizeof(t_lexer))))

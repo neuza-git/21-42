@@ -14,6 +14,8 @@ int		vm_isbuiltin(t_cmd *cmd, t_vm *vm)
 		ft_unset(cmd, &vm->local);
 	else if (ft_strequ(cmd->av[0], "export"))
 		ft_export(cmd, &vm->local);
+	else if (ft_strequ(cmd->av[0], "exit"))
+		exit(0);//todo a voir faut ptetre pas deconner x)
 	else
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 10:35:48 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/19 16:06:35 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/06/20 15:45:07 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,6 @@ int			ft_has_newnl(int ni, t_pos pos, char *str)
 	return (0);
 }
 
-void		ft_print_nl(int i, t_pos pos, int *n)
-{
-	if (ft_changeline(i - 1, pos, 'r') && ft_get_cursor('w') == pos.width)
-		*n += 1;
-	if (ft_changeline(i - 1, pos, 'r') && ft_get_cursor('w') == pos.width)
-		ft_putchar_fd('\n', pos.tfd);
-}
-
 void		ft_clear_ln(int i, t_pos pos, char *str)
 {
 	char	buf2[30];
@@ -61,13 +53,14 @@ void		ft_clear_ln(int i, t_pos pos, char *str)
 	ft_putstr_fd(tgetstr("cd", NULL), pos.tfd);
 	ft_putstr_fd(tgetstr("cr", NULL), pos.tfd);
 	ft_putstr_fd(((i == 0) ? "$> " : "> "), pos.tfd);
-	while (i < pos.imax)
+	ft_putstr_fd(str, pos.tfd);
+	if (ft_changeline(pos.imax, pos, str, 'r') && ft_get_cursor('w') == pos.width)
 	{
-		ft_print_nl(i, pos, &n);
-		ft_putchar_fd(pos.str[i++], pos.tfd);
+		ft_putchar_fd('\n', pos.tfd);
+		n++;
 	}
 	ft_putstr_fd(tgoto(tgetstr("cm", &buf), h - 1, w - 1 - \
-		((n != 0) ? n : 0)), pos.tfd);
+			((n != 0) ? n : 0)), pos.tfd);
 }
 
 int         ft_clear_line(int *i, t_pos *pos, char **str, int m)

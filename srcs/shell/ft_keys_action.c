@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 16:00:09 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/16 14:12:54 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/06/20 14:52:05 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int	ft_key_size_1(char *key, t_pos *pos)
 {
 	if (key[0] == 4 && g_sig == 0 && pos->str != NULL && pos->str[0] != '\0')
-		return (ft_key_backspace(pos, &pos->i, &pos->str, 1));
+		return (ft_key_backspace(pos, &pos->i, &pos->str, 0));
 	if (key[0] == 4 && g_sig != 0)
 		return (ft_print_sig(*pos));
 	if (key[0] == 127)
-		return (ft_key_backspace(pos, &pos->i, &pos->str, 0));
+		return (ft_key_backspace(pos, &pos->i, &pos->str, 1));
 	if (key[0] == 23)
 		return (ft_key_wordleft(pos, &pos->str, 1));
 	if (key[0] == 1)
@@ -78,7 +78,7 @@ int	ft_key_size_4(char *key, t_pos *pos)
 	if (key[0] == 27 && key[1] == 27 && key[2] == 91 && key[3] == 67)
 		return (ft_goes_leftnright(pos, 'r'));
 	if (key[0] == 27 && key[1] == 91 && key[2] == 51 && key[3] == 126)
-		return (ft_key_backspace(pos, &pos->i, &pos->str, 1));
+		return (ft_key_backspace(pos, &pos->i, &pos->str, 0));
 	if (key[0] == 27 && key[1] == 27 && key[2] == 91 && key[3] == 65)
 		return (ft_goes_up(&pos->i, *pos));
 	if (key[0] == 27 && key[1] == 27 && key[2] == 91 && key[3] == 66)

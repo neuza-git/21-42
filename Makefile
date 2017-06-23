@@ -4,13 +4,14 @@ NAME = 21sh
 
 PATH_SRC = srcs
 
-DIRS =	obj/ast \
+ODIRS =	obj/ast \
 		obj/builtins \
 		obj/engine \
 		obj/env \
 		obj/vm \
 		obj/shell \
-		obj/lexer
+		obj/lexer \
+		obj/htable \
 
 SRC = srcs/ast/ast_ast.c \
 	  srcs/ast/ast_build.c \
@@ -62,6 +63,10 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/vm/vm_kill_cmds.c \
 	  srcs/vm/vm_open_dup.c \
 	  srcs/vm/vm_readast.c \
+	  srcs/htable/ht_bucket.c \
+	  srcs/htable/ht_entries.c \
+	  srcs/htable/ht_paths.c \
+	  srcs/htable/ht_free.c \
 	  srcs/main.c
 
 PATH_SRC = srcs
@@ -87,11 +92,9 @@ $(NAME) : $(OBJ)
 	echo "\033[33mCreating  \033[32m[✔] \033[0m$(NAME)"
 
 obj/%.o : $(PATH_SRC)/%.c $(H_FILES)
-	mkdir -p $(DIRS)
+	mkdir -p $(ODIRS)
 	$(CC) $(FLAGS) -c $< -o $@ -I includes/
 	echo "\033[33mCompiling \033[32m[✔] \033[0m$<"
-
-.PHONY : clean fclean
 
 clean :
 	make -C libft/ clean
@@ -104,3 +107,8 @@ fclean : clean
 	echo "\033[31mRemoving  \033[32m[✔] \033[0m$(NAME)"
 
 re : fclean all
+
+valgrind : all
+	valgrind --leak-check=full ./21sh
+
+.PHONY : valgrind clean fclean re
