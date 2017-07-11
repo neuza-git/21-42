@@ -6,67 +6,75 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 10:55:13 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/07/11 11:22:06 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/06/16 16:03:49 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-void		ft_set_term(void)
+void        ft_set_term(void)
 {
-	struct termios	tattr;
+	struct termios  tattr;
 
 	tcgetattr(0, &tattr);
-	tattr.c_lflag &= ~(ICANON | ECHO);
+	tattr.c_lflag &= ~(ICANON|ECHO);
 	tattr.c_cc[VMIN] = 1;
 	tattr.c_cc[VTIME] = 0;
 	tcsetattr(0, TCSAFLUSH, &tattr);
 }
 
-void		ft_get(char *new)
+void        ft_get(char *new)
 {
-	int	i;
+	int     i;
 
 	i = -1;
 	while (new[++i] != '\0')
 		printf("\n%d :%d\n", i, new[i]);
 }
 
-int			win_size_changed(t_pos *pos)
+
+int         window_size_changed(int *width, int *height, int *uheight, char *ps)
 {
-	struct winsize	w;
+	struct winsize  w;
 
 	ioctl(0, TIOCGWINSZ, &w);
-	if (pos->width == w.ws_row && pos->uh == w.ws_col)
+	if (*width == w.ws_row && *uheight == w.ws_col)
 		return (0);
-	pos->width = w.ws_row;
-	pos->h = w.ws_col - 3;
-	pos->uh = w.ws_col;
+	*width = w.ws_row;
+	*height = w.ws_col - ((ps != NULL) ? (ft_strlen(ps) + 1) : 3);
+	*uheight = w.ws_col;
 	return (1);
 }
 
-void		initgl(t_engine *en, t_pos *pos, char *hdstr, int hd)
+void        init_get_line(t_engine *engine, t_pos *pos, char **keys)
 {
-	pos->hd = hd;
-	pos->keys = (pos->hd == 1) ? ft_strdup(hdstr) : NULL;
+	*keys = NULL;
 	pos->width = 0;
 	pos->h = 0;
 	pos->uh = 0;
-	pos->exp = 0;
-	pos->imax = 0;
-	pos->hs = (en->vm != NULL) ? en->vm->hs : NULL;
-	pos->uhs = (en->vm != NULL) ? en->vm->hs : NULL;
-	pos->tfd = en->tfd;
-	win_size_changed(pos);
-	//while (pos->head != NULL && pos->head->next != NULL)
-	//	pos->head = pos->head->next;
-	pos->cp = en->cp;
-	//pos->ps = en->ps;
+	pos->hd = 0;
+	pos->sq = 0;
+	pos->head = NULL;
+	pos->bq = 0;
+	pos->dq = 0;
+	window_size_changed(&pos->width, &pos->h, &pos->uh, "$>");
+	/*
+	if ((pos->head = s->hs) != NULL)
+	{
+		while (pos->head->next != NULL)
+			pos->head = pos->head->next;
+	}*/
+	//ft_set_term();
+	//pos->iw = ft_get_cursor('w');
+	//dprintf(open("/dev/ttys005", O_WRONLY), "s %d\n", pos->iw);
+	pos->cp = engine->cp;
+	//pos->ps = engine->ps;
 	pos->ps = NULL;
 	pos->str = NULL;
 	pos->s = 0;
 	pos->ss = 0;
 	pos->se = 0;
-	ft_putstr_fd(tgetstr("am", NULL), pos->tfd);
+	pos->tfd = engine->tfd;
 	pos->i = 0;
+	pos->imax = 0;
 }

@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_perror.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/06/16 16:37:59 by acorbeau          #+#    #+#             */
+/*   Updated: 2017/06/16 16:39:14 by acorbeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static char	*errname = "default";
+static char	*g_errname = "default";
 
 void		ft_errset(char *name)
 {
-	errname = name;
+	g_errname = name;
 }
 
 void		ft_perror(char *err, int flag)
 {
-	ft_putstr_fd(errname, 2);
+	ft_putstr_fd(g_errname, 2);
 	ft_putstr_fd(": ", 2);
 	if (err)
 		ft_putstr_fd(err, 2);
@@ -22,10 +34,6 @@ void		ft_perror(char *err, int flag)
 	if (flag == ERR_FORK)
 		ft_putstr_fd("can't fork", 2);
 	if (flag == ERR_NOTOKEN)
-		ft_putstr_fd("invalid token", 2);
-	if (flag == ERR_UNEXPCT)
-		return ft_putstr_fd("unexpected EOF while looking for matching : ", 2);
-	if (flag == ERR_ENDOFF)
-		return ft_putstr_fd("unexpected end of file", 2);
+		ft_putstr_fd("invalide token", 2);
 	ft_putendl_fd("", 2);
 }

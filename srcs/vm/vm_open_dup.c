@@ -1,16 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vm_open_dup.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/06/16 14:45:46 by acorbeau          #+#    #+#             */
+/*   Updated: 2017/06/16 14:46:36 by acorbeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
-/*
-** @PARAMS
-** name		file to create or open
-** fd		file descriptor to write into
-** flags	(VRDF_APPEND: append file, if not file was trunc | VRDF_STDERR: dup stderr)
-*/
 int		vm_open_dup(char *name, int fd, int flags)
 {
 	int		file;
 	int		oflags;
-	oflags = (O_RDWR | O_CREAT);//O_RDWR ou O_WRONLY
+
+	oflags = (O_RDWR | O_CREAT);
 	if (!(flags & VRDF_APPEND))
 		oflags |= O_TRUNC;
 	else

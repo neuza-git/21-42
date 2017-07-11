@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   en_init.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/06/16 15:30:08 by acorbeau          #+#    #+#             */
+/*   Updated: 2017/06/16 15:33:53 by acorbeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "engine.h"
-#include "shell.h"
-#include "history.h"
+#include "term.h"
 
 static void	enx_free(t_lexer **lexer, t_engine *engine)
 {
@@ -12,7 +23,6 @@ static void	enx_free(t_lexer **lexer, t_engine *engine)
 t_engine	*en_init(int flags, char **env)
 {
 	t_engine	*engine;
-	char		buf[1024];
 
 	if (!(engine = malloc(sizeof(t_engine))))
 		return (NULL);
@@ -21,13 +31,6 @@ t_engine	*en_init(int flags, char **env)
 		free(engine);
 		return (NULL);
 	}
-	engine->cp = NULL;
-	engine->rest = NULL;
-	tcgetattr(0, &engine->default_term);
-	tgetent(buf, getenv("TERM"));
-	engine->vm->hs = ft_create_history();
-	ft_set_term();
-	engine->tfd = open(ttyname(0), O_WRONLY);;
 	engine->buffer = NULL;
 	engine->flags = flags;
 	return (engine);
@@ -35,30 +38,29 @@ t_engine	*en_init(int flags, char **env)
 
 void		en_loop(t_engine *engine)
 {
-	t_lexer	*lexer;
+	t_lexer	*l;
 	t_ast	*ast;
 
-	while ((engine->buffer = get_line(engine, 0, NULL)))
+	while ((engine->buffer = en_getline()))
 	{
-		if (!(lexer = ft_memalloc(sizeof(t_lexer))))
+		if (!(l = ft_memalloc(sizeof(t_lexer))))
 			return ;
-		ft_fill_history(&engine->vm->hs, engine->buffer);
-		lexer->buff = engine->buffer;
-		lexer->ptr = lexer->buff;
-		lexer->stat = LXS_DEF;
-		lx_gettokens(lexer);
-		lx_remove_uslesstoken(&lexer->tokens);
-		if (lexer->tokens && lexer->tokens->value && lexer->tokens->value[0] != '\0')
+		l->buff = engine->buffer;
+		l->ptr = l->buff;
+		l->stat = LXS_DEF;
+		lx_gettokens(l);
+		lx_remove_uslesstoken(&l->tokens);
+		if (l->tokens && l->tokens->value && l->tokens->value[0] != '\0')
 		{
-			if (lx_verifytokens(lexer->tokens) && (ast = ast_build(lexer->tokens)))
+			if (lx_verifytokens(l->tokens) && (ast = ast_build(l->tokens)))
 			{
-				vm_duplocals(engine->vm->local, &lexer->tokens);
+				vm_duplocals(engine->vm->local, &l->tokens);
 				vm_loadast(engine->vm, ast);
 				tc_stop_signals();
 				vm_readast(engine->vm, ast);
 				tc_listen_signals();
 			}
 		}
-		enx_free(&lexer, engine);
+		enx_free(&l, engine);
 	}
 }

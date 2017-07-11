@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vm_readast.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/06/16 14:39:31 by acorbeau          #+#    #+#             */
+/*   Updated: 2017/06/16 14:40:51 by acorbeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
-#include "shell.h"
+#include "term.h"
 
 int		vm_execentry(t_ast *entry, t_vm *vm)
 {
@@ -48,7 +60,7 @@ t_ast	*vm_exec_andentry(t_ast *entry, t_vm *vm)
 	return (entry);
 }
 
-int		vm_readast(t_vm	*vm, t_ast *ptr)
+int		vm_readast(t_vm *vm, t_ast *ptr)
 {
 	if (!vm || !vm->ast)
 		return (1);

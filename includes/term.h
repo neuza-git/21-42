@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_insert.c                                       :+:      :+:    :+:   */
+/*   term.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/16 14:55:56 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/06/16 14:56:05 by acorbeau         ###   ########.fr       */
+/*   Created: 2017/06/16 16:40:04 by acorbeau          #+#    #+#             */
+/*   Updated: 2017/06/16 16:40:58 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ast.h"
+#ifndef TERM_H
+# define TERM_H
 
-void	ast_inright(t_ast **root, t_ast *elem)
-{
-	t_ast *tmp;
+# include <unistd.h>
+# include <signal.h>
+# include <sys/ioctl.h>
+# include <termios.h>
+# include <term.h>
+# include <curses.h>
+# include "libft.h"
 
-	if (!*root)
-	{
-		*root = elem;
-		return ;
-	}
-	tmp = *root;
-	while (tmp->right)
-		tmp = tmp->right;
-	tmp->right = elem;
-}
+int			tc_sigstat(int reset);
+void		tc_stop_signals();
+void		tc_listen_signals();
+void		tc_check_sin();
+int			tc_check_caps();
 
-void	ast_inleft(t_ast **root, t_ast *elem)
-{
-	t_ast *tmp;
-
-	if (!*root)
-		*root = elem;
-	tmp = *root;
-	while (tmp->left)
-		tmp = tmp->left;
-	tmp->left = elem;
-}
+#endif

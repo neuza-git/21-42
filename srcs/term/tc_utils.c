@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_insert.c                                       :+:      :+:    :+:   */
+/*   tc_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/16 14:55:56 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/06/16 14:56:05 by acorbeau         ###   ########.fr       */
+/*   Created: 2017/06/16 16:27:18 by acorbeau          #+#    #+#             */
+/*   Updated: 2017/06/16 16:27:55 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ast.h"
+#include "term.h"
 
-void	ast_inright(t_ast **root, t_ast *elem)
+void		tc_check_sin(void)
 {
-	t_ast *tmp;
-
-	if (!*root)
+	if (!isatty(0))
 	{
-		*root = elem;
-		return ;
+		ft_putendl("This shell needs a sin terminal connected.");
+		exit(1);
 	}
-	tmp = *root;
-	while (tmp->right)
-		tmp = tmp->right;
-	tmp->right = elem;
 }
 
-void	ast_inleft(t_ast **root, t_ast *elem)
+int			tc_check_caps(void)
 {
-	t_ast *tmp;
-
-	if (!*root)
-		*root = elem;
-	tmp = *root;
-	while (tmp->left)
-		tmp = tmp->left;
-	tmp->left = elem;
+	return (1);
 }

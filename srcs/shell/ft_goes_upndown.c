@@ -6,66 +6,47 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/15 16:31:05 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/26 13:48:28 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/06/16 10:34:23 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-int			ft_goes_up(int *i, t_pos pos)
+int			ft_goes_up(int *i, t_pos p)
 {
-	int		ni;
-	int		cw;
-	int		ch;
-	char    buf2[30];
-	char    *buf;
+	int		cl;
+	int		tmp;
+	int		pl;
 
-	ni = *i;
-	cw = ft_get_cursor('w');
-	ch = ft_get_cursor('h');
-	buf = buf2;
-	if (ni < pos.h && ft_snc(pos.str, '\n', ni) == 0)
-		return (1);
-	while (ni > 0)
+	cl = *i - 1;
+	while (cl >= 0 && p.str[cl] != '\n')
+		cl--;
+	pl = cl - 1;
+	tmp = cl;
+	cl = *i - 1 - cl + ((ft_snc(p.str, '\n', *i) == 0) ? p.uh - p.h : 0);
+	if (cl < p.uh)
 	{
-		if ((ft_get_cursor('h') == ch && ni != *i) \
-				|| (pos.str[ni - 1] == '\n' && ft_get_cursor('h') == 3))
-			break ;
-		//dprintf(open("/dev/ttys003", O_WRONLY), "%d, %c\n", ft_get_cursor('h'), pos.str[ni - 1]);
-		ft_key_left(&ni, pos);
+		while (pl >= 0 && p.str[pl] != '\n')
+			pl--;
+		pl = tmp - 1 - pl + ((pl > 0 \
+				&& ft_snc(p.str, '\n', pl + 1) == 0) ? p.uh - p.h : 0);
 	}
-	if (ft_get_cursor('h') == ch && ft_get_cursor('w') == (cw - 1))
-		*i = ni;
 	else
-		ft_putstr_fd(tgoto(tgetstr("cm", &buf), ch - 1, cw - 1), pos.tfd);
+	{
+		pl = p.uh - 1;
+		cl = (cl % p.uh);
+	}
+	if (cl <= pl && !(ft_snc(p.str, '\n', *i - 1) <= 1 && cl < (p.uh - p.h)))
+		ft_putstr_fd(tgetstr("up", NULL), p.tfd);
+	dprintf(open("/dev/ttys003", O_WRONLY), "%d, %d\n", cl, pl);
 	return (1);
 }
 
-int			ft_goes_down(int *i, t_pos pos)
+int			ft_goes_down(int *index, t_pos pos)
 {
-	//dprintf(open("/dev/ttys003", O_WRONLY), "%d, %d\n", ft_get_cursor('h'), ch - 1);
-	int		ni;
-	int		cw;
-	int		ch;
-	char    buf2[30];
-	char    *buf;
-
-	ni = *i;
-	cw = ft_get_cursor('w');
-	ch = ft_get_cursor('h');
-	buf = buf2;
-	if (ni == (pos.imax - 1))
-		return (1);
-	while (ni < pos.imax)
-	{
-		if (ft_get_cursor('h') == ch && ni != *i)
-			break ;
-		ft_key_right(&ni, &pos);
-	}
-	if (ft_get_cursor('h') == ch && ft_get_cursor('w') == (cw + 1))
-		*i = ni;
-	else
-		ft_putstr_fd(tgoto(tgetstr("cm", &buf), ch - 1, cw - 1), pos.tfd);
+	//dprintf(open("/devttys003", O_WRONLY), "%d, %d\n", cl, pos.uh - pos.h);
+	(void)*index;
+	(void)pos;
 	return (1);
 }
 
@@ -79,6 +60,7 @@ int			ft_goes_upndown(t_pos *pos, int m)
 	{
 		if (m == 'u')
 		{
+		//	dprintf(open("/devttys004", O_WRONLY), "%d - %d\n", pos->iw, ft_get_position('w'));
 			ft_putstr_fd(tgetstr("up", NULL), pos->tfd);
 			pos->i = pos->i - pos->uh;
 		}

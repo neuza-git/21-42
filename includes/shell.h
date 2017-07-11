@@ -1,5 +1,5 @@
-#ifndef SHELL_H
-# define SHELL_H
+#ifndef TERM_H
+# define TERM_H
 
 # include <engine.h>
 # include <unistd.h>
@@ -9,13 +9,10 @@
 # include <term.h>
 # include <curses.h>
 
-#include "libft.h"
+# include <fcntl.h>
+# include <sys/stat.h>
 
-#define EXP_SQ 0x01
-#define EXP_DQ 0x10
-#define EXP_BQ 0x100
-#define EXP_SL 0x1000
-#define EXP_P 0x10000
+#include "libft.h"
 
 int 		g_sig;
 
@@ -35,39 +32,67 @@ typedef struct      s_getcursor
 	int             size;
 }					t_getcursor;
 
+typedef struct      s_hs
+{
+	int             count;
+	char            *cmd;
+	struct s_hs     *next;
+	struct s_hs     *prev;
+}					t_hs;
+
+typedef struct      s_s
+{
+	t_hs            *hs;
+	char            *rest;
+	char            **tenv;
+	char            *cp;
+	struct termios  satt;
+	int             **fd;
+	int             ip;
+	int             maxp;
+	char            *entry;
+	char            *cmd;
+	char            **cmds;
+	char            **av;
+	char            **tmptenv;
+	char            *ps;
+	int             tmp;
+	int             tfd;
+}					t_s;
+
 typedef struct      s_pos
 {
-	char			*keys;
 	char            *str;
 	char            *rest;
 	int             s;
 	int             ss;
+	int             iw;
 	int             se;
 	char            *cp;
-	unsigned int	exp;
-	int             hd;
+	int             sq;
+	int             bq;
+	int             dq;
 	int             tfd;
 	int             i;
 	int             imax;
 	char            *ps;
-	t_hs            *hs;
-	t_hs            *uhs;
+	t_hs            *head;
 	int             width;
+	int             hd;
 	int             h;
 	int             uh;
 }					t_pos;
 
-char				*get_line(t_engine *engine, int hd, char *hdstr);
+char				*get_line(t_engine *engine);
 void                ft_set_term(void);
 void        ft_get(char *new); //for debug purpose
 
 int                 ft_get_cursor(int m);
-int                 ft_changeline(int index, t_pos pos, char *str, int m);
-int                 win_size_changed(t_pos *pos);
-void                initgl(t_engine *engine, t_pos *pos, char *hdstr, int hd);
-int					ft_clear_line(int i, t_pos pos, char *str);
-char				*leave_get_line(char *keys, t_pos pos, char *hdstr, int m);
-int					ft_leave_hd(char *str, char *hdstr);
+int                 ft_changeline(int index, t_pos pos, int m);
+int                 window_size_changed(int *width, int *height, int *uheight,\
+		char *ps);
+void                init_get_line(t_engine *engine, t_pos *pos, char **keys);
+int					ft_clear_line(int *i, t_pos *pos, char **str, int m);
 
 int                 ft_keysassign(char *key, t_pos *pos, int size);
 int                 ft_key_size_1(char *key, t_pos *pos);
@@ -82,26 +107,24 @@ int                 ft_key_beginning(int *index, t_pos pos);
 int                 ft_key_end(int *index, t_pos pos);
 
 int                 ft_key_deleteblock(int *index, int *imax, char **str);
+int                 ft_key_up(t_pos *pos);
+int                 ft_key_down(t_pos *pos);
 void                ft_delete(char **str, int i, int imax, int mode);
 int                 ft_key_backspace(t_pos *pos, int *i, char **str, int mode);
 int                 ft_print_sig(t_pos pos);
-void                ft_fill_quotes(int index, char *keys, unsigned int *exp);
-int					ft_expan(t_pos *pos);
-void				ft_new_line(int tfd);
+void                ft_fill_quotes(int index, char *keys, t_pos *pos);
 
 char                *ft_copy_selection(t_pos *pos, int m);
 char                *ft_cut_selection(t_pos *pos);
 int                 ft_paste_selection(t_pos *pos);
 
 int                 ft_cursor_pos(char c);
-int                 ft_goes_up(int *i, t_pos pos);
-int                 ft_goes_down(int *i, t_pos pos);
 int                 ft_key_wordleft(t_pos *pos, char **cur, int m);
 int                 ft_key_wordright(t_pos *pos, char *s);
 int                 ft_goes_upndown(t_pos *pos, int m);
+int                 ft_goes_up(int *index, t_pos pos);
+int                 ft_goes_down(int *index, t_pos pos);
 int                 ft_goes_leftnright(t_pos *pos, int m);
 
-int                 ft_key_up(t_pos *pos);
-int                 ft_key_down(t_pos *pos);
 
 #endif

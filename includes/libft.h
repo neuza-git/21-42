@@ -6,7 +6,7 @@
 /*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 17:39:11 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/06/23 11:06:13 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/05/23 20:59:09 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,13 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-# define BUFF_SIZE 4096
+# define BUFF_SIZE 1024
 
 # define ERR_NOFOUND 1
 # define ERR_NOACCESS 2
 # define ERR_NOCMD 3
 # define ERR_FORK 4
 # define ERR_NOTOKEN 5
-# define ERR_UNEXPCT 6
-# define ERR_ENDOFF 7
 
 typedef struct		s_list
 {
@@ -118,13 +116,6 @@ void				ft_lstpop(t_list **root);
 void				ft_lstswap(t_list *lst1, t_list *lst2);
 void				ft_lstsort(t_list *root, int (*f)(t_list *, t_list *));
 void				ft_lstrev(t_list **alst);
-
-char				*ft_strjoin_at(char *s1, char *s2, int i);
-int					ft_sc(char *str, char c);
-int					ft_snc(char *str, char c, int size);
-int					ft_pow(int n, int p);
-char				*ft_strndup(const char *s1, size_t size);
-char				*ft_str3join(char *s1, char *s2, char *s3);
 
 int					get_next_line(int fd, char **line);
 

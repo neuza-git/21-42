@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 16:21:50 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/26 11:47:51 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/06/16 15:40:41 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,69 +41,117 @@ static char		*ft_create_rest(char **rest, char *keys)
 	return (((new == NULL) ? ft_strdup("\0") : new));
 }
 
+static char		*leave_get_line(char *keys, t_pos pos, int m)
+{
+	int		out;
+
+	if (pos.sq || pos.dq || pos.bq)
+		out = 4;
+	if ((keys[0] == 4 && pos.str == NULL) || (keys[0] == 4 && pos.str[0] == '\0'))
+		out = 1;
+	if (keys[0] == 10)
+		out = 2;
+	if (g_sig == SIGINT)
+		out = 3;
+	if (out != 2 && m == 0)
+		ft_strdel(&pos.str);
+	ft_strdel(&keys);
+	if (out == 4)
+		ft_putstr_fd("\n", pos.tfd);
+	//if (out == 4)
+		//ft_error(NULL, "syntax error", 13);
+	g_sig = 0;
+	if (out == 1)
+		ft_putstr_fd("exit", pos.tfd);
+	ft_putstr_fd("\n", pos.tfd);
+	if (out == 1)
+		return (NULL);
+	if (out == 3 || pos.str == NULL)
+		return (ft_strdup("\0"));
+	return (pos.str);
+}
+
+static int		ft_escaped(char **str, t_pos *pos, int m)
+{
+	int		i;
+	char	*cur;
+
+	(void)m;
+	if (str == NULL || *str == NULL || pos->sq || pos->dq || pos->bq \
+			|| pos->imax <= 0)
+		return (0);
+	cur = *str;
+	i = pos->imax - 1;
+	while (i >= 0 && cur[i] == '\\')
+		i--;
+	i = ((pos->imax - 1) - i);
+	if (pos->hd == 0 && (i % 2) != 0)
+	{
+		ft_putstr_fd("\n> ", pos->tfd);
+		pos->hd = 2;
+	}
+	else
+		pos->hd = 0;
+	//dprintf(open("/dev//ttys003", O_WRONLY), "(%s) %d\n", *str, m);
+	return ((((i % 2) == 0) ? 0 : 1));
+}
+
 static void		ft_process_key(t_pos *pos, char *keys, int *size)
 {
 	if (keys[0] == 10)
-		ft_expan(pos);
+		ft_escaped(&pos->str, pos, pos->hd);
 	*size = ft_strlen(pos->str);
 	if (ft_keysassign(keys, pos, ft_strlen(keys)) == 2)
-		ft_clear_line(pos->i, *pos, pos->str);
-	if (keys[0] == 10 && ((pos->exp \
-			&& pos->str[pos->i] == '\0') || pos->hd == 2))
+		ft_clear_line(&pos->i, pos, &pos->str, 0);
+	if (keys[0] == 10 && (pos->sq || pos->dq || pos->bq) \
+			&& pos->str[pos->i] == '\0')
 		ft_putstr_fd("> ", pos->tfd);
+	//if (keys[0] == 10 && ft_escaped(&pos->str, *pos, 0))
 }
 
-static int		ft_leave_while(t_pos pos, char *hdstr, int size, char *rest)
+static int		ft_leave_while(t_pos pos, char *keys, int size, char *rest)
 {
-	if ((pos.keys[0] == 10 && ((!pos.exp && pos.hd != 2) || (pos.hd == 2 && ft_leave_hd(pos.str, hdstr)))) \
-			|| (pos.hd == 1)
+	if ((keys[0] == 10 && !pos.sq && !pos.dq && !pos.bq && !pos.hd) \
 			|| (g_sig == SIGINT)
-			|| (g_sig != SIGWINCH && pos.keys[0] == 4 && pos.str == NULL) \
-			|| (g_sig != SIGWINCH && pos.keys[0] == 4 && pos.str[0] == '\0' \
+			|| (g_sig != SIGWINCH && keys[0] == 4 && pos.str == NULL) \
+			|| (g_sig != SIGWINCH && keys[0] == 4 && pos.str[0] == '\0' \
 				&& size == (int)ft_strlen(pos.str)) \
 			|| (rest != NULL) \
-			|| (g_sig != SIGWINCH && pos.keys[0] == 4 \
-				&& (pos.exp || pos.hd == 2)))
+			|| (g_sig != SIGWINCH && keys[0] == 4 \
+				&& (pos.sq || pos.dq || pos.bq)))
 	{
 		return (1);
 	}
 	return (0);
 }
 
-char			*get_line(t_engine *engine, int hd, char *hdstr)
+char			*get_line(t_engine *engine)
 {
 	int		size;
 	char	buffer[1024];
+	char	*keys;
 	t_pos	pos;
 
-	initgl(engine, &pos, hdstr, hd);
+	init_get_line(engine, &pos, &keys);
 	//dprintf(open("/dev//ttys004", O_WRONLY), "\n\n");
-	if (pos.hd == 0)
-		write(pos.tfd, "$> ", 3);
-	else if (pos.hd == 2)
-		write(pos.tfd, "> ", 3);
+	write(pos.tfd, "$> ", 3);
 	while (1)
 	{
-		if (engine->rest == NULL && pos.keys == NULL)
+		if (engine->rest == NULL)
 		{
 			ft_memset(buffer, '\0', sizeof(buffer));
 			size = read(0, buffer, sizeof(buffer));
-			pos.keys = ft_strndup(buffer, size);
+			keys = ft_strndup(buffer, size);
 		}
-		if (!pos.exp && ((engine->rest != NULL) \
-			|| (ft_sc(pos.keys, '\n') > 0 && !(pos.keys[0] == 10 && pos.keys[1] == '\0'))))
-			pos.keys = ft_create_rest(&engine->rest, (engine->rest != NULL) \
-					? NULL : pos.keys);
-		if (!win_size_changed(&pos))
-			ft_process_key(&pos, pos.keys, &size);
-		if (ft_leave_while(pos, hdstr, size, engine->rest))
+		if (engine->rest != NULL || ft_sc(keys, '\n') > 1)
+			keys = ft_create_rest(&engine->rest, (engine->rest != NULL) ? NULL : keys);
+		if (!window_size_changed(&pos.width, &pos.h, &pos.uh, pos.ps))
+			ft_process_key(&pos, keys, &size);
+		if (ft_leave_while(pos, keys, size, engine->rest))
 			break ;
-		else
-			ft_strdel(&pos.keys);
 		//dprintf(open("/dev//ttys003", O_WRONLY), "[%s]\n", pos.str);
-		//ft_get(pos.keys);
+		//ft_get(keys);
 	}
 	engine->cp = pos.cp;
-	engine->vm->hs = pos.uhs;
-	return (leave_get_line(pos.keys, pos, hdstr, ((engine->rest == NULL) ? 0 : 1)));
+	return (leave_get_line(keys, pos, ((engine->rest == NULL) ? 0 : 1)));
 }

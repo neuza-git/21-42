@@ -6,7 +6,7 @@
 /*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 16:11:00 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/05/23 20:34:29 by acorbeau         ###   ########.fr       */
+/*   Updated: 2017/06/16 16:32:55 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ char		**env_dup(t_envent *env)
 	{
 		if (env->value)
 		{
-			dup[ec] = ft_strnew(ft_strlen(env->name) + ft_strlen(env->value) + 1);
+			dup[ec] = ft_strnew(ft_strlen(env->name) +
+ft_strlen(env->value) + 1);
 			ft_strcat(dup[ec], env->name);
 			ft_strcat(dup[ec], "=");
 			ft_strcat(dup[ec++], env->value);

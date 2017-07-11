@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vm_exec.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/06/16 14:51:35 by acorbeau          #+#    #+#             */
+/*   Updated: 2017/06/16 17:37:19 by acorbeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
-#include "shell.h"
+#include "term.h"
 
 void	vm_pipe_cmd(t_cmd *cmd)
 {
@@ -22,12 +34,12 @@ int		vm_exec(t_cmd *cmd, int flags, t_vm *vm)
 		return (2);
 	path = NULL;
 	ret = 0;
-	if (!vm_isextbuiltin(cmd) && !(path = env_getbin((char *)cmd->av[0], vm->env)))
+	if (!vm_isextbuiltin(cmd) && !(path = env_getbin(cmd->av[0], vm->env)))
 	{
 		if (cmd->next && tc_sigstat(0))
-			ret = vm_exec(cmd->next, flags, vm);
+			return (vm_exec(cmd->next, flags, vm));
 		else
-			ret = 0;
+			return (0);
 	}
 	else if ((flags & LFT_PIPE))
 	{
@@ -38,6 +50,6 @@ int		vm_exec(t_cmd *cmd, int flags, t_vm *vm)
 	}
 	else
 		ret = vm_fork_cmd(path, cmd, vm, &vm_fcb_def);
-	(path) ? free(path) : NULL;
+	free(path);
 	return (ret);
 }
