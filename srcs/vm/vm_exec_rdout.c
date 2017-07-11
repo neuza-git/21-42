@@ -1,37 +1,22 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   vm_exec_rdout.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/16 14:41:00 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/06/16 14:44:55 by acorbeau         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "vm.h"
 
 static int	rdout_andsetadd(t_ast *rd, t_list *av)
 {
-	if (av)
+	if (av)//a voir ici, bash posix ne pipe pas apres une redirection mais zsh le fais :3
 		return (vm_open_dup((char *)av->content, 1,
-					(rd->flags & LFT_ANDRDOSET) ?
-					VRDF_STDERR : VRDF_STDERR | VRDF_APPEND));
-		ft_perror("parse error near '>''", 0);
+(rd->flags & LFT_ANDRDOSET) ? VRDF_STDERR : VRDF_STDERR | VRDF_APPEND));
+	ft_perror("parse error near '>''", 0);
 	return (0);
 }
 
 static int	rdout_setadd(t_ast *rd, t_list *av)
 {
 	if (av && av->next)
-		return (vm_open_dup((char *)av->next->content,
-					(int)(*((char *)av->content)) - 48,
+		return (vm_open_dup((char *)av->next->content, (int)(*((char *)av->content)) - 48,
 (rd->flags & LFT_RDOSET) ? 0 : VRDF_APPEND));
-	else if (av && rd->flags & RDF_RIGHTAV)
-		return (vm_open_dup((char *)av->content, 1,
-(rd->flags & LFT_RDOSET) ? 0 : VRDF_APPEND));
-		ft_perror("parse error near '>''", 0);
+	else if (av && rd->flags & RDF_RIGHTAV)//todo le lexer reconais fd meme si il est a gauche :3
+		return (vm_open_dup((char *)av->content, 1, (rd->flags & LFT_RDOSET) ? 0 : VRDF_APPEND));
+	ft_perror("parse error near '>''", 0);
 	return (0);
 }
 

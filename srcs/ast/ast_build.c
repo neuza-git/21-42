@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ast_build.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/16 14:58:37 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/06/16 14:59:52 by acorbeau         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "ast.h"
 
 static void	cmd_addfront(t_cmd **cmd, t_cmd *new)
@@ -19,7 +7,7 @@ static void	cmd_addfront(t_cmd **cmd, t_cmd *new)
 	if (!*cmd)
 	{
 		*cmd = new;
-		return ;
+		return;
 	}
 	tmp = *cmd;
 	while (tmp->next)
@@ -64,8 +52,8 @@ t_ast		*ast_parse(t_token *token)
 
 int			ast_build_sections(t_token *tokens, t_ast **root)
 {
-	t_token		*tmp;
-	t_ast		*parsed;
+	t_token	*tmp;
+	t_ast	*parsed;
 
 	tmp = tokens;
 	while (tokens)
@@ -76,15 +64,14 @@ int			ast_build_sections(t_token *tokens, t_ast **root)
 				return (1);
 			if (!(parsed = ast_parse(tmp)))
 				return (0);
-			ast_inright(root, ast_newast(NULL, parsed, NULL,
-(tokens->flag | LFD_NONE)));
+			ast_inright(root, ast_newast(NULL , parsed, NULL, (tokens->flag | LFD_NONE)));
 			tmp = tokens->next;
 		}
 		tokens = tokens->next;
 	}
 	if (!(parsed = ast_parse(tmp)))
 		return (0);
-	ast_inright(root, ast_newast(NULL, parsed, NULL, (tmp->flag | LFD_NONE)));
+	ast_inright(root, ast_newast(NULL , parsed, NULL, (tmp->flag | LFD_NONE)));
 	return (1);
 }
 

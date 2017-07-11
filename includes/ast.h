@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ast.h                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/16 16:39:22 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/06/16 16:39:59 by acorbeau         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef AST_H
 # define AST_H
 
@@ -47,7 +35,7 @@ void				ast_freecmd(t_cmd *cmd);
 
 t_cmd				*cmd_parse(t_token **tk);
 t_ast				*ast_build(t_token *tokens);
-void				ast_lstfree(t_list *lst);
+void 				ast_lstfree(t_list *lst);
 void				ast_freeast(t_ast **ast);
 
 #endif

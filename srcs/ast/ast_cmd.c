@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ast_cmd.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/16 14:56:50 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/06/16 14:56:52 by acorbeau         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "ast.h"
 
 static char	**get_avs(t_list *av)
@@ -49,7 +37,7 @@ static void	ast_freecmdavs(char **lst)
 		free(lst);
 }
 
-t_cmd		*ast_newcmd(t_list *av, t_ast *redir)
+t_cmd	*ast_newcmd(t_list *av, t_ast *redir)
 {
 	t_cmd	*new;
 
@@ -66,7 +54,7 @@ t_cmd		*ast_newcmd(t_list *av, t_ast *redir)
 	return (new);
 }
 
-void		ast_freecmd(t_cmd *cmd)
+void	ast_freecmd(t_cmd *cmd)
 {
 	t_cmd	*fptr;
 	t_ast	*fast;

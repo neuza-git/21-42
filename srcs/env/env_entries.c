@@ -6,11 +6,12 @@
 /*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 16:11:00 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/06/16 16:36:15 by acorbeau         ###   ########.fr       */
+/*   Updated: 2017/05/23 20:18:45 by acorbeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
+
 
 static int	can_replace(t_envent *root, char *name, char *value)
 {
@@ -44,7 +45,7 @@ void		env_free_entry(t_envent *entry)
 	free(entry);
 }
 
-t_envent	*env_getentry(char *name, t_envent *tmp)
+t_envent		*env_getentry(char *name, t_envent *tmp)
 {
 	while (tmp)
 	{
@@ -55,7 +56,7 @@ t_envent	*env_getentry(char *name, t_envent *tmp)
 	return (NULL);
 }
 
-void		env_delentriy(char *name, t_envent **tmp)
+void			env_delentriy(char *name, t_envent **tmp)
 {
 	t_envent	*fptr;
 
@@ -80,7 +81,7 @@ void		env_delentriy(char *name, t_envent **tmp)
 	env_free_entry(fptr);
 }
 
-void		env_setentry(char *name, char *value, t_envent **en)
+void			env_setentry(char *name, char *value, t_envent **en)
 {
 	t_envent	*new;
 	t_envent	*root;

@@ -1,39 +1,27 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   vm_fork.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/16 14:03:56 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/06/16 14:39:25 by acorbeau         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "vm.h"
 
-static int	do_builtin(t_cmd *cmd)
+static int	do_builtin(t_cmd *cmd, t_vm *vm)
 {
 	if (ft_strequ(cmd->av[0], "echo"))
 		ft_echo(cmd);
+	if (ft_strequ(cmd->av[0], "history"))
+		ft_history(cmd->av, &vm->hs);
 	else
 	{
 		ft_perror(cmd->av[0], ERR_NOCMD);
-		return (0);
+		return 0;
 	}
 	return (1);
 }
 
-int			vm_fork_cmd(char *path, t_cmd *cmd, t_vm *vm,
-		int (*f)(t_cmd *cmd, int, t_vm *))
+int			vm_fork_cmd(char *path, t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *))
 {
 	if (vm_isextbuiltin(cmd))
-		return (vm_fork_builtin(cmd, vm, f) > 0) ? 0 : 1;
+		return (vm_fork_builtin(cmd, vm , f) > 0) ? 0 : 1;
 	return (vm_fork(path, cmd, vm, f) > 0) ? 0 : 1;
 }
 
-int			vm_fork(char *path, t_cmd *cmd, t_vm *vm,
-		int (*f)(t_cmd *cmd, int, t_vm *))
+int			vm_fork(char *path, t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *))
 {
 	int		res;
 
@@ -60,8 +48,7 @@ int			vm_fork(char *path, t_cmd *cmd, t_vm *vm,
 	return (0);
 }
 
-int			vm_fork_builtin(t_cmd *cmd, t_vm *vm,
-		int (*f)(t_cmd *cmd, int, t_vm *))
+int			vm_fork_builtin(t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *))
 {
 	int		res;
 
@@ -75,7 +62,7 @@ int			vm_fork_builtin(t_cmd *cmd, t_vm *vm,
 	else if (cmd->pid == 0)
 	{
 		if ((f)(cmd, cmd->pid, vm))
-			res = do_builtin(cmd);
+			res = do_builtin(cmd, vm);
 		exit((res) ? EXIT_SUCCESS : EXIT_FAILURE);
 	}
 	else if (cmd->pid > 0)

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ast_build_cmd.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/16 14:57:07 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/06/16 14:58:30 by acorbeau         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "ast.h"
 
 static t_token	*parse_redir_avs(t_token *token, t_list **rdav, t_ast *ret)
@@ -17,8 +5,7 @@ static t_token	*parse_redir_avs(t_token *token, t_list **rdav, t_ast *ret)
 	if ((token->flag & LFT_RDAV))
 	{
 		ret->flags |= RDF_LEFTAV;
-		ft_lstaddfront(rdav, ft_lstcreate(ft_strdup(token->value),
-sizeof(char *)));
+		ft_lstaddfront(rdav, ft_lstcreate(ft_strdup(token->value), sizeof(char *)));
 		token = token->next;
 	}
 	ret->flags = (lx_get_flag(token->value) | LFD_NONE);
@@ -26,8 +13,7 @@ sizeof(char *)));
 	if (token && (token->flag & LFT_WORD))
 	{
 		ret->flags |= RDF_RIGHTAV;
-		ft_lstaddfront(rdav, ft_lstcreate(ft_strdup(token->value),
-sizeof(char *)));
+		ft_lstaddfront(rdav, ft_lstcreate(ft_strdup(token->value), sizeof(char *)));
 		token = token->next;
 	}
 	return (token);
@@ -66,8 +52,7 @@ t_cmd			*cmd_parse(t_token **tk)
 		return (NULL);
 	while (token && (token->flag & LFT_WORD))
 	{
-		ft_lstaddfront(&av, ft_lstcreate(ft_strdup(token->value),
-sizeof(char *)));
+		ft_lstaddfront(&av, ft_lstcreate(ft_strdup(token->value), sizeof(char *)));
 		token = token->next;
 	}
 	redir = NULL;

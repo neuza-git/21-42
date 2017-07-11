@@ -6,15 +6,15 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 10:38:57 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/16 10:34:55 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/06/21 15:51:32 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-int     ft_key_beginning(int *index, t_pos pos)
+int		ft_key_beginning(int *index, t_pos pos)
 {
-	int i;
+	int	i;
 
 	i = *index;
 	while (*index > 0 && !(pos.str[*index - 1] == '\n' \
@@ -27,9 +27,9 @@ int     ft_key_beginning(int *index, t_pos pos)
 	return (1);
 }
 
-int     ft_key_end(int *index, t_pos pos)
+int		ft_key_end(int *index, t_pos pos)
 {
-	int i;
+	int	i;
 
 	i = *index;
 	while (*index < pos.imax)
@@ -39,7 +39,7 @@ int     ft_key_end(int *index, t_pos pos)
 	return (1);
 }
 
-int     ft_print_sig(t_pos pos)
+int		ft_print_sig(t_pos pos)
 {
 	if (g_sig == SIGINT)
 		write(2, "^C", 2);

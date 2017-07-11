@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lx_applytoken.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/16 15:38:02 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/06/16 15:40:31 by acorbeau         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "lexer.h"
 
-int			lx_get_flag(char *data)
+int		lx_get_flag(char *data)
 {
 	if (ft_strequ(data, LST_RDOADD))
 		return (LFT_RDOADD);
@@ -74,8 +62,7 @@ void		lx_doescape(t_token *tok)
 
 int			lx_verifytokens(t_token *tok)
 {
-	if (tok->flag & LXS_TOKEN && !(tok->flag == LXS_SQUOT ||
-tok->flag == LXS_DQUOT))
+	if (tok->flag & LXS_TOKEN && !(tok->flag == LXS_SQUOT || tok->flag == LXS_DQUOT))
 	{
 		ft_perror(tok->value, ERR_NOTOKEN);
 		return (0);
@@ -84,9 +71,7 @@ tok->flag == LXS_DQUOT))
 	{
 		if (tok->flag == LXS_SQUOT || tok->flag == LXS_DQUOT)
 			lx_doescape(tok);
-		else if ((tok->flag & LXS_TOKEN &&
-((tok->next && tok->next->flag & LXS_TOKEN) || !tok->next)) ||
-!lx_applytoken(tok))
+		else if ((tok->flag & LXS_TOKEN && ((tok->next && tok->next->flag & LXS_TOKEN) || !tok->next)) || !lx_applytoken(tok))
 		{
 			ft_perror(tok->value, ERR_NOTOKEN);
 			return (0);

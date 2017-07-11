@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ast_ast.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/16 14:55:06 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/06/16 14:55:50 by acorbeau         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "ast.h"
 
 t_ast	*ast_newast(void *data, t_ast *left, t_ast *right, int flag)
@@ -25,7 +13,7 @@ t_ast	*ast_newast(void *data, t_ast *left, t_ast *right, int flag)
 	return (new);
 }
 
-void	ast_lstfree(t_list *lst)
+void 	ast_lstfree(t_list *lst)
 {
 	t_list	*fptr;
 

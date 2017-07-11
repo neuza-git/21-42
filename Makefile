@@ -1,6 +1,6 @@
 CC = gcc
 
-NAME = minishell
+NAME = 21sh
 
 PATH_SRC = srcs
 
@@ -9,7 +9,8 @@ DIRS =	obj/ast \
 		obj/engine \
 		obj/env \
 		obj/vm \
-		obj/term \
+		obj/shell \
+		obj/history \
 		obj/lexer
 
 SRC = srcs/ast/ast_ast.c \
@@ -18,15 +19,14 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/ast/ast_cmd.c \
 	  srcs/ast/ast_insert.c \
 	  srcs/builtins/ft_cd.c \
-	  srcs/builtins/ft_env_fn2.c \
 	  srcs/builtins/ft_echo.c \
 	  srcs/builtins/ft_env.c \
 	  srcs/builtins/ft_export.c \
 	  srcs/builtins/ft_setenv.c \
 	  srcs/builtins/ft_unset.c \
 	  srcs/builtins/ft_unsetenv.c \
+	  srcs/builtins/ft_history.c \
 	  srcs/engine/en_free.c \
-	  srcs/engine/en_getline.c \
 	  srcs/engine/en_init.c \
 	  srcs/engine/en_print.c \
 	  srcs/env/env_dup.c \
@@ -37,8 +37,28 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/lexer/lx_gettokens.c \
 	  srcs/lexer/lx_remove_uslesstokens.c \
 	  srcs/lexer/lx_token.c \
-	  srcs/term/tc_signal.c \
-	  srcs/term/tc_utils.c \
+	  srcs/shell/ft_advanced_move.c \
+	  srcs/shell/ft_cursor.c \
+	  srcs/shell/ft_delete.c \
+	  srcs/shell/ft_history.c \
+	  srcs/shell/ft_getline.c \
+	  srcs/shell/ft_goes_upndown.c \
+	  srcs/shell/ft_huge_move.c \
+	  srcs/shell/ft_init_term.c \
+	  srcs/shell/ft_keys_action.c \
+	  srcs/shell/ft_keys_assign.c \
+	  srcs/shell/ft_expansion.c \
+	  srcs/shell/ft_selection.c \
+	  srcs/shell/ft_small_move.c \
+	  srcs/shell/ft_clear_line.c \
+	  srcs/shell/ft_leave.c \
+	  srcs/shell/tc_signal.c \
+	  srcs/shell/tc_utils.c \
+	  srcs/history/hs_create.c \
+	  srcs/history/hs_fill.c \
+	  srcs/history/hs_clear.c \
+	  srcs/history/hs_write.c \
+	  srcs/history/hs_builtin.c \
 	  srcs/vm/vm_duplocals.c \
 	  srcs/vm/vm_exec.c \
 	  srcs/vm/vm_exec_rdin.c \
@@ -54,15 +74,16 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/vm/vm_readast.c \
 	  srcs/main.c
 
-NAME = minishell
-
 PATH_SRC = srcs
 
 OBJ = $(patsubst $(PATH_SRC)/%.c, obj/%.o, $(SRC))
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror #-O3
 
-LIBS = -L./libft -lft
+LIBS = -L./libft -lft -ltermcap
+
+H_FILES = includes/ast.h includes/builtins.h includes/engine.h includes/env.h \
+		  includes/lexer.h includes/libft.h includes/shell.h includes/vm.h includes/history.h
 
 HEADERS = -I includes/
 
@@ -72,10 +93,10 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	make -C libft/
-	$(CC) $(FLAGS) $(OBJ) libft/libft.a -o $(NAME) -I includes/
+	$(CC) $(FLAGS) $(OBJ) libft/libft.a -o $(NAME) -I includes/ $(LIBS)
 	echo "\033[33mCreating  \033[32m[✔] \033[0m$(NAME)"
 
-obj/%.o : $(PATH_SRC)/%.c
+obj/%.o : $(PATH_SRC)/%.c $(H_FILES)
 	mkdir -p $(DIRS)
 	$(CC) $(FLAGS) -c $< -o $@ -I includes/
 	echo "\033[33mCompiling \033[32m[✔] \033[0m$<"

@@ -1,17 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/16 16:36:23 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/06/16 16:36:26 by acorbeau         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "engine.h"
-#include "term.h"
+#include "shell.h"
 
 /*
 ** BASH +- posix
@@ -37,11 +25,11 @@ int		main(int ac, char **av, char **env)
 {
 	t_engine	*engine;
 
-	ft_errset("minishell");
+	ft_errset("ft_bash");
 	tc_check_sin();
 	tc_listen_signals();
 	engine = en_init(get_cmd_flags(ac, av), env);
 	en_loop(engine);
+	tcsetattr(0, TCSANOW, &engine->default_term);
 	en_free(&engine);
-	ft_putchar('\n');
 }

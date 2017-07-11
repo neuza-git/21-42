@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   vm_isbuiltin.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/16 14:47:03 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/06/16 14:47:06 by acorbeau         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "vm.h"
 
 int		vm_isbuiltin(t_cmd *cmd, t_vm *vm)
@@ -34,6 +22,8 @@ int		vm_isbuiltin(t_cmd *cmd, t_vm *vm)
 int		vm_isextbuiltin(t_cmd *cmd)
 {
 	if (ft_strequ(cmd->av[0], "echo"))
+		return (1);
+	if (ft_strequ(cmd->av[0], "history"))
 		return (1);
 	return (0);
 }

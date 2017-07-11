@@ -1,27 +1,15 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lx_token.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/16 15:57:02 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/06/16 16:27:11 by acorbeau         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "lexer.h"
 
 int			is_wdpart(int stat)
 {
 	return (stat == LXS_WORD || stat == LXS_DQUOT || stat == LXS_ESC ||
-			stat == LXS_SQUOT || stat == LXS_ESC || stat == LXS_RDAV);
+		stat == LXS_SQUOT || stat == LXS_ESC || stat == LXS_RDAV);
 }
 
 int			is_token(char c)
 {
 	return (c == LXC_AND || c == LXC_RDOUT || c == LXC_RDIN ||
-			c == LXC_PIPE || c == LXC_SEP);
+		c == LXC_PIPE || c == LXC_SEP);
 }
 
 int			get_stat(char *c)
@@ -53,7 +41,7 @@ t_token		*lx_newtoken(char *value, int flag)
 	return (new);
 }
 
-void		lx_free(t_lexer **lx)
+void		lx_free(t_lexer	**lx)
 {
 	t_token	*fptr;
 	t_token	*token;
