@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include "libft.h"
 
 char	*ft_strndup(const char *s1, size_t size)
 {
