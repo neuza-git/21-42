@@ -27,6 +27,26 @@
 # define ERR_UNEXPCT 6
 # define ERR_ENDOFF 7
 
+# define XMAP_MAX 32
+# define XMAP_SIZE 4094
+
+# define XGET      0
+# define XCREATE   1
+# define XEXTENDE  2
+# define XFREE	   3
+# define XDEFRAG   4
+
+# define XF_NONE     0
+# define XF_OCCUPIED 1
+
+typedef	struct	s_xmap
+{
+	void		**map;
+	int			flags;
+	size_t		ptr;
+	size_t		size;
+}				t_xmap;
+
 typedef struct		s_list
 {
 	void			*content;
@@ -125,6 +145,17 @@ int					ft_snc(char *str, char c, int size);
 int					ft_pow(int n, int p);
 char				*ft_strndup(const char *s1, size_t size);
 char				*ft_str3join(char *s1, char *s2, char *s3);
+
+void				*ft_salloc(size_t size);
+void				*ft_scalloc(size_t size);
+void				*ft_xalloc(size_t size, int ref);
+void				*ft_xcalloc(size_t size, int ref);
+
+t_xmap				*ft_xmap(int ref, int mode);
+void				ft_xfree(void *ptr, int ref);
+void				ft_xclear(int ref);
+t_list				*ft_xlstcreate(void *content, size_t content_size, int ref);
+t_list				*ft_xlstnew(void *content, size_t content_size, int ref);
 
 int					get_next_line(int fd, char **line);
 

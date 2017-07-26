@@ -83,7 +83,7 @@ OBJ = $(patsubst $(PATH_SRC)/%.c, obj/%.o, $(SRC))
 
 #FLAGS = -g -Wall -Wextra -Werror #-O3
 
-FLAGS = -g
+FLAGS = -g3 -Wall -Wextra -Werror -fsanitize=address
 
 LIBS = -L./libft -lft -ltermcap
 
@@ -106,7 +106,6 @@ obj/%.o : $(PATH_SRC)/%.c $(H_FILES)
 	$(CC) $(FLAGS) -c $< -o $@ -I includes/
 	echo "\033[33mCompiling \033[32m[✔] \033[0m$<"
 
-.PHONY : clean fclean
 
 clean :
 	make -C libft/ clean
@@ -119,3 +118,5 @@ fclean : clean
 	echo "\033[31mRemoving  \033[32m[✔] \033[0m$(NAME)"
 
 re : fclean all
+
+.PHONY : clean fclean all $(NAME)

@@ -96,7 +96,10 @@ SRC = ft_atoi.c \
 	   ft_snc.c \
 	   ft_pow.c \
 	   ft_str3join.c \
-	   ft_strndup.c
+	   ft_strndup.c \
+	   ft_xalloc.c \
+	   ft_xmap.c \
+	   ft_salloc.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -112,7 +115,7 @@ $(NAME):
 	ar rcs $(NAME) $(OBJ)
 	 ranlib $(NAME)
 
-clean: 
+clean:
 	/bin/rm -f $(OBJ)
 
 fclean: clean

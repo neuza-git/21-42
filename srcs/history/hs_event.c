@@ -11,6 +11,7 @@ static char *get_x_param(int p, char *lcmd)
 
 	w = -1;
 	i = 0;
+	new = NULL;
 	while (lcmd[i] != '\0')
 	{
 		while (lcmd[i] == ' ')
@@ -37,11 +38,11 @@ static char *get_x_param(int p, char *lcmd)
 				i++;
 		}
 	}
+	return (new);//TODO: @tgas a voir c'est pour eviter les warning
 }
 
 static char	*get_param(char *str, char *lcmd)
 {
-	int		p;
 	int		i;
 
 	i = 0;
@@ -65,12 +66,10 @@ static char	*get_param(char *str, char *lcmd)
 static char	*substi(char *lcmd, char *str, int *error)
 {
 	int		i;
-	int		p;
 	char	*new;
 
 	new = NULL;
 	i = 3;
-	p = 0;
 	while (str[i] != '\0' && str[i] >= '0' && str[i] <= '9')
 		i++;
 	if ((str[i - 1] >= '0' && str[i - 1] <= '9') || (str[3] == '*' && !str[4]))
