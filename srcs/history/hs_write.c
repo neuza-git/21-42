@@ -37,7 +37,7 @@ int         ft_open_history(char *fn, int m)
 	else if (m == 'b')
 		fd = open(fp, O_RDWR | O_APPEND | O_CREAT, 0644);
 	else if (m == 'm')
-		fd = open(fp, O_WRONLY | O_CREAT, 0644);
+		fd = open(fp, O_TRUNC | O_WRONLY | O_CREAT, 0644);
 	else if (m == 'a')
 		fd = open(fp, O_WRONLY | O_APPEND | O_CREAT, 0644);
 	else

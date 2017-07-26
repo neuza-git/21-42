@@ -14,6 +14,8 @@ int		vm_isbuiltin(t_cmd *cmd, t_vm *vm)
 		ft_unset(cmd, &vm->local);
 	else if (ft_strequ(cmd->av[0], "export"))
 		ft_export(cmd, &vm->local);
+	else if	(ft_strequ(cmd->av[0], "exit"))
+		ft_exit(cmd->av[1]);
 	else
 		return (0);
 	return (1);

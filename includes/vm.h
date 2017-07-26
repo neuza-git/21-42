@@ -52,4 +52,6 @@ void		vm_duplocals(t_envent *loc, t_token **toks);
 
 void		ft_env(t_cmd *cmd, t_envent **ev, t_vm *vm);
 
+void		ft_history(char **av, t_vm *vm, int m);
+
 #endif
