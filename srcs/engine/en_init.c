@@ -42,7 +42,7 @@ void		en_loop(t_engine *engine)
 	{
 		if (!(lexer = ft_memalloc(sizeof(t_lexer))))
 			return ;
-		ft_fill_history(&engine->vm->hs, engine->buffer);
+		ft_fill_history(&engine->vm->hs, &engine->buffer);
 		lexer->buff = engine->buffer;
 		lexer->ptr = lexer->buff;
 		lexer->stat = LXS_DEF;

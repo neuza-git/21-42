@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 16:21:50 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/26 11:47:51 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/07/20 15:58:08 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ char			*get_line(t_engine *engine, int hd, char *hdstr)
 			|| (ft_sc(pos.keys, '\n') > 0 && !(pos.keys[0] == 10 && pos.keys[1] == '\0'))))
 			pos.keys = ft_create_rest(&engine->rest, (engine->rest != NULL) \
 					? NULL : pos.keys);
+		//ft_get(pos.keys);
 		if (!win_size_changed(&pos))
 			ft_process_key(&pos, pos.keys, &size);
 		if (ft_leave_while(pos, hdstr, size, engine->rest))
@@ -101,7 +102,6 @@ char			*get_line(t_engine *engine, int hd, char *hdstr)
 		else
 			ft_strdel(&pos.keys);
 		//dprintf(open("/dev//ttys003", O_WRONLY), "[%s]\n", pos.str);
-		//ft_get(pos.keys);
 	}
 	engine->cp = pos.cp;
 	engine->vm->hs = pos.uhs;

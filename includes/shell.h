@@ -45,12 +45,14 @@ typedef struct      s_pos
 	int             se;
 	char            *cp;
 	unsigned int	exp;
+	char			*crstr;
 	int             hd;
 	int             tfd;
 	int             i;
 	int             imax;
 	char            *ps;
 	t_hs            *hs;
+	t_hs			*rhs;
 	t_hs            *uhs;
 	int             width;
 	int             h;
@@ -88,6 +90,7 @@ int                 ft_print_sig(t_pos pos);
 void                ft_fill_quotes(int index, char *keys, unsigned int *exp);
 int					ft_expan(t_pos *pos);
 void				ft_new_line(int tfd);
+int					ft_char_input(t_pos *pos, char *keys);
 
 char                *ft_copy_selection(t_pos *pos, int m);
 char                *ft_cut_selection(t_pos *pos);
@@ -103,5 +106,7 @@ int                 ft_goes_leftnright(t_pos *pos, int m);
 
 int                 ft_key_up(t_pos *pos);
 int                 ft_key_down(t_pos *pos);
+
+int					ft_ctrl_r(t_pos *pos, char *keys);
 
 #endif

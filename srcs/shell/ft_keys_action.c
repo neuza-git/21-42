@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 16:00:09 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/07/11 12:59:38 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/07/20 16:01:18 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_key_size_1(char *key, t_pos *pos)
 		return (ft_key_backspace(pos, &pos->i, &pos->str, 0));
 	if (key[0] == 4 && g_sig != 0)
 		return (ft_print_sig(*pos));
-	if (key[0] == 127)
+	if (key[0] == 127 && pos->hd != 4)
 		return (ft_key_backspace(pos, &pos->i, &pos->str, 1));
 	if (key[0] == 23)
 		return (ft_key_wordleft(pos, &pos->str, 1));

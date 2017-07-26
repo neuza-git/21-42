@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 16:00:09 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/26 13:18:13 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/07/20 16:26:33 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ int			ft_char_input(t_pos *pos, char *keys)
 	if (((pos->imax + 1 + (pos->uh - pos->h)) / pos->uh) < pos->width)
 	{
 		ft_putstr_fd(tgetstr("im", NULL), pos->tfd);
-		(!(pos->hd == 1 && pos->str == NULL)) ? ft_putstr_fd(keys, pos->tfd) : "";
+		(!(pos->hd == 1 && !pos->str)) ? ft_putstr_fd(keys, pos->tfd) : "";
 		ft_putstr_fd(tgetstr("ei", NULL), pos->tfd);
-		tmp = (pos->str == NULL) \
+		tmp = (!pos->str) \
 			? ft_strdup(keys) : ft_strjoin_at(pos->str, keys, pos->i);
 		ft_strdel(&pos->str);
 		pos->str = tmp;
@@ -107,7 +107,14 @@ int			ft_keysassign(char *keys, t_pos *pos, int size)
 		ft_clear_line(pos->i, *pos, pos->str);
 	}
 	if (!ft_special_char(keys, pos))
-		return (ft_char_input(pos, keys));
+	{
+		if (pos->hd == 4)
+			ft_ctrl_r(pos, keys);
+		else
+			return (ft_char_input(pos, keys));
+	}
+	else if (keys[0] == 18 || pos->hd == 4)
+		ft_ctrl_r(pos, keys);
 	if (size == 1)
 		return (ft_key_size_1(keys, pos));
 	if (size == 2)

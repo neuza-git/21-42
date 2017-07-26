@@ -26,6 +26,7 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/builtins/ft_unset.c \
 	  srcs/builtins/ft_unsetenv.c \
 	  srcs/builtins/ft_history.c \
+	  srcs/builtins/ft_exit.c \
 	  srcs/engine/en_free.c \
 	  srcs/engine/en_init.c \
 	  srcs/engine/en_print.c \
@@ -52,6 +53,7 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/shell/ft_small_move.c \
 	  srcs/shell/ft_clear_line.c \
 	  srcs/shell/ft_leave.c \
+	  srcs/shell/ft_ctrl_r.c \
 	  srcs/shell/tc_signal.c \
 	  srcs/shell/tc_utils.c \
 	  srcs/history/hs_create.c \
@@ -59,6 +61,7 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/history/hs_clear.c \
 	  srcs/history/hs_write.c \
 	  srcs/history/hs_builtin.c \
+	  srcs/history/hs_event.c \
 	  srcs/vm/vm_duplocals.c \
 	  srcs/vm/vm_exec.c \
 	  srcs/vm/vm_exec_rdin.c \
@@ -78,7 +81,9 @@ PATH_SRC = srcs
 
 OBJ = $(patsubst $(PATH_SRC)/%.c, obj/%.o, $(SRC))
 
-FLAGS = -g -Wall -Wextra -Werror #-O3
+#FLAGS = -g -Wall -Wextra -Werror #-O3
+
+FLAGS = -g
 
 LIBS = -L./libft -lft -ltermcap
 

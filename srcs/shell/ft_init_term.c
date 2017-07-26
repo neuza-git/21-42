@@ -54,6 +54,8 @@ void		initgl(t_engine *en, t_pos *pos, char *hdstr, int hd)
 	pos->uh = 0;
 	pos->exp = 0;
 	pos->imax = 0;
+	pos->rhs = NULL;
+	pos->crstr = NULL;
 	pos->hs = (en->vm != NULL) ? en->vm->hs : NULL;
 	pos->uhs = (en->vm != NULL) ? en->vm->hs : NULL;
 	pos->tfd = en->tfd;

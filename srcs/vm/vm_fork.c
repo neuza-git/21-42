@@ -1,11 +1,11 @@
 #include "vm.h"
 
-static int	do_builtin(t_cmd *cmd, t_vm *vm)
+static int	do_builtin(t_cmd *cmd, t_vm *vm, int m)
 {
-	if (ft_strequ(cmd->av[0], "echo"))
+	if (ft_strequ(cmd->av[0], "echo") && m)
 		ft_echo(cmd);
 	if (ft_strequ(cmd->av[0], "history"))
-		ft_history(cmd->av, &vm->hs);
+		ft_history(cmd->av, vm, m);
 	else
 	{
 		ft_perror(cmd->av[0], ERR_NOCMD);
@@ -62,7 +62,7 @@ int			vm_fork_builtin(t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *))
 	else if (cmd->pid == 0)
 	{
 		if ((f)(cmd, cmd->pid, vm))
-			res = do_builtin(cmd, vm);
+			res = do_builtin(cmd, vm, 1);
 		exit((res) ? EXIT_SUCCESS : EXIT_FAILURE);
 	}
 	else if (cmd->pid > 0)
@@ -70,6 +70,7 @@ int			vm_fork_builtin(t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *))
 		(f)(cmd, -2, vm);
 		waitpid(cmd->pid, &res, 0);
 		(f)(cmd, cmd->pid, vm);
+		do_builtin(cmd, vm, 0);
 		return (WEXITSTATUS(res));
 	}
 	return (0);

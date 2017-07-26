@@ -13,28 +13,6 @@
 #include "vm.h"
 #include <stdio.h>
 
-static void		ft_delete_history(t_hs **h, int s)
-{
-	t_hs	*n;
-	int		i;
-	(void)s;
-
-	i = 0;
-	n = *h;
-	while (s >= 0 && n != NULL && n->prev)
-		n = n->prev;
-	while (s >= 0 && n != NULL && s != i)
-	{
-		i++;
-		n = n->next;
-	}
-	if (s < 0 || n == NULL)
-		return ;
-	if (i == 0)
-		*h = (*h)->next;
-	dprintf(open("/dev//ttys004", O_WRONLY), "%d\n", s);
-}
-
 static void		ft_show_history(t_hs *h, int s)
 {
 	t_hs	*n;
@@ -66,29 +44,29 @@ static void		ft_show_history(t_hs *h, int s)
 	}
 }
 
-static void		history_args(t_hs **h, char **av)
+static void		history_args(t_hs **h, char **av, int m)
 {
-	if (ft_strequ(av[1], "-c") == 1 && !av[2])
+	if (ft_strequ(av[1], "-c") == 1 && !av[2] && !m)
 		ft_clear_history(h);
-	else if (ft_strequ(av[1], "-d") == 1 && av[2])
-		ft_delete_history(h, ((av[2] == NULL) ? -1 : ft_atoi(av[2])));
-	else if (ft_strequ(av[1], "-a") == 1 && av[2])
+	else if (ft_strequ(av[1], "-d") == 1 && av[2] && !m)
+		ft_delete_history(h, ft_atoi(av[2]));
+	else if (ft_strequ(av[1], "-a") == 1 && !m)
 		ft_a_args(av[2], *h);
-	else if (ft_strequ(av[1], "-n") == 1 && av[2])
-		;
-	else if (ft_strequ(av[1], "-r") == 1 && av[2])
-		;
-	else if (ft_strequ(av[1], "-w") == 1 && av[2])
-		;
-	else if (ft_strequ(av[1], "-p") == 1 && av[2])
-		;
-	else if (ft_strequ(av[1], "-s") == 1 && av[2])
-		;
-	else
+	else if (ft_strequ(av[1], "-n") == 1 && !m)
+		ft_n_args(av[2], h);
+	else if (ft_strequ(av[1], "-r") == 1 && !m)
+		ft_r_args(av[2], h);
+	else if (ft_strequ(av[1], "-w") == 1 && !m)
+		ft_w_args(av[2], *h);
+	else if (ft_strequ(av[1], "-p") == 1 && av[2] && !m)
+		ft_p_args(av, h);
+	else if (ft_strequ(av[1], "-s") == 1 && av[2] && !m)
+		ft_s_args(av, h);
+	else if (m)
 		ft_show_history(*h, ((av[1] == NULL) ? -1 : ft_atoi(av[1])));
 }
 
-void			ft_history(char **av, t_hs **h)
+void			ft_history(char **av, t_vm *vm, int m)
 {
-	history_args(h, av);
+	history_args(&vm->hs, av, m);
 }

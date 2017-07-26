@@ -18,9 +18,16 @@ int		ft_open_history(char *fn, int m);
 t_hs	*ft_create_history(void);
 t_hs	*hs_create_node(char *str, int m, t_hs *prev);
 void	ft_clear_history(t_hs **oh);
-void	ft_fill_history(t_hs **oh, char *str);
+void	ft_delete_history(t_hs **h, int s);
+void	ft_fill_history(t_hs **oh, char **cur);
 void	ft_write_history(t_hs *h);
 void	ft_a_args(char *fn, t_hs *h);
-
+void	ft_n_args(char *fn, t_hs **h);
+void	ft_r_args(char *fn, t_hs **h);
+void	ft_w_args(char *fn, t_hs *h);
+void	ft_s_args(char **av, t_hs **h);
+void	ft_p_args(char **av, t_hs **h);
+void	ft_even_single(t_hs *n, char **cur);
+void	ft_even_double(t_hs *n, char **cur);
 
 #endif
