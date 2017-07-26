@@ -89,6 +89,7 @@ SRC = ft_atoi.c \
 	   ft_lstswap.c \
 	   ft_lstsort.c \
 	   get_next_line.c \
+	   xget_next_line.c \
 	   ft_memdup.c \
 	   ft_lstaddfront.c \
 	   ft_strjoin_at.c \

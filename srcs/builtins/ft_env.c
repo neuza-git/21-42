@@ -48,7 +48,7 @@ static t_envopts	*get_opts(t_cmd *cmd)
 	return (opts);
 }
 
-static t_envent	*get_newentries(t_envopts *opts, t_cmd *cmd)
+static t_envent	*get_newentries(t_envopts *opts, t_cmd *cmd, t_vm *vm)
 {
 	int			i;
 	char		*pch;
@@ -61,6 +61,8 @@ static t_envent	*get_newentries(t_envopts *opts, t_cmd *cmd)
 		if (!(pch = ft_strchr(cmd->av[i], '=')))
 			continue ;
 		*pch = '\0';
+		if (ft_strequ(cmd->av[i], "PATH"))
+			vm->reg |= VRF_NEW_PATH;
 		env_setentry(cmd->av[i], pch + 1, &env);
 		*pch = '=';
 	}
@@ -113,7 +115,7 @@ void			ft_env(t_cmd *cmd, t_envent **e, t_vm *vm)
 	fptr = env;
 	while (fptr && fptr->next)
 		fptr = fptr->next;
-	(fptr) ? (fptr->next = get_newentries(opts, cmd)) : (env = get_newentries(opts, cmd));
+	(fptr) ? (fptr->next = get_newentries(opts, cmd, vm)) : (env = get_newentries(opts, cmd, vm));
 	fptr = env;
 	while (opts->affenv && fptr)
 	{
@@ -131,6 +133,7 @@ void			ft_env(t_cmd *cmd, t_envent **e, t_vm *vm)
 		vm_exec(cmd, cmd->flags, vm);
 		vm->env = fptr;
 		cmd->av -= opts->end;
+		vm->reg &= ~VRF_NEW_PATH;
 	}
 	free(opts);
 	(env) ? envent_free(&env) : NULL;

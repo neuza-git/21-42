@@ -11,7 +11,8 @@ DIRS =	obj/ast \
 		obj/vm \
 		obj/shell \
 		obj/history \
-		obj/lexer
+		obj/lexer \
+		obj/htable
 
 SRC = srcs/ast/ast_ast.c \
 	  srcs/ast/ast_build.c \
@@ -75,6 +76,10 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/vm/vm_kill_cmds.c \
 	  srcs/vm/vm_open_dup.c \
 	  srcs/vm/vm_readast.c \
+	  srcs/htable/ht_bucket.c \
+	  srcs/htable/ht_entries.c \
+	  srcs/htable/ht_free.c \
+	  srcs/htable/ht_paths.c \
 	  srcs/main.c
 
 PATH_SRC = srcs
@@ -88,7 +93,7 @@ FLAGS = -g3 -Wall -Wextra -Werror -fsanitize=address
 LIBS = -L./libft -lft -ltermcap
 
 H_FILES = includes/ast.h includes/builtins.h includes/engine.h includes/env.h \
-		  includes/lexer.h includes/libft.h includes/shell.h includes/vm.h includes/history.h
+		  includes/lexer.h includes/libft.h includes/shell.h includes/vm.h includes/history.h includes/htable.h
 
 HEADERS = -I includes/
 

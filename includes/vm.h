@@ -9,17 +9,20 @@
 # include "ast.h"
 # include "builtins.h"
 # include "sys/wait.h"
+# include "htable.h"
 
 # define VRDF_APPEND 0x8
 # define VRDF_STDERR 0x4
 # define VRF_SKIP 0x1
 # define VRF_LAST_KO 0x10
+# define VRF_NEW_PATH 0x18
 
 typedef struct		s_vm
 {
 	t_hs			*hs;
 	t_envent		*env;
 	t_envent		*local;
+	t_htbucket		*htable;
 	t_ast			*ast;
 	t_cmd			*work;
 	int				reg;

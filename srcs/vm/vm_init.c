@@ -11,6 +11,9 @@ t_vm		*vm_init(char **environ)
 	new->ast = NULL;
 	new->reg = 0;
 	new->work = NULL;
+	new->htable = NULL;
+	if (env_getentry("PATH", new->env))
+		new->htable = ht_loadbinaries(env_getentry("PATH", new->env)->value);
 	return (new);
 }
 

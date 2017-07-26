@@ -12,6 +12,8 @@
 
 #include "libft.h"
 
+#include "libft.h"
+
 static int	get_nl_pointer(int fd, char **old_buffer, char **chr_ptr)
 {
 	char	buffer[BUFF_SIZE + 1];
@@ -38,7 +40,7 @@ static int	get_nl_pointer(int fd, char **old_buffer, char **chr_ptr)
 	return ((readed > 0) ? 1 : readed);
 }
 
-int			get_next_line(int const fd, char **line)
+int			xget_next_line(int const fd, char **line, int ref)
 {
 	static char	*buff;
 	char		*nl_ptr;
@@ -52,12 +54,12 @@ int			get_next_line(int const fd, char **line)
 	free_ptr = buff;
 	if (nl_ptr)
 	{
-		if (!(*line = ft_strsub(buff, 0, nl_ptr - buff)) ||
+		if (!(*line = ft_xstrsub(buff, 0, nl_ptr - buff, ref)) ||
 !(buff = ft_strdup(nl_ptr + 1)))
 			return (-1);
 		free(free_ptr);
 	}
-	else if (!(*line = ft_strdup(buff)))
+	else if (!(*line = ft_xstrdup(buff, ref)))
 		return (-1);
 	else if (buff)
 	{

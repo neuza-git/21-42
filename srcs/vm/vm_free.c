@@ -6,6 +6,8 @@ void		vm_free(t_vm **vm)
 		return ;
 	if ((*vm)->env)
 		envent_free(&(*vm)->env);
+	if ((*vm)->htable)
+		ht_free_bucket((*vm)->htable);
 	if ((*vm)->local)
 		envent_free(&(*vm)->local);
 	if  ((*vm)->ast)

@@ -21,7 +21,7 @@ char	*ft_strndup(const char *s1, size_t size)
 	if (s1 != NULL)
 	{
 		dst = NULL;
-		dst = (char*)malloc(sizeof(char) * (size + 1));
+		dst = (char*)ft_salloc(sizeof(char) * (size + 1));
 		if (dst == NULL)
 			return (NULL);
 		i = -1;

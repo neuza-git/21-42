@@ -40,8 +40,7 @@ void		en_loop(t_engine *engine)
 
 	while ((engine->buffer = get_line(engine, 0, NULL)))
 	{
-		if (!(lexer = ft_memalloc(sizeof(t_lexer))))
-			return ;
+		lexer = ft_scalloc(sizeof(t_lexer));
 		ft_fill_history(&engine->vm->hs, &engine->buffer);
 		lexer->buff = engine->buffer;
 		lexer->ptr = lexer->buff;

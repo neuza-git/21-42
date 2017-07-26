@@ -33,5 +33,6 @@ int		ft_echo(t_cmd *cmd)
 	}
 	if (pnl)
 		ft_putchar('\n');
+	exit(0);
 	return (1);
 }

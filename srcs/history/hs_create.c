@@ -51,6 +51,7 @@ t_hs	*ft_create_history(void)
 		}
 		ft_strdel(&line);
 	}
+	ft_strdel(&line);
 	fd = close(fd);
 	return (n);
 }

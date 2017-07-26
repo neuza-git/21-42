@@ -30,3 +30,20 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 	ret[i] = '\0';
 	return (ret);
 }
+
+char	*ft_xstrsub(char const *s, unsigned int start, size_t len, int ref)
+{
+	char	*ret;
+	size_t	i;
+
+	ret = ft_xcalloc(sizeof(char) * (len + 1), ref);
+	s += start;
+	i = 0;
+	while (i < len)
+	{
+		ret[i] = *s++;
+		i++;
+	}
+	ret[i] = '\0';
+	return (ret);
+}

@@ -13,6 +13,13 @@ void	vm_pipe_cmd(t_cmd *cmd)
 	cmd->next->flags = cmd->flags;
 }
 
+static char	*xget_bin(char *cmd, t_vm *vm)
+{
+	if (vm->reg & VRF_NEW_PATH)
+		return (env_getbin(cmd, vm->env));
+	return (ht_getbin(cmd, vm->htable));
+}
+
 int		vm_exec(t_cmd *cmd, int flags, t_vm *vm)
 {
 	char	*path;
@@ -22,7 +29,7 @@ int		vm_exec(t_cmd *cmd, int flags, t_vm *vm)
 		return (2);
 	path = NULL;
 	ret = 0;
-	if (!vm_isextbuiltin(cmd) && !(path = env_getbin((char *)cmd->av[0], vm->env)))
+	if (!vm_isextbuiltin(cmd) && !(path = xget_bin((char *)cmd->av[0], vm)))
 	{
 		if (cmd->next && tc_sigstat(0))
 			ret = vm_exec(cmd->next, flags, vm);
