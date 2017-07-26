@@ -6,7 +6,7 @@ static int	do_builtin(t_cmd *cmd, t_vm *vm, int m)
 		ft_echo(cmd);
 	if (ft_strequ(cmd->av[0], "history"))
 		ft_history(cmd->av, vm, m);
-	else
+	else if (m)
 	{
 		ft_perror(cmd->av[0], ERR_NOCMD);
 		return 0;
