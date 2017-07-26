@@ -67,9 +67,9 @@ char			*ht_getbin(char *name, t_htbucket *bk)
 	ret[0] = '\0';
 	if (ft_strnequ(name, "./", 2) || ft_strnequ(name, "/", 1))
 	{
-		if (stat(name, &st) < 0)
+		if (stat(name, &st) == -1)
 			return (NULL);
-		if (st.st_mode & (S_IFBLK | S_IFSOCK | S_IFLNK | S_IFCHR))
+		if (!(st.st_mode & (S_IXGRP | S_IXUSR)) || S_ISDIR(st.st_mode))
 			return (0);
 		return (st.st_mode & (S_IXUSR | S_IXGRP))  ? ft_strdup(name) : NULL;
 	}

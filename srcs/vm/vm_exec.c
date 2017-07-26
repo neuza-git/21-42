@@ -31,6 +31,7 @@ int		vm_exec(t_cmd *cmd, int flags, t_vm *vm)
 	ret = 0;
 	if (!vm_isextbuiltin(cmd) && !(path = xget_bin((char *)cmd->av[0], vm)))
 	{
+		ft_perror(cmd->av[0], ERR_NOCMD);
 		if (cmd->next && tc_sigstat(0))
 			ret = vm_exec(cmd->next, flags, vm);
 		else
