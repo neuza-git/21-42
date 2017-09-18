@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 12:42:07 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/22 10:44:21 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/09/18 15:07:12 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,31 @@ void			ft_fill_quotes(int index, char *keys, unsigned int *exp)
 		else
 			i++;
 	}
+}
+
+void			cut_multiple_lines(t_engine *e, t_pos *pos)
+{
+	if (!pos->exp && ((e->rest != NULL) || (ft_sc(pos->keys, '\n') > 0 \
+		&& !(pos->keys[0] == 10 && pos->keys[1] == '\0'))))
+	{
+		pos->keys = ft_crest(&e->rest, (e->rest != NULL) ? NULL : pos->keys);
+	}
+}
+
+int				ft_changelines(int index, t_pos pos, char *str, int nc)
+{
+	int     i;
+
+	i = index;
+	while (i > 0 && str != NULL && str[i] != '\n')
+		i--;
+	if (i != 0)
+		i += 2;
+	i = index - i;
+	if (((i + (pos.uh - pos.h)) / pos.uh) \
+			< ((i + (pos.uh - pos.h) + nc) / pos.uh))
+		return (1);
+	return (0);
 }
 
 int				ft_expan(t_pos *pos)

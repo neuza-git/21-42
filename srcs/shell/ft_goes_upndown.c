@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/15 16:31:05 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/26 13:48:28 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/09/13 15:26:22 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int			ft_goes_up(int *i, t_pos pos)
 	int		ni;
 	int		cw;
 	int		ch;
-	char    buf2[30];
-	char    *buf;
+	char	buf2[30];
+	char	*buf;
 
 	ni = *i;
 	cw = ft_get_cursor('w');
@@ -31,7 +31,6 @@ int			ft_goes_up(int *i, t_pos pos)
 		if ((ft_get_cursor('h') == ch && ni != *i) \
 				|| (pos.str[ni - 1] == '\n' && ft_get_cursor('h') == 3))
 			break ;
-		//dprintf(open("/dev/ttys003", O_WRONLY), "%d, %c\n", ft_get_cursor('h'), pos.str[ni - 1]);
 		ft_key_left(&ni, pos);
 	}
 	if (ft_get_cursor('h') == ch && ft_get_cursor('w') == (cw - 1))
@@ -43,12 +42,11 @@ int			ft_goes_up(int *i, t_pos pos)
 
 int			ft_goes_down(int *i, t_pos pos)
 {
-	//dprintf(open("/dev/ttys003", O_WRONLY), "%d, %d\n", ft_get_cursor('h'), ch - 1);
 	int		ni;
 	int		cw;
 	int		ch;
-	char    buf2[30];
-	char    *buf;
+	char	buf2[30];
+	char	*buf;
 
 	ni = *i;
 	cw = ft_get_cursor('w');
@@ -75,7 +73,7 @@ int			ft_goes_upndown(t_pos *pos, int m)
 
 	i = -1;
 	if ((m == 'u' && (pos->i / pos->uh) > 0) \
-			|| (m == 'd' && pos->imax > pos->h && (pos->i + pos->uh) <= pos->imax))
+		|| (m == 'd' && pos->imax > pos->h && (pos->i + pos->uh) <= pos->imax))
 	{
 		if (m == 'u')
 		{

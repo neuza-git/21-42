@@ -37,7 +37,7 @@ static t_htent	*get_next(char *path, t_htent *prev)
 		new->next = (prev) ? prev : NULL;
 		prev = new;
 	}
-	free(dir);
+	closedir(dir);
 	return (prev);
 }
 

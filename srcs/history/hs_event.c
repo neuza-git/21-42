@@ -38,7 +38,7 @@ static char *get_x_param(int p, char *lcmd)
 				i++;
 		}
 	}
-	return (new);//TODO: @tgas a voir c'est pour eviter les warning
+	return (NULL);//TODO: @tgas a voir c'est pour eviter les warning
 }
 
 static char	*get_param(char *str, char *lcmd)
@@ -126,9 +126,9 @@ void		ft_event_double(t_hs *n, char **cur)
 	new = NULL;
 	if (n && size >= 3 && str[2] == ':')
 		new = substi(n->cmd, str, &error);
-	else if (n && size > 0)
-		new = ft_strjoin(n->cmd, str);
-	else if (n && size == 0)
+	else if (n && size > 0 && ft_strequ(str, "!!") != 1)
+		new = ft_strjoin(n->cmd, str + 2);
+	else if (n && (size == 0 || ft_strequ(str, "!!")))
 		new = ft_strdup(n->cmd);
 	if (new)
 	{

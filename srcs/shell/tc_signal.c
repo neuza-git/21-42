@@ -6,20 +6,20 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 15:45:36 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/23 16:30:51 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/09/14 13:57:38 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int			last_signal;
-int			waitsig;
+int			g_last_signal;
+int			g_waitsig;
 
 void		tc_handle_signals(int sig)
 {
 	struct termios	tattr;
 
-	if (waitsig)
+	if (g_waitsig)
 	{
 		tcgetattr(0, &tattr);
 		ioctl(0, TIOCSTI, &tattr.c_cc[VEOF]);
@@ -27,24 +27,25 @@ void		tc_handle_signals(int sig)
 			g_sig = sig;
 	}
 }
+
 int			tc_sigstat(int reset)
 {
 	int	tmp;
 
-	tmp = last_signal;
+	tmp = g_last_signal;
 	if (reset)
-		last_signal = 0;
+		g_last_signal = 0;
 	return (tmp);
 }
 
-void		tc_stop_signals()
+void		tc_stop_signals(void)
 {
-	waitsig = 0;
+	g_waitsig = 0;
 }
 
-void		tc_listen_signals()
+void		tc_listen_signals(void)
 {
-	waitsig = 1;
+	g_waitsig = 1;
 	signal(SIGINT, &tc_handle_signals);
 	signal(SIGQUIT, &tc_handle_signals);
 	signal(SIGWINCH, &tc_handle_signals);

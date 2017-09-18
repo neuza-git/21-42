@@ -9,6 +9,8 @@
 # include <stdio.h>
 # include <fcntl.h>
 
+# define PATH_MAX 4096
+
 typedef struct		s_htent
 {
 	unsigned long	hash;

@@ -31,7 +31,7 @@ void		ft_fill_history(t_hs **oh, char **cur)
 		ft_event_double(n, cur);
 	str = *cur;
 	size = ft_strlen(str);
-	if (str != NULL && size > 0 \
+	if (str != NULL && size > 0 && ft_sc(str, ' ') != size \
 		&& !(str[0] == '!' && (str[1] != ' ' || str[1] != '\0')))
 	{
 		if (*oh == NULL)

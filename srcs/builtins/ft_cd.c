@@ -6,14 +6,13 @@
 /*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 16:11:00 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/05/23 20:50:20 by acorbeau         ###   ########.fr       */
+/*   Updated: 2017/09/14 15:25:58 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include <sys/types.h>
 #include <dirent.h>
-
 
 static int	usage(void)
 {
@@ -41,7 +40,6 @@ static void	set_dir(char *dir, t_envent **env)
 	char	tmp[PATH_MAX];
 
 	tmp[0] = '\0';
-
 	if (check_dir(dir))
 		chdir(dir);
 	getcwd(tmp, PATH_MAX);

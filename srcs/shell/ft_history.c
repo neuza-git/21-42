@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 11:57:00 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/27 11:07:48 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/09/13 14:19:02 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void		ft_clear(t_pos *pos, char *str)
 		while (i > 0 && !(pos->str[i - 1] == '\n' && ft_get_cursor('h') == 3))
 			ft_key_left(&i, *pos);
 		if (i > 0 && pos->str[i - 1] == '\n' && ft_get_cursor('h') == 3)
-			return ft_putstr_fd(tgetstr("bl", NULL), pos->tfd);
+			return (ft_putstr_fd(tgetstr("bl", NULL), pos->tfd));
 		ft_putstr_fd(tgetstr("cr", NULL), pos->tfd);
 		ft_putstr_fd(tgetstr("cd", NULL), pos->tfd);
 		ft_putstr_fd(tgetstr("cr", NULL), pos->tfd);

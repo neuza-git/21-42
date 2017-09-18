@@ -101,6 +101,7 @@ SRC = ft_atoi.c \
 	   ft_xalloc.c \
 	   ft_xmap.c \
 	   ft_salloc.c \
+	   ft_tabdel.c \
 
 OBJ = $(SRC:.c=.o)
 

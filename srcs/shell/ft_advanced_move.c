@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 11:11:40 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/23 16:04:59 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/09/18 12:16:07 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	ft_delimiter(char c)
 {
 	if (c == ' ' || c == '"' || c == '\'' || c == '|' || c == ';' \
-			||	c == '/' || c == '\\')
+			|| c == '/' || c == '\\')
 		return (1);
 	return (0);
 }
@@ -60,14 +60,14 @@ int			ft_key_wordleft(t_pos *pos, char **cur, int m)
 	{
 		(m == 0) ? ft_key_left(&i, *pos) : ft_key_backspace(pos, &i, &s, 1);
 		*cur = (m == 1) ? s : *cur;
-		(m && pos->imax >= pos->h) ? (void)ft_clear_line(i, *pos, s) : "";
+		(m && pos->imax >= pos->h) ? (void)ft_clear_line(i, *pos, s, 1) : "";
 	}
 	while (i > 0 && !ft_delimiter(s[i - 1]) && !(s[i - 1] == '\n' \
 				&& ft_get_cursor('h') == 3))
 	{
 		(m == 0) ? ft_key_left(&i, *pos) : ft_key_backspace(pos, &i, &s, 1);
 		*cur = (m == 1) ? s : *cur;
-		(m && pos->imax >= pos->h) ? (void)ft_clear_line(i, *pos, s) : "";
+		(m && pos->imax >= pos->h) ? (void)ft_clear_line(i, *pos, s, 1) : "";
 	}
 	if (i == pos->i)
 		ft_putstr_fd(tgetstr("bl", NULL), pos->tfd);

@@ -13,7 +13,7 @@ t_ast	*ast_newast(void *data, t_ast *left, t_ast *right, int flag)
 	return (new);
 }
 
-void 	ast_lstfree(t_list *lst)
+void	ast_lstfree(t_list *lst)
 {
 	t_list	*fptr;
 

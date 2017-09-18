@@ -6,11 +6,9 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 14:24:57 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/26 14:30:18 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/09/13 13:38:40 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 #include "libft.h"
 

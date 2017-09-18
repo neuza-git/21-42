@@ -6,11 +6,18 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 10:35:48 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/07/20 16:20:38 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/09/18 13:57:02 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
+
+static void	ft_clear_n_align(int tfd)
+{
+	ft_putstr_fd(tgetstr("cr", NULL), tfd);
+	ft_putstr_fd(tgetstr("cd", NULL), tfd);
+	ft_putstr_fd(tgetstr("cr", NULL), tfd);
+}
 
 void		ft_new_line(int tfd)
 {
@@ -59,7 +66,7 @@ static void	ft_erase_ctrl_r(int hd, char *crstr, int tfd)
 	}
 }
 
-int			ft_clear_line(int i, t_pos pos, char *str)
+int			ft_clear_line(int i, t_pos pos, char *str, int nc)
 {
 	char	buf2[30];
 	char	*buf;
@@ -74,19 +81,16 @@ int			ft_clear_line(int i, t_pos pos, char *str)
 	while (str && i > 0 && !(str[i - 1] == '\n' && ft_get_cursor('h') == 3))
 		ft_key_left(&i, pos);
 	ft_erase_ctrl_r(pos.hd, pos.crstr, pos.tfd);
-	ft_putstr_fd(tgetstr("cr", NULL), pos.tfd);
-	ft_putstr_fd(tgetstr("cd", NULL), pos.tfd);
-	ft_putstr_fd(tgetstr("cr", NULL), pos.tfd);
+	ft_clear_n_align(pos.tfd);
 	ft_putstr_fd(((i == 0) ? "$> " : "> "), pos.tfd);
-	(str != NULL) ? ft_putstr_fd(str + i, pos.tfd): "";
-	if (i == 0 && str && ft_changeline(pos.imax - 1, pos, str, 'r') \
+	(str != NULL) ? ft_putstr_fd(str + i, pos.tfd) : "";
+	if (i == 0 && str && ft_changelines(pos.imax - 1, pos, str, nc) \
 			&& ft_get_cursor('w') == pos.width)
 	{
 		ft_putchar_fd('\n', pos.tfd);
-		n++;
+		n = (((pos.i + (pos.uh - pos.h) + nc) / pos.uh)) - ((pos.i + (pos.uh - pos.h)) / pos.uh) + 1;
 	}
 	if (pos.hd != 4)
 		ft_putstr_fd(tgoto(tgetstr("cm", &buf), (h - 1), (w - 1 - n)), pos.tfd);
-	(pos.hd == 4 && pos.str) ? ft_putstr_fd(tgetstr("nd", NULL), pos.tfd) : "";
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 16:00:09 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/07/20 16:01:18 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/09/18 15:57:36 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	ft_key_size_1(char *key, t_pos *pos)
 		return (ft_key_beginning(&pos->i, *pos));
 	if (key[0] == 5)
 		return (ft_key_end(&pos->i, *pos));
+	if (key[0] == 9 && !pos->exp)
+		return (ft_autocomplete(pos));
 	return (1);
 }
 
@@ -34,7 +36,7 @@ int	ft_key_size_2(char *key, t_pos *pos)
 	if (key[0] == -61 && key[1] == -97 && ft_sc(pos->str, '\n') == 0)
 	{
 		if (pos->s == 1)
-			ft_clear_line(pos->i, *pos, pos->str);
+			ft_clear_line(pos->i, *pos, pos->str, 1);
 		pos->s = (pos->s == 0) ? 1 : 0;
 		pos->ss = pos->i;
 		pos->se = pos->i;
@@ -56,16 +58,12 @@ int	ft_key_size_3(char *key, t_pos *pos)
 		return (ft_key_beginning(&pos->i, *pos));
 	if (key[0] == 27 && key[1] == 91 && key[2] == 70)
 		return (ft_key_end(&pos->i, *pos));
-	//if (key[0] == 27 && key[1] == 79 && key[2] == 68)
 	if (key[0] == 27 && key[1] == 91 && key[2] == 68)
 		return (ft_key_left(&pos->i, *pos));
-	//if (key[0] == 27 && key[1] == 79 && key[2] == 67)
 	if (key[0] == 27 && key[1] == 91 && key[2] == 67)
 		return (ft_key_right(&pos->i, pos));
-	//if (key[0] == 27 && key[1] == 79 && key[2] == 65)
 	if (key[0] == 27 && key[1] == 91 && key[2] == 65)
 		return (ft_key_up(pos));
-	//if (key[0] == 27 && key[1] == 79 && key[2] == 66)
 	if (key[0] == 27 && key[1] == 91 && key[2] == 66)
 		return (ft_key_down(pos));
 	return (1);

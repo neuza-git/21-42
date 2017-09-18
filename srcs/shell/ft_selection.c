@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/17 16:32:32 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/23 16:03:06 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/09/18 12:17:45 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char		*ft_copy_selection(t_pos *pos, int m)
 	if (m == 1 && pos->s == 1)
 	{
 		pos->s = 0;
-		ft_clear_line(pos->i, *pos, pos->str);
+		ft_clear_line(pos->i, *pos, pos->str, 1);
 	}
 	return (new);
 }
@@ -59,7 +59,7 @@ char		*ft_cut_selection(t_pos *pos)
 		while (pos->i > pos->ss)
 		{
 			if (ft_key_backspace(pos, &pos->i, &pos->str, 1) == 2)
-				ft_clear_line(pos->i, *pos, pos->str);
+				ft_clear_line(pos->i, *pos, pos->str, 1);
 		}
 	}
 	pos->s = 0;
@@ -68,10 +68,12 @@ char		*ft_cut_selection(t_pos *pos)
 
 int			ft_paste_selection(t_pos *pos)
 {
-	char *new;
+	char	*new;
+	int		cps;
 
+	cps = ft_strlen(pos->cp);
 	if (pos->cp != NULL && (((pos->imax + 1 + (pos->uh - pos->h)) \
-	+ (int)ft_strlen(pos->cp)) / pos->uh) < pos->width)
+	+ cps) / pos->uh) < pos->width)
 	{
 		if (pos->str != NULL)
 		{
@@ -82,7 +84,8 @@ int			ft_paste_selection(t_pos *pos)
 			new = ft_strdup(pos->cp);
 		pos->imax = ft_strlen(new);
 		pos->str = new;
-		return (2);
+		ft_clear_line(pos->i, *pos, pos->str, cps);
+		return (1);
 	}
 	return (1);
 }

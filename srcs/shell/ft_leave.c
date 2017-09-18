@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 13:27:14 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/26 10:48:09 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/09/14 11:58:21 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,31 +49,31 @@ int			ft_leave_hd(char *str, char *hdstr)
 	return (0);
 }
 
-char		*leave_get_line(char *keys, t_pos pos, char *hdstr, int m)
+char		*leave_gl(t_engine *e, t_pos p, char *hdstr, int m)
 {
 	int		out;
 
+	e->cp = p.cp;
+	e->vm->hs = p.uhs;
 	out = 0;
-	if (keys[0] == 4 && (pos.exp || pos.hd == 2))
+	if (p.keys[0] == 4 && (p.exp || p.hd == 2))
 		out = 4;
-	if (!pos.hd && ((keys[0] == 4 && pos.str == NULL) || (keys[0] == 4 && !pos.str[0])))
+	if (!p.hd && ((p.keys[0] == 4 && !p.str) || (p.keys[0] == 4 && !p.str[0])))
 		out = 1;
-	if (keys[0] == 10 || pos.hd == 1)
+	if (p.keys[0] == 10 || p.hd == 1)
 		out = 2;
 	if (g_sig == SIGINT)
 		out = 3;
 	if (out != 2 && m == 0)
-		ft_strdel(&pos.str);
-	ft_strdel(&keys);
-	if (out == 4)
-		ft_yet_exp(pos.exp, pos.hd, hdstr);
+		ft_strdel(&p.str);
+	ft_strdel(&p.keys);
+	(out == 4) ? ft_yet_exp(p.exp, p.hd, hdstr) : "";
 	g_sig = 0;
-	if (out == 1)
-		ft_putstr_fd("exit", pos.tfd);
-	(pos.hd != 1) ? ft_putstr_fd("\n", pos.tfd) : "";
+	(out == 1) ? ft_putstr_fd("exit", p.tfd) : "";
+	(p.hd != 1) ? ft_putstr_fd("\n", p.tfd) : "";
 	if (out == 1)
 		return (NULL);
-	if (out == 3 || pos.str == NULL)
+	if (out == 3 || p.str == NULL)
 		return (ft_strdup("\0"));
-	return (pos.str);
+	return (p.str);
 }

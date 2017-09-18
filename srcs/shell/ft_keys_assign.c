@@ -6,36 +6,34 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 16:00:09 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/07/20 16:26:33 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/09/18 15:57:34 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-static int	ft_special_char(char *keys, t_pos *pos)
+static int	ft_special_char(char *k, t_pos *p)
 {
 	int		i;
 
 	i = 0;
-	while (keys[i] != '\0')
+	while (k[i] != '\0')
 	{
-		if (ft_isprint(keys[i]) == 0 && keys[i] != 10)
+		if (ft_isprint(k[i]) == 0 && k[i] != 10)
 			return (1);
-		if (pos->str != NULL && keys[0] == 10 && keys[1] == '\0' \
-				&& pos->str[pos->i] != '\0')
+		if (p->str && k[0] == 10 && k[1] == '\0' && p->str[p->i] != '\0')
 		{
-			ft_key_end(&pos->i, *pos);
-			return (0);
+			ft_key_end(&p->i, *p);
+			return (1);
 		}
-		if (keys[0] == 10 && keys[1] == '\0' && pos->hd == 2)
+		if (k[0] == 10 && k[1] == '\0' && p->hd == 2)
 			return (0);
-		if (keys[0] == 10 && keys[1] == '\0' \
-				&& !pos->exp)
+		if (k[0] == 10 && ((k[1] == '\0' && !p->exp)))
 			return (1);
-		if (keys[0] == 10 && keys[1] == '\0' \
-			&& ((pos->exp & EXP_SL) || (pos->exp & EXP_P)))
+		if (k[0] == 10 && k[1] == '\0' \
+			&& ((p->exp & EXP_SL) || (p->exp & EXP_P)))
 		{
-			ft_putstr_fd("\n", pos->tfd);
+			ft_putstr_fd("\n", p->tfd);
 			return (1);
 		}
 		i++;
@@ -67,27 +65,27 @@ int			ft_changeline(int index, t_pos pos, char *str, int m)
 	return (0);
 }
 
-int			ft_char_input(t_pos *pos, char *keys)
+int			ft_char_input(t_pos *pos, char *k)
 {
 	char *tmp;
 
 	if (((pos->imax + 1 + (pos->uh - pos->h)) / pos->uh) < pos->width)
 	{
 		ft_putstr_fd(tgetstr("im", NULL), pos->tfd);
-		(!(pos->hd == 1 && !pos->str)) ? ft_putstr_fd(keys, pos->tfd) : "";
+		(!(pos->hd == 1 && !pos->str)) ? ft_putstr_fd(k, pos->tfd) : "";
 		ft_putstr_fd(tgetstr("ei", NULL), pos->tfd);
-		tmp = (!pos->str) \
-			? ft_strdup(keys) : ft_strjoin_at(pos->str, keys, pos->i);
+		tmp = (!pos->str) ? ft_strdup(k) : ft_strjoin_at(pos->str, k, pos->i);
 		ft_strdel(&pos->str);
 		pos->str = tmp;
-		pos->i += ft_strlen(keys);
-		pos->imax += ft_strlen(keys);
-		ft_fill_quotes(-1, keys, &pos->exp);
+		pos->i += ft_strlen(k);
+		pos->imax += ft_strlen(k);
+		ft_fill_quotes(-1, k, &pos->exp);
 		if (ft_changeline(pos->i, *pos, pos->str, 'n'))
 			ft_new_line(pos->tfd);
-		if (((int)ft_strlen(keys) > 1 && !(ft_strequ(keys, pos->str) == 1 && pos->hd == 2)) || pos->s == 1 \
-			|| (((pos->i + (pos->uh - pos->h)) / pos->uh) \
-			!= ((pos->imax + (pos->uh - pos->h)) / pos->uh)))
+		if (((int)ft_strlen(k) > 1 && !(ft_strequ(k, pos->str) == 1 && \
+			pos->hd == 2)) || pos->s == 1 || (((pos->i + \
+			(pos->uh - pos->h)) / pos->uh) != \
+			((pos->imax + (pos->uh - pos->h)) / pos->uh)))
 		{
 			pos->s = 0;
 			return (2);
@@ -96,25 +94,8 @@ int			ft_char_input(t_pos *pos, char *keys)
 	return (1);
 }
 
-int			ft_keysassign(char *keys, t_pos *pos, int size)
+static int	ft_assign(int size, char *keys, t_pos *pos)
 {
-	if (pos->s == 1 && !((keys[0] == 27 && keys[1] == 91 && keys[2] == 67) || \
-				(keys[0] == -61 && keys[1] == -89) || \
-				(keys[0] == -61 && keys[1] == -97) || \
-				(keys[0] == -30 && keys[1] == -119 && keys[2] == -120)))
-	{
-		pos->s = 0;
-		ft_clear_line(pos->i, *pos, pos->str);
-	}
-	if (!ft_special_char(keys, pos))
-	{
-		if (pos->hd == 4)
-			ft_ctrl_r(pos, keys);
-		else
-			return (ft_char_input(pos, keys));
-	}
-	else if (keys[0] == 18 || pos->hd == 4)
-		ft_ctrl_r(pos, keys);
 	if (size == 1)
 		return (ft_key_size_1(keys, pos));
 	if (size == 2)
@@ -126,4 +107,28 @@ int			ft_keysassign(char *keys, t_pos *pos, int size)
 	if (size == 6)
 		return (ft_key_size_6(keys, pos));
 	return (0);
+}
+
+int			ft_keysassign(char *keys, t_pos *pos, int size)
+{
+	if (pos->s == 1 && !((keys[0] == 27 && keys[1] == 91 && keys[2] == 67) || \
+				(keys[0] == -61 && keys[1] == -89) || \
+				(keys[0] == -61 && keys[1] == -97) || \
+				(keys[0] == -30 && keys[1] == -119 && keys[2] == -120)))
+	{
+		pos->s = 0;
+		ft_clear_line(pos->i, *pos, pos->str, 1);
+	}
+	if (pos->t && keys[0] != 9)
+		pos->t = 0;
+	if (!ft_special_char(keys, pos))
+	{
+		if (pos->hd == 4)
+			ft_ctrl_r(pos, keys);
+		else
+			return (ft_char_input(pos, keys));
+	}
+	else if (keys[0] == 18 || keys[0] == 6 || pos->hd == 4)
+		ft_ctrl_r(pos, keys);
+	return (ft_assign(size, keys, pos));
 }

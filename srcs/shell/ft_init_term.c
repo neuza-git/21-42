@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 10:55:13 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/07/11 11:22:06 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/09/13 15:07:34 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,10 @@ void		initgl(t_engine *en, t_pos *pos, char *hdstr, int hd)
 	pos->crstr = NULL;
 	pos->hs = (en->vm != NULL) ? en->vm->hs : NULL;
 	pos->uhs = (en->vm != NULL) ? en->vm->hs : NULL;
+	pos->t = 0;
 	pos->tfd = en->tfd;
 	win_size_changed(pos);
-	//while (pos->head != NULL && pos->head->next != NULL)
-	//	pos->head = pos->head->next;
 	pos->cp = en->cp;
-	//pos->ps = en->ps;
 	pos->ps = NULL;
 	pos->str = NULL;
 	pos->s = 0;

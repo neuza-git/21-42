@@ -54,9 +54,14 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/shell/ft_small_move.c \
 	  srcs/shell/ft_clear_line.c \
 	  srcs/shell/ft_leave.c \
-	  srcs/shell/ft_ctrl_r.c \
+	  srcs/shell/ft_ctrl_r_1.c \
+	  srcs/shell/ft_ctrl_r_2.c \
 	  srcs/shell/tc_signal.c \
 	  srcs/shell/tc_utils.c \
+	  srcs/shell/ft_autocomplete_1.c \
+	  srcs/shell/ft_autocomplete_2.c \
+	  srcs/shell/ft_autocomplete_3.c \
+	  srcs/shell/ft_autocomplete_4.c \
 	  srcs/history/hs_create.c \
 	  srcs/history/hs_fill.c \
 	  srcs/history/hs_clear.c \
@@ -88,7 +93,7 @@ OBJ = $(patsubst $(PATH_SRC)/%.c, obj/%.o, $(SRC))
 
 #FLAGS = -g -Wall -Wextra -Werror #-O3
 
-FLAGS = -g3 -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -g3
 
 LIBS = -L./libft -lft -ltermcap
 
