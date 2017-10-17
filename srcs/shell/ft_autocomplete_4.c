@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_autocomplete.c                                  :+:      :+:    :+:   */
+/*   ft_autocomplete_4.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/09 15:36:52 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/14 13:05:27 by tgascoin         ###   ########.fr       */
+/*   Created: 2017/09/19 11:12:41 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/09/21 12:10:29 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int			ft_complete(t_pos *pos, char *common, int nb, int m)
 {
 	int		i;
-	int		i2;
 	char	*tmp_new;
 	char	*tmp;
 

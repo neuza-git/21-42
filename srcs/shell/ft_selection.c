@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/17 16:32:32 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/18 12:17:45 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/09/26 11:51:29 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char		*ft_cut_selection(t_pos *pos)
 		{
 			if (ft_key_backspace(pos, &pos->i, &pos->str, 1) == 2)
 				ft_clear_line(pos->i, *pos, pos->str, 1);
+			ft_fill_quotes(-1, pos->str, &pos->exp);
 		}
 	}
 	pos->s = 0;
@@ -84,6 +85,7 @@ int			ft_paste_selection(t_pos *pos)
 			new = ft_strdup(pos->cp);
 		pos->imax = ft_strlen(new);
 		pos->str = new;
+		ft_fill_quotes(-1, pos->str, &pos->exp);
 		ft_clear_line(pos->i, *pos, pos->str, cps);
 		return (1);
 	}

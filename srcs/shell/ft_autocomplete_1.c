@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_autocomplete.c                                  :+:      :+:    :+:   */
+/*   ft_autocomplete_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/09 15:36:52 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/18 15:53:48 by tgascoin         ###   ########.fr       */
+/*   Created: 2017/09/19 11:12:16 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/09/21 12:09:39 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ static void		findbinary(char *str, t_pos *pos)
 	s.iw = 0;
 	s.h = NULL;
 	s.f = NULL;
-	s.p = ft_strsplit(getenv("PATH"), ':');
+	s.p = NULL;
+	if (pos->env && env_getentry("PATH", pos->env))
+		s.p = ft_strsplit(env_getentry("PATH", pos->env)->value, ':');
 	while (s.p && s.p[s.iw] != NULL)
 	{
 		if (s.h == NULL)
@@ -44,7 +46,7 @@ static void		findfile(char *fname, char *dname, t_pos *pos)
 {
 	t_files		*h;
 	char		*pwd;
-	t_files		*tmp;
+	char		tmppwd[PATH_MAX];
 
 	pos->actype = 'f';
 	pwd = NULL;
@@ -52,9 +54,9 @@ static void		findfile(char *fname, char *dname, t_pos *pos)
 		h = thrudir(fname, dname, 0);
 	else
 	{
+		ft_memset(tmppwd, '\0', sizeof(tmppwd));
+		pwd = tmppwd;
 		h = thrudir(fname, getcwd(pwd, 1024), 0);
-		if (pwd)
-			free(pwd);
 	}
 	h = ft_dsort(h);
 	if (h)

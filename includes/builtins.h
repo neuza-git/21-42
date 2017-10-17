@@ -9,6 +9,6 @@ void			ft_setenv(t_cmd *cmd, t_envent **env);
 void			ft_unsetenv(t_cmd *cmd, t_envent **env);
 void			ft_export(t_cmd *cmd, t_envent **env);
 void			ft_unset(t_cmd *cmd, t_envent **env);
-void			ft_exit(char *str);
+void			ft_exit(char *str, int *out);
 
 #endif

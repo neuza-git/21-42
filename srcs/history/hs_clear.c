@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hs_clear.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/19 13:57:55 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/09/19 14:03:34 by tgascoin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 #include <stdio.h>
 
@@ -23,8 +35,6 @@ void		ft_delete_history(t_hs **h, int s)
 	t_hs	*n;
 	t_hs	*tmp;
 	int		i;
-	(void)s;
-	(void)tmp;
 
 	i = 0;
 	n = *h;
@@ -48,7 +58,7 @@ void		ft_delete_history(t_hs **h, int s)
 			}
 			n = n->prev;
 			n->next = n->next->next;
-			free(tmp); 
+			free(tmp);
 			*h = n;
 		}
 		if (i == 0 && n != NULL)
@@ -60,6 +70,4 @@ void		ft_delete_history(t_hs **h, int s)
 			*h = n;
 		}
 	}
-	//(n == NULL) ? ft_putstr("NULL\n") : "";
-	//dprintf(open("/dev//ttys004", O_WRONLY), "%d\n", s);
 }

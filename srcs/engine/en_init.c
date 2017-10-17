@@ -12,7 +12,6 @@ static void	enx_free(t_lexer **lexer, t_engine *engine)
 t_engine	*en_init(int flags, char **env)
 {
 	t_engine	*engine;
-	char		buf[1024];
 
 	if (!(engine = malloc(sizeof(t_engine))))
 		return (NULL);
@@ -21,24 +20,24 @@ t_engine	*en_init(int flags, char **env)
 		free(engine);
 		return (NULL);
 	}
+	g_out = 0;
 	engine->cp = NULL;
 	engine->rest = NULL;
 	tcgetattr(0, &engine->default_term);
-	tgetent(buf, getenv("TERM"));
-	engine->vm->hs = ft_create_history();
+	engine->vm->hs = ft_create_history(engine->vm->env);
 	ft_set_term();
-	engine->tfd = open(ttyname(0), O_WRONLY);;
+	engine->tfd = open(ttyname(0), O_WRONLY);
 	engine->buffer = NULL;
 	engine->flags = flags;
 	return (engine);
 }
 
-void		en_loop(t_engine *engine)
+void		en_loop(t_engine *engine, int *out)
 {
 	t_lexer	*lexer;
 	t_ast	*ast;
 
-	while ((engine->buffer = get_line(engine, 0, NULL)))
+	while (!g_out && (engine->buffer = get_line(engine, 0, NULL)))
 	{
 		lexer = ft_scalloc(sizeof(t_lexer));
 		ft_fill_history(&engine->vm->hs, &engine->buffer);
@@ -54,7 +53,7 @@ void		en_loop(t_engine *engine)
 				vm_duplocals(engine->vm->local, &lexer->tokens);
 				vm_loadast(engine->vm, ast);
 				tc_stop_signals();
-				vm_readast(engine->vm, ast);
+				vm_readast(engine->vm, ast, out);
 				tc_listen_signals();
 			}
 		}

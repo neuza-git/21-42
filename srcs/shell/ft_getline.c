@@ -6,13 +6,13 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 16:21:50 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/18 15:55:38 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/09/19 13:32:09 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-char		*ft_crest(char **rest, char *keys)
+char			*ft_crest(char **rest, char *keys)
 {
 	int		i;
 	int		ni;

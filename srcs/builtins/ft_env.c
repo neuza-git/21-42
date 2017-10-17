@@ -6,7 +6,7 @@
 /*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 16:11:00 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/05/23 20:36:15 by acorbeau         ###   ########.fr       */
+/*   Updated: 2017/09/21 15:25:50 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static t_envent	*get_newenv(t_envent *env)
 	return (ret);
 }
 
-void			ft_env(t_cmd *cmd, t_envent **e, t_vm *vm)
+void			ft_env(t_cmd *cmd, t_envent **e, t_vm *vm, int *out)
 {
 	t_envopts	*opts;
 	t_envent	*fptr;
@@ -120,7 +120,7 @@ void			ft_env(t_cmd *cmd, t_envent **e, t_vm *vm)
 	while (opts->affenv && fptr)
 	{
 		ft_putstr(fptr->name);
-		(fptr->value) ? ft_putchar('=') : NULL;
+		ft_putchar('=');
 		ft_putstr(fptr->value);
 		(!opts->skipnl) ? ft_putchar('\n') : NULL;
 		fptr = fptr->next;
@@ -130,7 +130,7 @@ void			ft_env(t_cmd *cmd, t_envent **e, t_vm *vm)
 		cmd->av += opts->end;
 		fptr = vm->env;
 		vm->env = env;
-		vm_exec(cmd, cmd->flags, vm);
+		vm_exec(cmd, cmd->flags, vm, out);
 		vm->env = fptr;
 		cmd->av -= opts->end;
 		vm->reg &= ~VRF_NEW_PATH;

@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 10:55:13 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/13 15:07:34 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/09/19 13:21:33 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void		initgl(t_engine *en, t_pos *pos, char *hdstr, int hd)
 	win_size_changed(pos);
 	pos->cp = en->cp;
 	pos->ps = NULL;
+	pos->env = en->vm->env;
 	pos->str = NULL;
 	pos->s = 0;
 	pos->ss = 0;

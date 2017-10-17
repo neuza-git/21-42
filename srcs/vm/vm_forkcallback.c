@@ -30,7 +30,7 @@ int			vm_fcb_piped(t_cmd *cmd, int pid, t_vm *vm)
 		}
 		if (cmd->next)
 		{
-			if (!vm_exec(cmd->next, LFT_PIPE, vm))
+			if (!vm_exec(cmd->next, LFT_PIPE, vm, 0))
 			{
 				vm->reg |= VRF_LAST_KO;
 				return (0);

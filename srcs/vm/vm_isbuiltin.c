@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vm_isbuiltin.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/20 13:47:56 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/09/21 15:24:39 by tgascoin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
-int		vm_isbuiltin(t_cmd *cmd, t_vm *vm)
+int		vm_isbuiltin(t_cmd *cmd, t_vm *vm, int *out)
 {
 	if (ft_strequ((char *)cmd->av[0], "cd"))
 		return (ft_cd(cmd, &vm->env));
 	else if (ft_strequ(cmd->av[0], "env"))
-		ft_env(cmd, &vm->env, vm);
+		ft_env(cmd, &vm->env, vm, out);
 	else if (ft_strequ(cmd->av[0], "setenv"))
 		ft_setenv(cmd, &vm->env);
 	else if (ft_strequ(cmd->av[0], "unsetenv"))
@@ -15,7 +27,7 @@ int		vm_isbuiltin(t_cmd *cmd, t_vm *vm)
 	else if (ft_strequ(cmd->av[0], "export"))
 		ft_export(cmd, &vm->local);
 	else if	(ft_strequ(cmd->av[0], "exit"))
-		ft_exit(cmd->av[1]);
+		ft_exit(cmd->av[1], out);
 	else
 		return (0);
 	return (1);

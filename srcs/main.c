@@ -24,12 +24,14 @@ int		get_cmd_flags(int ac, char **av)
 int		main(int ac, char **av, char **env)
 {
 	t_engine	*engine;
+	int			out;
 
+	out = 0;
 	ft_errset("ft_bash");
-	tc_check_sin();
+	tc_check_sin(env);
 	tc_listen_signals();
 	engine = en_init(get_cmd_flags(ac, av), env);
-	en_loop(engine);
+	en_loop(engine, &out);
 	tcsetattr(0, TCSANOW, &engine->default_term);
-	en_free(&engine);
+	return (en_free(&engine, out));
 }

@@ -85,6 +85,7 @@ typedef struct      s_pos
 	char			*cp;
 	int				t;
 	unsigned int	exp;
+	t_envent		*env;
 	char			*crstr;
 	int				hd;
 	int				tfd;
@@ -131,7 +132,7 @@ int					ft_key_deleteblock(int *index, int *imax, char **str);
 void				ft_delete(char **str, int i, int imax, int mode);
 int					ft_key_backspace(t_pos *pos, int *i, char **str, int mode);
 int					ft_print_sig(t_pos pos);
-void				ft_fill_quotes(int index, char *keys, unsigned int *exp);
+void				ft_fill_quotes(int index, char *str, unsigned int *exp);
 int					ft_expan(t_pos *pos);
 void				ft_new_line(int tfd);
 int					ft_char_input(t_pos *pos, char *keys);
@@ -152,7 +153,8 @@ int					ft_has_newnl(int ni, t_pos pos, char *str);
 int					ft_key_up(t_pos *pos);
 int					ft_key_down(t_pos *pos);
 
-void				ft_ctrl_r_clear(int i, t_pos pos, int m);
+void				ft_ctrl_r_clear(int i, t_pos pos);
+int					ft_count_realign(t_pos pos, int nc);
 void				ft_ctrl_r_replace(t_pos *pos);
 int					ft_ctrl_r(t_pos *pos, char *keys);
 

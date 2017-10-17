@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fill_history.c                                  :+:      :+:    :+:   */
+/*   hs_fill.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/23 13:11:00 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/07/11 11:19:27 by tgascoin         ###   ########.fr       */
+/*   Created: 2017/09/19 13:35:18 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/09/20 13:45:05 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine.h"
 #include "history.h"
-#include <stdio.h>
 
 void		ft_fill_history(t_hs **oh, char **cur)
 {
@@ -20,6 +19,8 @@ void		ft_fill_history(t_hs **oh, char **cur)
 	char	*str;
 	int		size;
 
+	if (!(cur && *cur && oh && *oh))
+		return ;
 	str = *cur;
 	size = ft_strlen(str);
 	n = *oh;
@@ -27,6 +28,7 @@ void		ft_fill_history(t_hs **oh, char **cur)
 		n = n->next;
 	if (size > 1 && str[0] == '!' && str[1] != '!')
 		ft_event_single(n, cur);
+	str = *cur;
 	if (size > 1 && str[0] == '!' && str[1] == '!')
 		ft_event_double(n, cur);
 	str = *cur;

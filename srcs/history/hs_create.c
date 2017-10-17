@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/23 12:39:53 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/07/11 13:30:57 by tgascoin         ###   ########.fr       */
+/*   Created: 2017/09/19 13:51:47 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/09/19 15:01:45 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "history.h"
 #include "vm.h"
 
-t_hs	*hs_create_node(char *str, int m, t_hs *prev)
+t_hs			*hs_create_node(char *str, int m, t_hs *prev)
 {
 	t_hs	*n;
 
@@ -26,16 +26,22 @@ t_hs	*hs_create_node(char *str, int m, t_hs *prev)
 	return (n);
 }
 
-t_hs	*ft_create_history(void)
+static void		init_create_history(int *fd, char **line, int *i, t_envent *env)
+{
+	*i = 0;
+	*line = NULL;
+	*fd = ft_open_history(NULL, 'r', env);
+}
+
+t_hs			*ft_create_history(t_envent *env)
 {
 	int		fd;
 	char	*line;
 	int		i;
 	t_hs	*n;
 
-	i = 0;
-	fd = ft_open_history(NULL, 'r');
 	n = NULL;
+	init_create_history(&fd, &line, &i, env);
 	while (fd > 0 && get_next_line(fd, &line))
 	{
 		if (line != NULL && ft_strlen(line) > 0)
@@ -52,6 +58,7 @@ t_hs	*ft_create_history(void)
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
-	fd = close(fd);
+	if (fd > 0)
+		fd = close(fd);
 	return (n);
 }

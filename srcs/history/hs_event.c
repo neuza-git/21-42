@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hs_event.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/19 14:07:35 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/09/21 15:35:48 by tgascoin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "history.h"
-#include <stdio.h>
 
 static char *get_x_param(int p, char *lcmd)
 {
@@ -11,6 +22,7 @@ static char *get_x_param(int p, char *lcmd)
 
 	w = -1;
 	i = 0;
+	ni = 0;
 	new = NULL;
 	while (lcmd[i] != '\0')
 	{
@@ -38,7 +50,7 @@ static char *get_x_param(int p, char *lcmd)
 				i++;
 		}
 	}
-	return (NULL);//TODO: @tgas a voir c'est pour eviter les warning
+	return (NULL);
 }
 
 static char	*get_param(char *str, char *lcmd)
@@ -57,9 +69,7 @@ static char	*get_param(char *str, char *lcmd)
 		return ((lcmd[i] == '\0') ? ft_strdup(" ") : ft_strdup(lcmd + i));
 	}
 	else
-	{
 		return (get_x_param(ft_atoi(str + 3), lcmd));
-	}
 	return (NULL);
 }
 

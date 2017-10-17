@@ -8,6 +8,8 @@
 # define EF_PRINTLEX 0x8
 # define CMD_MAX 4086//todo a voir la limite
 
+int		g_out;
+
 typedef struct		s_engine
 {
 	t_vm			*vm;
@@ -19,9 +21,9 @@ typedef struct		s_engine
 	int				flags;
 }					t_engine;
 
-void		en_free(t_engine **en);
 t_engine	*en_init(int flags, char **env);
-void		en_loop(t_engine *engine);
+int			en_free(t_engine **en, int out);
+void		en_loop(t_engine *engine, int *out);
 void		en_print_lex(t_lexer *lex);
 void		en_print_ast(t_ast *ast);
 char		*en_getline();

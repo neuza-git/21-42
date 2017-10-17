@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 11:11:40 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/18 12:16:07 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/09/25 11:45:24 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int			ft_key_wordleft(t_pos *pos, char **cur, int m)
 		*cur = (m == 1) ? s : *cur;
 		(m && pos->imax >= pos->h) ? (void)ft_clear_line(i, *pos, s, 1) : "";
 	}
+	ft_fill_quotes(-1, s, &pos->exp);
 	if (i == pos->i)
 		ft_putstr_fd(tgetstr("bl", NULL), pos->tfd);
 	else

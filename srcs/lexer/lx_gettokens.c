@@ -31,7 +31,8 @@ t_lexer		*lx_gettokens(t_lexer *lx)
 	if (!lx->tmp && !(lx->tmp = ft_strnew(ft_strlen(lx->buff))))
 		return (NULL);
 	lx->tmp[0] = '\0';
-	while (*lx->ptr && (!is_wdpart(lx->stat = get_stat(lx->ptr)) && !is_token(*lx->ptr)))
+	while (*lx->ptr && (!is_wdpart(lx->stat = get_stat(lx->ptr)) \
+				&& !is_token(*lx->ptr)))
 		lx->ptr++;
 	if (!*lx->ptr)
 		return (lx);
@@ -51,6 +52,7 @@ t_lexer		*lx_gettokens(t_lexer *lx)
 			break;
 		lx->ptr++;
 	}
-	ft_lstaddfront((t_list **)&lx->tokens, (t_list *)lx_newtoken(ft_strdup(lx->tmp), lx->stat));
+	ft_lstaddfront((t_list **)&lx->tokens,\
+		(t_list *)lx_newtoken(ft_strdup(lx->tmp), lx->stat));
 	return ((get_stat(lx->ptr) == LXS_PARSED) ? lx : lx_gettokens(lx));
 }

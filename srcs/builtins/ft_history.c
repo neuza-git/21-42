@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 15:31:42 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/07/11 13:27:24 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/09/19 12:26:22 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,20 @@ static void		ft_show_history(t_hs *h, int s)
 	}
 }
 
-static void		history_args(t_hs **h, char **av, int m)
+static void		history_args(t_hs **h, char **av, t_envent *env, int m)
 {
 	if (ft_strequ(av[1], "-c") == 1 && !av[2] && !m)
 		ft_clear_history(h);
 	else if (ft_strequ(av[1], "-d") == 1 && av[2] && !m)
 		ft_delete_history(h, ft_atoi(av[2]));
 	else if (ft_strequ(av[1], "-a") == 1 && !m)
-		ft_a_args(av[2], *h);
+		ft_a_args(av[2], *h, env);
 	else if (ft_strequ(av[1], "-n") == 1 && !m)
-		ft_n_args(av[2], h);
+		ft_n_args(av[2], h, env);
 	else if (ft_strequ(av[1], "-r") == 1 && !m)
-		ft_r_args(av[2], h);
+		ft_r_args(av[2], h, env);
 	else if (ft_strequ(av[1], "-w") == 1 && !m)
-		ft_w_args(av[2], *h);
+		ft_w_args(av[2], *h, env);
 	else if (ft_strequ(av[1], "-p") == 1 && av[2] && !m)
 		ft_p_args(av, h);
 	else if (ft_strequ(av[1], "-s") == 1 && av[2] && !m)
@@ -66,7 +66,7 @@ static void		history_args(t_hs **h, char **av, int m)
 		ft_show_history(*h, ((av[1] == NULL) ? -1 : ft_atoi(av[1])));
 }
 
-void			ft_history(char **av, t_vm *vm, int m)
+void			ft_history(char **av, t_vm *vm, t_envent *env, int m)
 {
-	history_args(&vm->hs, av, m);
+	history_args(&vm->hs, av, env, m);
 }

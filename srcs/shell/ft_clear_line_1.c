@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_clear_line.c                                    :+:      :+:    :+:   */
+/*   ft_clear_line_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/19 10:35:48 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/18 13:57:02 by tgascoin         ###   ########.fr       */
+/*   Created: 2017/09/19 11:11:26 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/09/19 11:16:05 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int			ft_clear_line(int i, t_pos pos, char *str, int nc)
 			&& ft_get_cursor('w') == pos.width)
 	{
 		ft_putchar_fd('\n', pos.tfd);
-		n = (((pos.i + (pos.uh - pos.h) + nc) / pos.uh)) - ((pos.i + (pos.uh - pos.h)) / pos.uh) + 1;
+		n = ft_count_realign(pos, nc);
 	}
 	if (pos.hd != 4)
 		ft_putstr_fd(tgoto(tgetstr("cm", &buf), (h - 1), (w - 1 - n)), pos.tfd);

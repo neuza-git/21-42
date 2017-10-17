@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ctrl_r.c                                        :+:      :+:    :+:   */
+/*   ft_ctrl_r_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/20 14:21:47 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/18 14:20:35 by tgascoin         ###   ########.fr       */
+/*   Created: 2017/09/19 11:12:52 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/09/25 11:46:14 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ static void			lookformatch(t_pos *pos, char *keys)
 	ft_strdel(&new);
 	if (!pos->rhs)
 		pos->rhs = tmp;
-	ft_ctrl_r_clear(pos->i, *pos, ((keys[0] == 18) ? 1 : 0));
+	//ft_ctrl_r_clear(pos->i, *pos, ((keys[0] == 18) ? 1 : 0));
+	ft_ctrl_r_clear(pos->i, *pos);
 }
 
 int					ft_ctrl_r(t_pos *pos, char *keys)
@@ -112,6 +113,8 @@ int					ft_ctrl_r(t_pos *pos, char *keys)
 	{
 		if (keys[0] == 127)
 			ft_key_backspace(pos, &pos->i, &pos->str, 1);
+		if (keys[0] == 127)
+			ft_fill_quotes(-1, pos->str, &pos->exp);
 		lookformatch(pos, keys);
 		pos->hd = 4;
 	}

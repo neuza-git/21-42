@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vm_exec.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/20 13:48:41 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/09/21 14:56:29 by tgascoin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 #include "shell.h"
 
@@ -20,12 +32,12 @@ static char	*xget_bin(char *cmd, t_vm *vm)
 	return (ht_getbin(cmd, vm->htable));
 }
 
-int		vm_exec(t_cmd *cmd, int flags, t_vm *vm)
+int		vm_exec(t_cmd *cmd, int flags, t_vm *vm, int *out)
 {
 	char	*path;
 	int		ret;
 
-	if (vm_isbuiltin(cmd, vm))
+	if (vm_isbuiltin(cmd, vm, out))
 		return (2);
 	path = NULL;
 	ret = 0;
@@ -33,7 +45,7 @@ int		vm_exec(t_cmd *cmd, int flags, t_vm *vm)
 	{
 		ft_perror(cmd->av[0], ERR_NOCMD);
 		if (cmd->next && tc_sigstat(0))
-			ret = vm_exec(cmd->next, flags, vm);
+			ret = vm_exec(cmd->next, flags, vm, out);
 		else
 			ret = 0;
 	}

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ctrl_r.c                                        :+:      :+:    :+:   */
+/*   ft_ctrl_r_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/20 14:21:47 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/13 15:17:06 by tgascoin         ###   ########.fr       */
+/*   Created: 2017/09/19 11:12:57 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/09/21 12:08:06 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void			ft_ctrl_r_clear(int i, t_pos pos, int m)
+void			ft_ctrl_r_clear(int i, t_pos pos)
 {
 	int		id;
 

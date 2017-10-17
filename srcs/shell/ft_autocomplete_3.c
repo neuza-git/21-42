@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_autocomplete.c                                  :+:      :+:    :+:   */
+/*   ft_autocomplete_3.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/09 15:36:52 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/18 16:01:28 by tgascoin         ###   ########.fr       */
+/*   Created: 2017/09/19 11:12:35 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/09/21 12:10:11 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void		return_term(t_pos pos, int *iv, int m)
 	}
 }
 
-static void		displayall(t_files *h, t_pos *pos, int i, int m)
+static void		displayall(t_files *h, t_pos *pos, int i)
 {
 	int		out;
 
@@ -93,11 +93,7 @@ static int		ft_look4match(t_files *n, char *str, t_pos *pos, int m)
 static int		treat_match(t_files *h, char *str, t_pos *pos, int m)
 {
 	int		out;
-	int		i;
-	t_files	*n;
 
-	n = h;
-	i = 0;
 	out = (str) ? 0 : 1;
 	if (h)
 		out = ft_look4match(h, str, pos, m);
@@ -130,5 +126,5 @@ void			treat_result(char *str, t_files *h, t_pos *pos, int m)
 		nb++;
 		n = n->next;
 	}
-	displayall(h, pos, nb, m);
+	displayall(h, pos, nb);
 }

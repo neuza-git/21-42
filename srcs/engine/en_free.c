@@ -1,12 +1,12 @@
 #include "engine.h"
 
-void		en_free(t_engine **en)
+int			en_free(t_engine **en, int out)
 {
 	if (!*en)
-		return ;
+		return (1);
 	if ((*en)->vm)
 	{
-		ft_write_history((*en)->vm->hs);
+		ft_write_history((*en)->vm->hs, (*en)->vm->env);
 		ft_clear_history(&((*en)->vm->hs));
 		vm_free(&(*en)->vm);
 	}
@@ -15,4 +15,5 @@ void		en_free(t_engine **en)
 	(*en)->tfd = close((*en)->tfd);
 	free(*en);
 	*en = NULL;
+	return (out);
 }

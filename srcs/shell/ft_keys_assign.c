@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 16:00:09 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/18 15:57:34 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/09/25 15:52:54 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static int	ft_special_char(char *k, t_pos *p)
 		if (p->str && k[0] == 10 && k[1] == '\0' && p->str[p->i] != '\0')
 		{
 			ft_key_end(&p->i, *p);
+			if (p->exp)
+				ft_putstr_fd("\n", p->tfd);
 			return (1);
 		}
 		if (k[0] == 10 && k[1] == '\0' && p->hd == 2)
@@ -79,7 +81,7 @@ int			ft_char_input(t_pos *pos, char *k)
 		pos->str = tmp;
 		pos->i += ft_strlen(k);
 		pos->imax += ft_strlen(k);
-		ft_fill_quotes(-1, k, &pos->exp);
+		ft_fill_quotes(-1, pos->str, &pos->exp);
 		if (ft_changeline(pos->i, *pos, pos->str, 'n'))
 			ft_new_line(pos->tfd);
 		if (((int)ft_strlen(k) > 1 && !(ft_strequ(k, pos->str) == 1 && \

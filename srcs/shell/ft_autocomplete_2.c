@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_autocomplete.c                                  :+:      :+:    :+:   */
+/*   ft_autocomplete_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/09 15:36:52 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/14 13:29:09 by tgascoin         ###   ########.fr       */
+/*   Created: 2017/09/19 11:12:29 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/09/21 12:09:48 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static int		fileandexec(char *str, char *path, char *fname, int m)
 	struct stat		s;
 	int				i;
 	char			*fpath;
-	int				fd;
 	int				out;
 
 	i = 0;
