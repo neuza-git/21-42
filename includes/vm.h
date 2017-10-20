@@ -1,21 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vm.h                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/20 20:10:12 by kbagot            #+#    #+#             */
+/*   Updated: 2017/10/20 20:32:03 by kbagot           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef VM_H
 # define VM_H
 
 # include <fcntl.h>
 # include <string.h>
-#include <signal.h>
+# include <signal.h>
 # include "env.h"
 # include "history.h"
 # include "ast.h"
 # include "builtins.h"
 # include "sys/wait.h"
 # include "htable.h"
-
 # define VRDF_APPEND 0x8
 # define VRDF_STDERR 0x4
 # define VRF_SKIP 0x1
 # define VRF_LAST_KO 0x10
 # define VRF_NEW_PATH 0x18
+
+typedef struct		s_job
+{
+	int				idc;
+	int				id;
+	char			*name;
+	struct s_job	*next;
+}					t_job;
 
 typedef struct		s_vm
 {
@@ -26,6 +45,8 @@ typedef struct		s_vm
 	t_ast			*ast;
 	t_cmd			*work;
 	int				reg;
+	int				newpid;
+	t_job			*job;
 }					t_vm;
 
 void		vm_free(t_vm **vm);
@@ -56,5 +77,7 @@ void		vm_duplocals(t_envent *loc, t_token **toks);
 void		ft_env(t_cmd *cmd, t_envent **ev, t_vm *vm, int *out);
 
 void		ft_history(char **av, t_vm *vm, t_envent *env, int m);
+
+void		ft_jobs(t_vm *vm);
 
 #endif

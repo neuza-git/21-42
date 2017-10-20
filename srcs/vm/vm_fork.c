@@ -1,5 +1,7 @@
 #include "vm.h"
 
+extern int			g_pid;
+
 static int	do_builtin(t_cmd *cmd, t_vm *vm, int m)
 {
 	if (ft_strequ(cmd->av[0], "echo") && m)
@@ -26,6 +28,8 @@ int			vm_fork(char *path, t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *
 	int		res;
 
 	cmd->pid = fork();
+	if (!g_pid)
+		g_pid = cmd->pid;
 	res = 0;
 	if (cmd->pid < 0)
 	{
@@ -41,7 +45,7 @@ int			vm_fork(char *path, t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *
 	else if (cmd->pid > 0)
 	{
 		(f)(cmd, -2, vm);
-		waitpid(cmd->pid, &res, 0);
+		waitpid(cmd->pid, &res, WUNTRACED);
 		(f)(cmd, cmd->pid, vm);
 		return (WEXITSTATUS(res));
 	}

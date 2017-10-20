@@ -13,6 +13,7 @@
 # include <term.h>
 # include <curses.h>
 
+#include "vm.h"
 #include "libft.h"
 
 #define EXP_SQ 0x01
@@ -68,7 +69,7 @@ typedef struct      s_sort
 	char			*tmp;
 	int				itmp;
 	int				r;
-	t_files			 *file;
+	t_files			*file;
 	t_files			*new;
 	t_files			next;
 	t_files			curr;

@@ -54,7 +54,7 @@ void		en_loop(t_engine *engine, int *out)
 				vm_loadast(engine->vm, ast);
 				tc_stop_signals();
 				vm_readast(engine->vm, ast, out);
-				tc_listen_signals();
+				tc_listen_signals(engine);
 			}
 		}
 		enx_free(&lexer, engine);
