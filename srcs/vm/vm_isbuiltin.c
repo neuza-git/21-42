@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:47:56 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/20 20:25:58 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/10/24 17:31:32 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int		vm_isbuiltin(t_cmd *cmd, t_vm *vm, int *out)
 		ft_exit(cmd->av[1], out);
 	else if (ft_strequ(cmd->av[0], "jobs"))
 		ft_jobs(vm);
+	else if (ft_strequ(cmd->av[0], "fg"))
+		ft_fg(cmd->av[1], vm->job);
+	else if (ft_strequ(cmd->av[0], "bg"))
+		ft_bg(cmd->av[1], vm->job);
 	else
 		return (0);
 	return (1);

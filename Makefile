@@ -29,6 +29,8 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/builtins/ft_history.c \
 	  srcs/builtins/ft_exit.c \
 	  srcs/builtins/ft_jobs.c \
+	  srcs/builtins/ft_fg.c \
+	  srcs/builtins/ft_bg.c \
 	  srcs/engine/en_free.c \
 	  srcs/engine/en_init.c \
 	  srcs/engine/en_print.c \

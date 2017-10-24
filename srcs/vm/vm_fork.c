@@ -38,6 +38,7 @@ int			vm_fork(char *path, t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *
 	}
 	else if (cmd->pid == 0)
 	{
+		tc_ign_exec();
 		if ((f)(cmd, cmd->pid, vm))
 			execve(path, cmd->av, env_dup(vm->env));
 		exit(EXIT_FAILURE);

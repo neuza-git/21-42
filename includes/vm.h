@@ -6,7 +6,7 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 20:10:12 by kbagot            #+#    #+#             */
-/*   Updated: 2017/10/20 20:32:03 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/10/24 19:38:09 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,8 @@ void		ft_env(t_cmd *cmd, t_envent **ev, t_vm *vm, int *out);
 void		ft_history(char **av, t_vm *vm, t_envent *env, int m);
 
 void		ft_jobs(t_vm *vm);
+void		ft_fg(char *arg, t_job *job);
+void		ft_bg(char *arg, t_job *job);
+void		tc_ign_exec();
 
 #endif

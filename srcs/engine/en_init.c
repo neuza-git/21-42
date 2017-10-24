@@ -25,6 +25,7 @@ t_engine	*en_init(int flags, char **env)
 	engine->rest = NULL;
 	tcgetattr(0, &engine->default_term);
 	engine->vm->hs = ft_create_history(engine->vm->env);
+	engine->vm->job = NULL;
 	ft_set_term();
 	engine->tfd = open(ttyname(0), O_WRONLY);
 	engine->buffer = NULL;
