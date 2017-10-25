@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 15:45:36 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/24 20:05:29 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/10/25 20:31:06 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,13 @@ static int	add_njob(t_job **tmp, t_engine *e, int npid)
 		*tmp = (*tmp)->next;
 		i++;
 	}
-	if ((*tmp)->id)
+	if ((*tmp)->id == npid)
 			return (1);
 	if (!((*tmp)->next = ft_memalloc(sizeof(t_job))))
 		return (1);
 	*tmp = (*tmp)->next;
 	(*tmp)->idc = i;
 	return (0);
-}
-
-static void print_job(t_job *tmp, int npid, t_engine *e)
-{
-	tmp->name = ft_strdup(e->buffer);
-	printf("\n[%d] %s  %s  %d\n", tmp->idc, "Stopped", tmp->name, npid);
 }
 
 static void add_job(int npid, t_engine *e)
@@ -66,15 +60,15 @@ static void add_job(int npid, t_engine *e)
 	{
 		if (add_njob(&tmp, e, npid))
 		{
-			print_job(tmp, npid, e);
+			printf("\n[%d] %s  %s  %d\n", tmp->idc, "exist Stopped", tmp->name, npid);
 			return ;
 		}
 	}
-	print_job(tmp, npid, e);
+	tmp->name = ft_strdup(e->buffer);
+	printf("\n[%d] %s  %s  %d\n", tmp->idc, "Stopped", tmp->name, npid);
 	tmp->id = npid;
 	tmp->next = NULL;
 }
-
 void		tc_handle_signals(int sig)
 {
 	struct termios	tattr;
@@ -89,8 +83,9 @@ void		tc_handle_signals(int sig)
 	else
 	{
 		g_last_signal = sig;
-		if (g_pid != (int)getpid() && g_pid != 0)
-			kill(g_pid, SIGSTOP);
+		signal(SIGSTOP, SIG_IGN);
+		if (g_pid != 0)
+			kill(- g_pid, SIGSTOP);
 	}
 }
 
@@ -110,7 +105,7 @@ void		tc_stop_signals(void)
 {
 	g_last_signal = 0;
 	g_waitsig = 0;
-	//waitpid(pid, &status, WNOHANG); CHECK ALL JOBS STATUS
+	//waitpid(pid, &status, WNOHANG); CHECK ALL JOBS STATUS  look at  sigchld
 	signal(SIGTSTP, &tc_handle_signals);
 }
 

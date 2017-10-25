@@ -6,7 +6,7 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:53:55 by kbagot            #+#    #+#             */
-/*   Updated: 2017/10/24 18:50:19 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/10/25 20:31:00 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void	ft_bg(char *arg, t_job *job)
 	(arg) ? (i = ft_atoi(arg)) : (i = 0);
 	if (job)
 	{
-		if (!arg)
-		while (job->next || (job->idc == i))
+		while (job->next && (job->idc != i))
 			job = job->next;
 		if (job->idc == i || !arg)
 		{

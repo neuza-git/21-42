@@ -45,6 +45,7 @@ int			vm_fork(char *path, t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *
 	}
 	else if (cmd->pid > 0)
 	{
+		setpgid(cmd->pid, g_pid);
 		(f)(cmd, -2, vm);
 		waitpid(cmd->pid, &res, WUNTRACED);
 		(f)(cmd, cmd->pid, vm);

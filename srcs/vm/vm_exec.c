@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:48:41 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/24 13:17:26 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/10/25 17:41:11 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ int		vm_exec(t_cmd *cmd, int flags, t_vm *vm, int *out)
 	}
 	else if ((flags & LFT_PIPE))
 	{
-		if (!g_pid) // under shell for  piped  cmd
-			g_pid = fork();
 		cmd->flags = flags;
 		(cmd->next) ? (vm_pipe_cmd(cmd)) : NULL;
 		ret = (vm_fork_cmd(path, cmd, vm, &vm_fcb_piped));

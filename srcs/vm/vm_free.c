@@ -11,7 +11,7 @@ void		vm_free(t_vm **vm)
 	if ((*vm)->local)
 		envent_free(&(*vm)->local);
 	if  ((*vm)->ast)
-		ast_freeast(&(*vm)->ast);
+		ast_freeast(&(*vm)->ast);// TODOmaybe free &(*vm)->job
 	free (*vm);
 	*vm = NULL;
 }
