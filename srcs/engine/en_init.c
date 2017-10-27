@@ -5,7 +5,8 @@
 static void	enx_free(t_lexer **lexer, t_engine *engine)
 {
 	lx_free(lexer);
-	free(engine->buffer);
+	ft_strdel(&engine->buffer);
+	ft_strdel(&engine->vm->buffer);
 	engine->buffer = NULL;
 }
 
@@ -42,6 +43,7 @@ void		en_loop(t_engine *engine, int *out)
 	{
 		lexer = ft_scalloc(sizeof(t_lexer));
 		ft_fill_history(&engine->vm->hs, &engine->buffer);
+		engine->vm->buffer = ft_strdup(engine->buffer);
 		lexer->buff = engine->buffer;
 		lexer->ptr = lexer->buff;
 		lexer->stat = LXS_DEF;
@@ -55,7 +57,7 @@ void		en_loop(t_engine *engine, int *out)
 				vm_loadast(engine->vm, ast);
 				tc_stop_signals();
 				vm_readast(engine->vm, ast, out);
-				tc_listen_signals(engine);
+				tc_listen_signals();
 			}
 		}
 		enx_free(&lexer, engine);

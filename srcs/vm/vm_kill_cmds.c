@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:48:27 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/20 13:48:28 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/27 17:08:55 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	vm_kill_cmds(t_cmd *cmd)
 {
 	while (cmd)
 	{
-		if (cmd->pid)
-			kill(cmd->pid, SIGKILL);
+	//	if (cmd->pid)
+		//	kill(cmd->pid, SIGKILL);
 		cmd = cmd->next;
 	}
 }
