@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:47:56 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/30 13:04:05 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/27 18:05:42 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ int		vm_isbuiltin(t_cmd *cmd, t_vm *vm, int *out)
 		ft_export(cmd->av, &vm->env, vm->local);
 	else if	(ft_strequ(cmd->av[0], "exit"))
 		ft_exit(cmd->av[1], out);
+	else if (ft_strequ(cmd->av[0], "jobs"))
+		ft_jobs(vm);
+	else if (ft_strequ(cmd->av[0], "fg"))
+		ft_fg(cmd->av[1], vm);
+	else if (ft_strequ(cmd->av[0], "bg"))
+		ft_bg(cmd->av[1], vm);
 	else if	(ft_strequ(cmd->av[0], "read"))
 		ft_read(cmd->av, &vm->local, &vm->env);
 	else if (ft_strequ(cmd->av[0], "set"))

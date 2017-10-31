@@ -16,8 +16,9 @@
 
 static void	enx_free(t_lexer **lex, t_engine *engine)
 {
-	lx_free(lex);
-	free(engine->buffer);
+	ft_strdel(&engine->buffer);
+	ft_strdel(&engine->vm->buffer);
+  lx_free(lex);
 	engine->buffer = NULL;
 }
 
@@ -36,6 +37,7 @@ t_engine	*en_init(int flags, char **env)
 	engine->cp = NULL;
 	engine->rest = NULL;
 	engine->vm->hs = ft_create_history(engine->vm->env);
+	engine->vm->job = NULL;
 	engine->tfd = open(ttyname(0), O_WRONLY);
 	engine->buffer = NULL;
 	engine->flags = flags;
@@ -51,6 +53,7 @@ void		en_loop(t_engine *engine, int *out)
 	{
 		lex = ft_scalloc(sizeof(t_lexer));
 		ft_fill_history(&engine->vm->hs, &engine->buffer);
+		engine->vm->buffer = ft_strdup(engine->buffer);
 		lex->buff = engine->buffer;
 		lex->ptr = lex->buff;
 		lex->stat = LXS_DEF;

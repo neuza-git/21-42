@@ -1,6 +1,5 @@
 #include "engine.h"
 #include "shell.h"
-
 /*
 ** BASH +- posix
 ** Based on bash 4.3 --posix, debian

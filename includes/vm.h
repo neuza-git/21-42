@@ -1,21 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vm.h                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/20 20:10:12 by kbagot            #+#    #+#             */
+/*   Updated: 2017/10/27 18:10:04 by kbagot           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef VM_H
 # define VM_H
 
 # include <fcntl.h>
 # include <string.h>
-#include <signal.h>
+# include <signal.h>
 # include "env.h"
 # include "history.h"
 # include "ast.h"
 # include "builtins.h"
 # include "sys/wait.h"
 # include "htable.h"
-
 # define VRDF_APPEND 0x8
 # define VRDF_STDERR 0x4
 # define VRF_SKIP 0x1
 # define VRF_LAST_KO 0x10
 # define VRF_NEW_PATH 0x18
+
+typedef struct		s_job
+{
+	int				idc;
+	int				id;
+	char			*name;
+	struct s_job	*next;
+}					t_job;
 
 typedef struct		s_vm
 {
@@ -26,6 +45,9 @@ typedef struct		s_vm
 	t_ast			*ast;
 	t_cmd			*work;
 	int				reg;
+	int				newpid;
+	t_job			*job;
+	char			*buffer;
 }					t_vm;
 
 typedef struct		s_sv
@@ -63,7 +85,14 @@ void		ft_env(t_cmd *cmd, t_envent **ev, t_vm *vm, int *out);
 
 void		ft_history(char **av, t_vm *vm, t_envent *env, int m);
 
+void		ft_jobs(t_vm *vm);
+void		ft_fg(char *arg, t_vm *vm);
+void		ft_bg(char *arg, t_vm *vm);
+void		tc_ign_exec();
+void		add_job(int g_pid, t_vm *vm);
+
 void        treat_var(char ***cmd, t_envent **locals, t_envent **env);
 void		ft_set_var(char **t, t_envent **locals, t_envent **env);
+
 
 #endif

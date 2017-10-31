@@ -6,13 +6,15 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:48:41 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/26 13:03:12 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/27 17:26:41 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include "shell.h"
 #include <stdio.h>
+
+extern int			g_pid;
 
 void	vm_pipe_cmd(t_cmd *cmd)
 {
@@ -46,7 +48,7 @@ int		vm_exec(t_cmd *cmd, int flags, t_vm *vm, int *out)
 	if (!vm_isextbuiltin(cmd) && !(path = xget_bin((char *)cmd->av[0], vm)))
 	{
 		ft_perror(cmd->av[0], ERR_NOCMD);
-		if (cmd->next && tc_sigstat(0))
+		if (cmd->next)
 			ret = vm_exec(cmd->next, flags, vm, out);
 		else
 			ret = 0;
@@ -56,7 +58,7 @@ int		vm_exec(t_cmd *cmd, int flags, t_vm *vm, int *out)
 		cmd->flags = flags;
 		(cmd->next) ? (vm_pipe_cmd(cmd)) : NULL;
 		ret = (vm_fork_cmd(path, cmd, vm, &vm_fcb_piped));
-		(!cmd->next) ? (vm_kill_cmds(vm->work)) : NULL;
+	//	(!cmd->next) ? (vm_kill_cmds(vm->work)) : NULL;
 	}
 	else
 		ret = vm_fork_cmd(path, cmd, vm, &vm_fcb_def);

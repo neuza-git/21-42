@@ -30,6 +30,9 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/builtins/ft_unsetenv.c \
 	  srcs/builtins/ft_history.c \
 	  srcs/builtins/ft_exit.c \
+	  srcs/builtins/ft_jobs.c \
+	  srcs/builtins/ft_fg.c \
+	  srcs/builtins/ft_bg.c \
 	  srcs/builtins/ft_read.c \
 	  srcs/builtins/ft_readline.c \
 	  srcs/engine/en_free.c \

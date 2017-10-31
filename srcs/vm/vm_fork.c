@@ -1,5 +1,7 @@
 #include "vm.h"
 
+extern int			g_pid;
+
 static int	do_builtin(t_cmd *cmd, t_vm *vm, int m)
 {
 	if (ft_strequ(cmd->av[0], "echo") && m)
@@ -26,6 +28,8 @@ int			vm_fork(char *path, t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *
 	int		res;
 
 	cmd->pid = fork();
+	if (!g_pid)
+		g_pid = cmd->pid;
 	res = 0;
 	if (cmd->pid < 0)
 	{
@@ -34,14 +38,20 @@ int			vm_fork(char *path, t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *
 	}
 	else if (cmd->pid == 0)
 	{
+		tc_ign_exec();
 		if ((f)(cmd, cmd->pid, vm))
 			execve(path, cmd->av, env_dup(vm->env));
 		exit(EXIT_FAILURE);
 	}
 	else if (cmd->pid > 0)
 	{
+		setpgid(cmd->pid, g_pid);
+		tcsetpgrp(0, g_pid);
 		(f)(cmd, -2, vm);
-		waitpid(cmd->pid, &res, 0);
+		waitpid(cmd->pid, &res, WUNTRACED);
+		tcsetpgrp(0, getpid());
+		if (WIFSTOPPED(res) && cmd->pid == g_pid)
+			add_job(g_pid, vm);
 		(f)(cmd, cmd->pid, vm);
 		return (WEXITSTATUS(res));
 	}

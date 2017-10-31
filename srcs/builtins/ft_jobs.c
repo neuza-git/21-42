@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_kill_cmds.c                                     :+:      :+:    :+:   */
+/*   ft_jobs.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/20 13:48:27 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/27 17:08:55 by kbagot           ###   ########.fr       */
+/*   Created: 2017/10/20 19:50:25 by kbagot            #+#    #+#             */
+/*   Updated: 2017/10/27 19:07:19 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm.h"
+#include "builtins.h"
 
-void	vm_kill_cmds(t_cmd *cmd)
+void	ft_jobs(t_vm *vm)
 {
-	while (cmd)
+	t_job *i;
+
+	i = vm->job;
+	while (i)
 	{
-	//	if (cmd->pid)
-		//	kill(cmd->pid, SIGKILL);
-		cmd = cmd->next;
+		printf("[%d] %s  %s  %d\n", i->idc, "Stopped", i->name, i->id);
+		i = i->next;
 	}
 }
