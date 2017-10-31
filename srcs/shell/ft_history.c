@@ -6,13 +6,13 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 11:57:00 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/13 14:19:02 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/18 10:55:53 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-static void		ft_clear(t_pos *pos, char *str)
+void			ft_clear(t_pos *pos, char *str)
 {
 	int		i;
 

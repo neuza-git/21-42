@@ -27,11 +27,11 @@ unsigned int		ht_hash(char *cp, unsigned int len)
 	(void)len;
 
 	hash = 0x01000193;
-    while (*cp)
+	while (*cp)
 	{
-        hash ^= *cp++;
-        hash *= 0x01000193;
-    }
+		hash ^= *cp++;
+		hash *= 0x01000193;
+	}
 	return (0xFFFF & hash);
 }
 
@@ -53,10 +53,13 @@ t_htent				*ht_getval(char *key, t_htbucket *bk)
 	unsigned long int	hash;
 	t_htent			*ent;
 
-	hash = ht_hash(key, bk->count) - bk->min;
 	ent = NULL;
-	if (((hash + bk->min) >= bk->max) || !(ent = bk->tab[hash]))
-		return (NULL);
+	if (bk)
+	{
+		hash = ht_hash(key, bk->count) - bk->min;
+		if (((hash + bk->min) >= bk->max) || !(ent = bk->tab[hash]))
+			return (NULL);
+	}
 	while (ent && ent->doub && !ft_strequ(ent->key, key))
 		ent = ent->doub;
 	return (ent && ft_strequ(ent->key, key)) ? ent : NULL;

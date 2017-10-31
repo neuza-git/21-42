@@ -6,26 +6,34 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 11:12:57 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/21 12:08:06 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/31 12:32:01 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void			ft_ctrl_r_clear(int i, t_pos pos)
+static void		print_stuff(int tfd)
+{
+	ft_putstr_fd(tgetstr("cr", NULL), tfd);
+	ft_putstr_fd(tgetstr("cd", NULL), tfd);
+	ft_putstr_fd(tgetstr("cr", NULL), tfd);
+	ft_putstr_fd("(reverse-i-search)`", tfd);
+}
+
+void			ft_ctrl_r_clear(int i, t_pos pos, char *oldstr)
 {
 	int		id;
 
 	id = -1;
-	while (pos.str && i > 0 && !(pos.str[i - 1] == '\n' \
-				&& ft_get_cursor('h') == 3))
-		ft_key_left(&i, pos);
+	i = ft_strlen(oldstr);
+	while (i > 0)
+	{
+		ft_putstr_fd(tgetstr("le", NULL), pos.tfd);
+		i--;
+	}
 	while (++id < ((!(pos.crstr)) ? 27 : 22))
 		ft_putstr_fd(tgetstr("le", NULL), pos.tfd);
-	ft_putstr_fd(tgetstr("cr", NULL), pos.tfd);
-	ft_putstr_fd(tgetstr("cd", NULL), pos.tfd);
-	ft_putstr_fd(tgetstr("cr", NULL), pos.tfd);
-	ft_putstr_fd("(reverse-i-search)`", pos.tfd);
+	print_stuff(pos.tfd);
 	ft_putstr_fd(pos.str, pos.tfd);
 	ft_putstr_fd("': ", pos.tfd);
 	(pos.crstr != NULL) ? ft_putstr_fd(pos.crstr, pos.tfd) : "";

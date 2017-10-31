@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 12:42:07 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/26 11:47:29 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/31 12:33:22 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void		ft_change_quotes(char c, unsigned int *exp)
 	}
 }
 
-static int		not_escaped(char *str, int i)
+int				not_escaped(char *str, int i)
 {
 	int			nos;
 

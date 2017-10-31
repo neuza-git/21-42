@@ -6,11 +6,12 @@
 /*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 16:11:00 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/05/23 19:58:39 by acorbeau         ###   ########.fr       */
+/*   Updated: 2017/10/31 13:15:42 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
+#include <stdio.h>
 
 static char		**get_paths(t_envent *env)
 {
@@ -47,7 +48,8 @@ static char		*check_file(char *tmp, char **fptr)
 {
 	struct stat		st;
 
-	if (stat(tmp, &st) != -1 && (st.st_mode & (S_IXGRP | S_IXUSR)) && !S_ISDIR(st.st_mode))
+	if (stat(tmp, &st) != -1 \
+			&& (st.st_mode & (S_IXGRP | S_IXUSR)) && !S_ISDIR(st.st_mode))
 	{
 		arr_clr(fptr);
 		return (tmp);
@@ -65,7 +67,7 @@ char			*env_getbin(char *name, t_envent *env)
 		return (NULL);
 	paths = get_paths(env);
 	fptr = paths;
-	while (!(tmp[0] = 0) && paths && *paths && !ft_strnequ(name, "./", 2) && name[0] != '/')
+	while (!(tmp[0] = 0) && paths && *paths && !ft_sc(name, '/'))
 	{
 		tmp = ft_strcat(tmp, *paths++);
 		tmp = ft_strcat(tmp, "/");
@@ -73,7 +75,7 @@ char			*env_getbin(char *name, t_envent *env)
 		if (check_file(tmp, fptr))
 			return (tmp);
 	}
-	if ((ft_strnequ(name, "./", 2) || name[0] == '/') && check_file(name, fptr))
+	if (ft_sc(name, '/') && check_file(name, fptr))
 		return (ft_strdup(name));
 	bad_binary(fptr, name, tmp);
 	return (NULL);

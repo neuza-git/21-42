@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 16:00:09 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/26 12:12:06 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/31 13:09:23 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int	ft_key_size_1(char *key, t_pos *pos)
 	if (key[0] == 4 && g_sig == 0 && pos->str != NULL && pos->str[0] != '\0')
 	{
 		ft_fill_quotes(-1, pos->str, &pos->exp);
-		return (ft_key_backspace(pos, &pos->i, &pos->str, 0));
+		return (ft_key_bs(pos, &pos->i, &pos->str, 0));
 	}
 	if (key[0] == 4 && g_sig != 0)
 		return (ft_print_sig(*pos));
 	if (key[0] == 127 && pos->hd != 4)
 	{
 		ft_fill_quotes(-1, pos->str, &pos->exp);
-		return (ft_key_backspace(pos, &pos->i, &pos->str, 1));
+		return (ft_key_bs(pos, &pos->i, &pos->str, 1));
 	}
 	if (key[0] == 23)
 		return (ft_key_wordleft(pos, &pos->str, 1));
@@ -87,7 +87,7 @@ int	ft_key_size_4(char *key, t_pos *pos)
 	if (key[0] == 27 && key[1] == 91 && key[2] == 51 && key[3] == 126)
 	{
 		ft_fill_quotes(-1, pos->str, &pos->exp);
-		return (ft_key_backspace(pos, &pos->i, &pos->str, 0));
+		return (ft_key_bs(pos, &pos->i, &pos->str, 0));
 	}
 	if (key[0] == 27 && key[1] == 27 && key[2] == 91 && key[3] == 65)
 		return (ft_goes_up(&pos->i, *pos));

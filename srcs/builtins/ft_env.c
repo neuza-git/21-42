@@ -6,7 +6,7 @@
 /*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 16:11:00 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/09/21 15:25:50 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/30 13:15:41 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ void			ft_env(t_cmd *cmd, t_envent **e, t_vm *vm, int *out)
 	t_envent	*fptr;
 	t_envent	*env;
 
-	(void)vm;
 	(*e) ? (env = *e) : (env = NULL);
 	fptr = NULL;
 	if (!(opts = get_opts(cmd)))

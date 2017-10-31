@@ -6,12 +6,13 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:48:41 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/21 14:56:29 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/26 13:03:12 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include "shell.h"
+#include <stdio.h>
 
 void	vm_pipe_cmd(t_cmd *cmd)
 {
@@ -37,6 +38,7 @@ int		vm_exec(t_cmd *cmd, int flags, t_vm *vm, int *out)
 	char	*path;
 	int		ret;
 
+	treat_var(&cmd->av, &vm->local, &vm->env);
 	if (vm_isbuiltin(cmd, vm, out))
 		return (2);
 	path = NULL;

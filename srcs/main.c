@@ -32,6 +32,5 @@ int		main(int ac, char **av, char **env)
 	tc_listen_signals();
 	engine = en_init(get_cmd_flags(ac, av), env);
 	en_loop(engine, &out);
-	tcsetattr(0, TCSANOW, &engine->default_term);
 	return (en_free(&engine, out));
 }

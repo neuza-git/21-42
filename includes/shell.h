@@ -29,6 +29,7 @@ void		tc_stop_signals();
 void		tc_listen_signals();
 void		tc_check_sin();
 int			tc_check_caps();
+char		*poor_get_line(t_read_args args );
 
 typedef struct      s_getcursor
 {
@@ -85,6 +86,7 @@ typedef struct      s_pos
 	char			*cp;
 	int				t;
 	unsigned int	exp;
+	struct termios	default_term;
 	t_envent		*env;
 	char			*crstr;
 	int				hd;
@@ -102,13 +104,13 @@ typedef struct      s_pos
 }					t_pos;
 
 char				*get_line(t_engine *engine, int hd, char *hdstr);
-void				ft_set_term(void);
+void				ft_set_term(int tfd, int m);
 void				ft_get(char *new); //for debug purpose
 
 int					ft_get_cursor(int m);
 int					ft_changeline(int index, t_pos pos, char *str, int m);
 int					ft_changelines(int index, t_pos pos, char *str, int nc);
-int					win_size_changed(t_pos *pos);
+int					win_size_ch(t_pos *pos, int psize);
 void				initgl(t_engine *engine, t_pos *pos, char *hdstr, int hd);
 char				*ft_crest(char **rest, char *keys);
 void				cut_multiple_lines(t_engine *e, t_pos *pos);
@@ -130,7 +132,7 @@ int					ft_key_end(int *index, t_pos pos);
 
 int					ft_key_deleteblock(int *index, int *imax, char **str);
 void				ft_delete(char **str, int i, int imax, int mode);
-int					ft_key_backspace(t_pos *pos, int *i, char **str, int mode);
+int					ft_key_bs(t_pos *pos, int *i, char **str, int mode);
 int					ft_print_sig(t_pos pos);
 void				ft_fill_quotes(int index, char *str, unsigned int *exp);
 int					ft_expan(t_pos *pos);
@@ -153,19 +155,22 @@ int					ft_has_newnl(int ni, t_pos pos, char *str);
 int					ft_key_up(t_pos *pos);
 int					ft_key_down(t_pos *pos);
 
-void				ft_ctrl_r_clear(int i, t_pos pos);
+void				ft_clear(t_pos *pos, char *str);
+void				ft_ctrl_r_clear(int i, t_pos pos, char *oldstr);
 int					ft_count_realign(t_pos pos, int nc);
 void				ft_ctrl_r_replace(t_pos *pos);
 int					ft_ctrl_r(t_pos *pos, char *keys);
+char				*get_term(char **env);
 
 int					ft_autocomplete(t_pos *pos);
 int					ft_complete(t_pos *pos, char *common, int nb, int m);
-void				treat_result(char *str, t_files *h, t_pos *pos, int m);
+void				tr(char *str, t_files *h, t_pos *pos, int m);
 t_files				*thrudir(char *str, char *dname, int m);
 int					ft_complete(t_pos *pos, char *common, int nb, int m);
 t_files				*ft_dsort(t_files *begin);
 void				delete_list(t_files **h);
 int					isp(char *str);
-
+int					printable(char *str);
+int					not_escaped(char *str, int i);
 
 #endif

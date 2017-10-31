@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 11:11:26 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/19 11:16:05 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/31 13:07:42 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int			ft_clear_line(int i, t_pos pos, char *str, int nc)
 		ft_key_left(&i, pos);
 	ft_erase_ctrl_r(pos.hd, pos.crstr, pos.tfd);
 	ft_clear_n_align(pos.tfd);
-	ft_putstr_fd(((i == 0) ? "$> " : "> "), pos.tfd);
+	if (nc != 2)
+		ft_putstr_fd(((i == 0) ? "$> " : "> "), pos.tfd);
 	(str != NULL) ? ft_putstr_fd(str + i, pos.tfd) : "";
 	if (i == 0 && str && ft_changelines(pos.imax - 1, pos, str, nc) \
 			&& ft_get_cursor('w') == pos.width)

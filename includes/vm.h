@@ -28,6 +28,12 @@ typedef struct		s_vm
 	int				reg;
 }					t_vm;
 
+typedef struct		s_sv
+{
+	int				dollar;
+	char			*name;
+}					t_sv;
+
 void		vm_free(t_vm **vm);
 t_vm		*vm_init(char **environ);
 void		vm_loadast(t_vm *vm, t_ast *ast);
@@ -56,5 +62,8 @@ void		vm_duplocals(t_envent *loc, t_token **toks);
 void		ft_env(t_cmd *cmd, t_envent **ev, t_vm *vm, int *out);
 
 void		ft_history(char **av, t_vm *vm, t_envent *env, int m);
+
+void        treat_var(char ***cmd, t_envent **locals, t_envent **env);
+void		ft_set_var(char **t, t_envent **locals, t_envent **env);
 
 #endif

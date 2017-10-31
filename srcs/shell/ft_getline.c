@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 16:21:50 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/19 13:32:09 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/31 12:34:01 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char			*get_line(t_engine *e, int hd, char *hdstr)
 			pos.keys = ft_strndup(buffer, size);
 		}
 		cut_multiple_lines(e, &pos);
-		(!win_size_changed(&pos)) ? ft_process_key(&pos, pos.keys, &size) : "";
+		(!win_size_ch(&pos, 3)) ? ft_process_key(&pos, pos.keys, &size) : "";
 		if (ft_leave_while(pos, hdstr, size, e->rest))
 			break ;
 		else

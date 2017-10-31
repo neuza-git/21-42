@@ -6,21 +6,28 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 10:55:13 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/19 13:21:33 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/31 12:34:11 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-void		ft_set_term(void)
+void		ft_set_term(int tfd, int m)
 {
 	struct termios	tattr;
 
-	tcgetattr(0, &tattr);
-	tattr.c_lflag &= ~(ICANON | ECHO);
+	tcgetattr(tfd, &tattr);
+	if (m == 0)
+		tattr.c_lflag &= ~(ICANON | ECHO);
+	else if (m == 1)
+		tattr.c_lflag &= ~(ICANON);
+	if (m == 2)
+	{
+		tattr.c_lflag &= ~(ECHO);
+	}
 	tattr.c_cc[VMIN] = 1;
 	tattr.c_cc[VTIME] = 0;
-	tcsetattr(0, TCSAFLUSH, &tattr);
+	tcsetattr(tfd, TCSAFLUSH, &tattr);
 }
 
 void		ft_get(char *new)
@@ -32,7 +39,7 @@ void		ft_get(char *new)
 		printf("\n%d :%d\n", i, new[i]);
 }
 
-int			win_size_changed(t_pos *pos)
+int			win_size_ch(t_pos *pos, int psize)
 {
 	struct winsize	w;
 
@@ -40,13 +47,15 @@ int			win_size_changed(t_pos *pos)
 	if (pos->width == w.ws_row && pos->uh == w.ws_col)
 		return (0);
 	pos->width = w.ws_row;
-	pos->h = w.ws_col - 3;
+	pos->h = w.ws_col - psize;
 	pos->uh = w.ws_col;
 	return (1);
 }
 
 void		initgl(t_engine *en, t_pos *pos, char *hdstr, int hd)
 {
+	tcgetattr(0, &pos->default_term);
+	ft_set_term(0, 0);
 	pos->hd = hd;
 	pos->keys = (pos->hd == 1) ? ft_strdup(hdstr) : NULL;
 	pos->width = 0;
@@ -60,7 +69,7 @@ void		initgl(t_engine *en, t_pos *pos, char *hdstr, int hd)
 	pos->uhs = (en->vm != NULL) ? en->vm->hs : NULL;
 	pos->t = 0;
 	pos->tfd = en->tfd;
-	win_size_changed(pos);
+	win_size_ch(pos, 3);
 	pos->cp = en->cp;
 	pos->ps = NULL;
 	pos->env = en->vm->env;
