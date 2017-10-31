@@ -12,6 +12,7 @@
 
 #include "vm.h"
 #include "shell.h"
+#include <stdio.h>
 
 extern int			g_pid;
 
@@ -39,6 +40,7 @@ int		vm_exec(t_cmd *cmd, int flags, t_vm *vm, int *out)
 	char	*path;
 	int		ret;
 
+	treat_var(&cmd->av, &vm->local, &vm->env);
 	if (vm_isbuiltin(cmd, vm, out))
 		return (2);
 	path = NULL;

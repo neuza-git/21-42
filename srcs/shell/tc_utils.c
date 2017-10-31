@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 15:45:19 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/20 14:48:24 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/10/20 14:59:09 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ char		*get_term(char **env)
 	return (term);
 }
 
-void		tc_check_sin(char **env)
+void		tc_check_sin(void)
 {
 	struct termios	def;
 	char			*term;
 	char			buf[1024];
 
-	term = get_term(env);
-	if (!isatty(0) \
-			|| term == NULL \
-			|| tcgetattr(0, &def) == -1 \
+	term = getenv("TERM");
+	if (!isatty(0)
+			|| term == NULL
+			|| tcgetattr(0, &def) == -1
 			|| tgetent(buf, term) != 1)
 	{
 		ft_putendl("This shell needs a sdtin terminal connected.");

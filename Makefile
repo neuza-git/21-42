@@ -19,8 +19,10 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/ast/ast_build_cmd.c \
 	  srcs/ast/ast_cmd.c \
 	  srcs/ast/ast_insert.c \
-	  srcs/builtins/ft_cd.c \
+	  srcs/builtins/ft_cd_1.c \
+	  srcs/builtins/ft_cd_2.c \
 	  srcs/builtins/ft_echo.c \
+	  srcs/builtins/ft_set.c \
 	  srcs/builtins/ft_env.c \
 	  srcs/builtins/ft_export.c \
 	  srcs/builtins/ft_setenv.c \
@@ -31,6 +33,8 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/builtins/ft_jobs.c \
 	  srcs/builtins/ft_fg.c \
 	  srcs/builtins/ft_bg.c \
+	  srcs/builtins/ft_read.c \
+	  srcs/builtins/ft_readline.c \
 	  srcs/engine/en_free.c \
 	  srcs/engine/en_init.c \
 	  srcs/engine/en_print.c \
@@ -73,7 +77,7 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/history/hs_builtin_1.c \
 	  srcs/history/hs_builtin_2.c \
 	  srcs/history/hs_event.c \
-	  srcs/vm/vm_duplocals.c \
+	  srcs/vm/vm_locals.c \
 	  srcs/vm/vm_exec.c \
 	  srcs/vm/vm_exec_rdin.c \
 	  srcs/vm/vm_exec_rdout.c \
@@ -96,7 +100,7 @@ PATH_SRC = srcs
 
 OBJ = $(patsubst $(PATH_SRC)/%.c, obj/%.o, $(SRC))
 
-FLAGS = -g -Wall -Wextra -Werror #-O3
+FLAGS = -g3 -Wall -Wextra -Werror #-O3
 
 #FLAGS = -g3
 

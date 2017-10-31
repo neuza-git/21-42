@@ -6,13 +6,13 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 11:12:52 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/25 11:46:14 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/31 13:08:19 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static int			printable(char *str)
+int					printable(char *str)
 {
 	int		i;
 
@@ -86,8 +86,7 @@ static void			lookformatch(t_pos *pos, char *keys)
 	ft_strdel(&new);
 	if (!pos->rhs)
 		pos->rhs = tmp;
-	//ft_ctrl_r_clear(pos->i, *pos, ((keys[0] == 18) ? 1 : 0));
-	ft_ctrl_r_clear(pos->i, *pos);
+	ft_ctrl_r_clear(pos->i, *pos, tmp->cmd);
 }
 
 int					ft_ctrl_r(t_pos *pos, char *keys)
@@ -111,10 +110,8 @@ int					ft_ctrl_r(t_pos *pos, char *keys)
 	}
 	else
 	{
-		if (keys[0] == 127)
-			ft_key_backspace(pos, &pos->i, &pos->str, 1);
-		if (keys[0] == 127)
-			ft_fill_quotes(-1, pos->str, &pos->exp);
+		(keys[0] == 127) ? (void)ft_key_bs(pos, &pos->i, &pos->str, 1) : "";
+		(keys[0] == 127) ? ft_fill_quotes(-1, pos->str, &pos->exp) : "";
 		lookformatch(pos, keys);
 		pos->hd = 4;
 	}

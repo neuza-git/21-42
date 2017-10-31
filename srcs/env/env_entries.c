@@ -6,13 +6,13 @@
 /*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 16:11:00 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/09/21 12:07:35 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/31 13:15:56 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
-void		env_free_entry(t_envent *entry)
+void			env_free_entry(t_envent *entry)
 {
 	if (!entry)
 		return ;
@@ -85,7 +85,7 @@ void			env_setentry(char *name, char *value, t_envent **en)
 	if (n != NULL && ft_strequ(n->name, name) == 1)
 	{
 		ft_strdel(&n->value);
-		n->value = ft_strdup(value);
+		n->value = (value) ? ft_strdup(value) : NULL;
 	}
 	else if (n != NULL && ft_strequ(n->name, name) == 0)
 		n->next = env_createnode(name, value, n);

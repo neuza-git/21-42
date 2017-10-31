@@ -50,6 +50,12 @@ typedef struct		s_vm
 	char			*buffer;
 }					t_vm;
 
+typedef struct		s_sv
+{
+	int				dollar;
+	char			*name;
+}					t_sv;
+
 void		vm_free(t_vm **vm);
 t_vm		*vm_init(char **environ);
 void		vm_loadast(t_vm *vm, t_ast *ast);
@@ -84,5 +90,9 @@ void		ft_fg(char *arg, t_vm *vm);
 void		ft_bg(char *arg, t_vm *vm);
 void		tc_ign_exec();
 void		add_job(int g_pid, t_vm *vm);
+
+void        treat_var(char ***cmd, t_envent **locals, t_envent **env);
+void		ft_set_var(char **t, t_envent **locals, t_envent **env);
+
 
 #endif

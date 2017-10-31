@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 16:00:09 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/25 15:52:54 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/31 13:11:39 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,15 @@ static int	ft_special_char(char *k, t_pos *p)
 {
 	int		i;
 
-	i = 0;
-	while (k[i] != '\0')
+	i = -1;
+	while (k[++i] != '\0')
 	{
 		if (ft_isprint(k[i]) == 0 && k[i] != 10)
 			return (1);
 		if (p->str && k[0] == 10 && k[1] == '\0' && p->str[p->i] != '\0')
 		{
 			ft_key_end(&p->i, *p);
-			if (p->exp)
-				ft_putstr_fd("\n", p->tfd);
+			(p->exp) ? ft_putstr_fd("\n", p->tfd) : "";
 			return (1);
 		}
 		if (k[0] == 10 && k[1] == '\0' && p->hd == 2)
@@ -33,12 +32,11 @@ static int	ft_special_char(char *k, t_pos *p)
 		if (k[0] == 10 && ((k[1] == '\0' && !p->exp)))
 			return (1);
 		if (k[0] == 10 && k[1] == '\0' \
-			&& ((p->exp & EXP_SL) || (p->exp & EXP_P)))
+				&& ((p->exp & EXP_SL) || (p->exp & EXP_P)))
 		{
 			ft_putstr_fd("\n", p->tfd);
 			return (1);
 		}
-		i++;
 	}
 	return (0);
 }

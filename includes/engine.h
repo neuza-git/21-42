@@ -17,7 +17,6 @@ typedef struct		s_engine
 	int				tfd;
 	char			*cp;
 	char			*rest;
-	struct termios	default_term;
 	int				flags;
 }					t_engine;
 

@@ -6,7 +6,7 @@
 /*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 18:56:33 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/04/19 18:18:14 by acorbeau         ###   ########.fr       */
+/*   Updated: 2017/10/24 14:11:44 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		ft_atoi(const char *nptr)
 
 	retval = 0;
 	sign = 1;
+	if (!nptr)
+		return (0);
 	while (ft_isspace(*nptr))
 		nptr++;
 	if (*nptr == '+' || *nptr == '-')

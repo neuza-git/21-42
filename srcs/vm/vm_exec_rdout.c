@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:49:12 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/20 13:49:13 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/20 15:38:47 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	rdout_setaddand(t_ast *rd, t_list *av)
 			return (1);
 		}
 	}
-	ft_perror("invalide file descriptor", 0);
+	ft_perror("invalid file descriptor", 0);
 	return (rd) ? 0 : 0;
 }
 

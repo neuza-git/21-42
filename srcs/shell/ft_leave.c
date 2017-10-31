@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 13:27:14 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/14 11:58:21 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/31 12:35:15 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ char		*leave_gl(t_engine *e, t_pos p, char *hdstr, int m)
 		out = 2;
 	if (g_sig == SIGINT)
 		out = 3;
-	if (out != 2 && m == 0)
-		ft_strdel(&p.str);
+	(out != 2 && m == 0) ? ft_strdel(&p.str) : "";
 	ft_strdel(&p.keys);
 	(out == 4) ? ft_yet_exp(p.exp, p.hd, hdstr) : "";
 	g_sig = 0;
 	(out == 1) ? ft_putstr_fd("exit", p.tfd) : "";
 	(p.hd != 1) ? ft_putstr_fd("\n", p.tfd) : "";
+	tcsetattr(0, TCSANOW, &p.default_term);
 	if (out == 1)
 		return (NULL);
 	if (out == 3 || p.str == NULL)

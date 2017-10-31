@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 13:51:47 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/19 15:01:45 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/31 13:16:48 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ t_hs			*ft_create_history(t_envent *env)
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
-	if (fd > 0)
-		fd = close(fd);
+	fd = (fd > 0) ? close(fd) : fd;
 	return (n);
 }

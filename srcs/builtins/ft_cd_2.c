@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_duplocals.c                                     :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/20 13:48:34 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/20 13:50:16 by tgascoin         ###   ########.fr       */
+/*   Created: 2017/05/19 16:11:00 by acorbeau          #+#    #+#             */
+/*   Updated: 2017/10/30 13:13:31 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm.h"
+#include "builtins.h"
 
-//TODO un genrent de str format, on parcours la chaine avec une copie tmp jusque a tomber sur un $, on strjoin le tmp avec la valeur $
-//
-void		vm_duplocals(t_envent *loc, t_token **toks)
+int		check_dir(char *new, char *dir)
 {
-	(void)loc;
-	(void)toks;
+	DIR				*bf;
+	struct stat		s;
+
+	bf = NULL;
+	bf = opendir(new);
+	stat(new, &s);
+	if (!bf)
+	{
+		ft_perror(dir, ERR_NOFOUND);
+		return (0);
+	}
+	closedir(bf);
+	return (1);
 }

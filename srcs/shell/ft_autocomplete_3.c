@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 11:12:35 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/21 12:10:11 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/31 12:28:36 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ static int		treat_match(t_files *h, char *str, t_pos *pos, int m)
 	return (1);
 }
 
-void			treat_result(char *str, t_files *h, t_pos *pos, int m)
+void			tr(char *str, t_files *h, t_pos *pos, int m)
 {
 	int		nb;
 	t_files	*n;

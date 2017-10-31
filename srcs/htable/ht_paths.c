@@ -1,4 +1,5 @@
 #include "htable.h"
+#include <stdio.h>
 
 static int		check_file(char *path, char *name)
 {
@@ -10,8 +11,8 @@ static int		check_file(char *path, char *name)
 	if (ft_strequ(name, ".") || ft_strequ(name, ".."))
 		return (0);
 	if ((ft_strlcat(tmp, path, PATH_MAX) > PATH_MAX) ||
-(ft_strlcat(tmp, "/", PATH_MAX) > PATH_MAX) ||
-(ft_strlcat(tmp, name, PATH_MAX) > PATH_MAX))
+			(ft_strlcat(tmp, "/", PATH_MAX) > PATH_MAX) ||
+			(ft_strlcat(tmp, name, PATH_MAX) > PATH_MAX))
 		return (0);
 	if (stat(tmp, &st) < 0)
 		return (0);
@@ -65,7 +66,7 @@ char			*ht_getbin(char *name, t_htbucket *bk)
 	char		ret[PATH_MAX + 1];
 
 	ret[0] = '\0';
-	if (ft_strnequ(name, "./", 2) || ft_strnequ(name, "/", 1))
+	if (ft_sc(name, '/'))
 	{
 		if (stat(name, &st) == -1)
 			return (NULL);
@@ -76,8 +77,8 @@ char			*ht_getbin(char *name, t_htbucket *bk)
 	if (!(ent = ht_getval(name, bk)))
 		return (NULL);
 	if (ft_strlcat(ret, ent->content, PATH_MAX) > PATH_MAX ||
-ft_strlcat(ret, "/", PATH_MAX) > PATH_MAX ||
-ft_strlcat(ret, ent->key, PATH_MAX) > PATH_MAX)
+			ft_strlcat(ret, "/", PATH_MAX) > PATH_MAX ||
+			ft_strlcat(ret, ent->key, PATH_MAX) > PATH_MAX)
 	{
 		return (NULL);
 	}

@@ -6,23 +6,23 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 11:12:16 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/21 12:09:39 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/10/31 12:28:24 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-static void		findbinary(char *str, t_pos *pos)
+static void		findbinary(char *str, t_pos *p)
 {
 	t_findbinary	s;
 
-	pos->actype = 'b';
+	p->actype = 'b';
 	s.iw = 0;
 	s.h = NULL;
 	s.f = NULL;
 	s.p = NULL;
-	if (pos->env && env_getentry("PATH", pos->env))
-		s.p = ft_strsplit(env_getentry("PATH", pos->env)->value, ':');
+	if (p->env && env_getentry("PATH", p->env))
+		s.p = ft_strsplit(env_getentry("PATH", p->env)->value, ':');
 	while (s.p && s.p[s.iw] != NULL)
 	{
 		if (s.h == NULL)
@@ -37,8 +37,7 @@ static void		findbinary(char *str, t_pos *pos)
 	}
 	ft_tabdel(&s.p);
 	s.h = ft_dsort(s.h);
-	(s.h) ? treat_result(str, s.h, pos, 'b') \
-		: ft_putstr_fd(tgetstr("bl", NULL), pos->tfd);
+	(s.h) ? tr(str, s.h, p, 'b') : ft_putstr_fd(tgetstr("bl", NULL), p->tfd);
 	delete_list(&s.h);
 }
 
@@ -60,7 +59,7 @@ static void		findfile(char *fname, char *dname, t_pos *pos)
 	}
 	h = ft_dsort(h);
 	if (h)
-		treat_result(fname, h, pos, 'f');
+		tr(fname, h, pos, 'f');
 	else
 		ft_putstr_fd(tgetstr("bl", NULL), pos->tfd);
 	delete_list(&h);
