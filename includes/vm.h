@@ -6,7 +6,7 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 20:10:12 by kbagot            #+#    #+#             */
-/*   Updated: 2017/10/27 18:10:04 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/01 23:50:39 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct		s_job
 	int				idc;
 	int				id;
 	char			*name;
+	int				status;
+	int				dead;
 	struct s_job	*next;
 }					t_job;
 
@@ -89,7 +91,11 @@ void		ft_jobs(t_vm *vm);
 void		ft_fg(char *arg, t_vm *vm);
 void		ft_bg(char *arg, t_vm *vm);
 void		tc_ign_exec();
-void		add_job(int g_pid, t_vm *vm);
+void		add_job(int g_pid, t_vm *vm, int res);
+void		del_job(int i, t_vm *vm);
+void		clear_job(t_vm *vm);
+void		update_jobs(t_vm *vm, int display);
+void		display_status(t_job *i);
 
 void        treat_var(char ***cmd, t_envent **locals, t_envent **env);
 void		ft_set_var(char **t, t_envent **locals, t_envent **env);

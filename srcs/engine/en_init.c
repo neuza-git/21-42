@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 13:14:02 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/31 13:14:42 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/01 23:56:08 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void		en_loop(t_engine *engine, int *out)
 				tc_listen_signals();
 			}
 		}
+		update_jobs(engine->vm, 1);
+		clear_job(engine->vm);
 		enx_free(&lex, engine);
 	}
 }

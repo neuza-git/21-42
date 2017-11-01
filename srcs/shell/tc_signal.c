@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 15:45:36 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/27 19:53:47 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/01 23:50:41 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ static int	add_njob(t_job **tmp, t_vm *vm, int npid)
 	return (0);
 }
 
-void add_job(int npid, t_vm *vm)
+void add_job(int npid, t_vm *vm, int res)
 {
 	t_job	*tmp;
 
 	tmp = NULL;
+	update_jobs(vm, 1);
 	if (!vm->job)
 	{
 		add_job_init(vm);
@@ -58,15 +59,20 @@ void add_job(int npid, t_vm *vm)
 	{
 		if (add_njob(&tmp, vm, npid))
 		{
-			printf("[%d] %s  %s  %d\n", tmp->idc, "exist Stopped", tmp->name, npid);
+			ft_putchar('\n');
+			display_status(tmp);
 			return ;
 		}
 	}
 	tmp->name = ft_strdup(vm->buffer);
-	printf("[%d] %s  %s  %d\n", tmp->idc, "Stopped", tmp->name, npid);
+	tmp->status = res;
+	tmp->dead = 0;
 	tmp->id = npid;
 	tmp->next = NULL;
+	ft_putchar('\n');
+	display_status(tmp);
 }
+
 void		tc_handle_signals(int sig)
 {
 	struct termios	tattr;
@@ -77,13 +83,6 @@ void		tc_handle_signals(int sig)
 		ioctl(0, TIOCSTI, &tattr.c_cc[VEOF]);
 		if (sig == SIGINT || sig == SIGWINCH)
 			g_sig = sig;
-	}
-	else
-	{
-		g_last_signal = sig;
-		signal(SIGSTOP, SIG_IGN);
-		if (g_pid != 0)
-			kill(- g_pid, SIGSTOP);
 	}
 }
 /*
