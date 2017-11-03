@@ -6,7 +6,7 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 20:10:12 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/01 23:50:39 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/03 14:42:15 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void		update_jobs(t_vm *vm, int display);
 void		display_status(t_job *i);
 
 void        treat_var(char ***cmd, t_envent **locals, t_envent **env);
-void		ft_set_var(char **t, t_envent **locals, t_envent **env);
 
 void				treat_var(char ***cmd, t_envent **locals, t_envent **env);
 

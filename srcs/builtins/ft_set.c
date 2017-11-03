@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 12:39:27 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/31 16:14:44 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/03 14:41:34 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	reload_ht(t_htbucket **ht, char *value)
 	*ht = ht_loadbinaries(value);
 }
 
-static void	ft_set_var(char **t, t_envent **l, t_envent **env, t_htbucket **ht)
+void		ft_set_var(char **t, t_envent **l, t_envent **env, t_htbucket **ht)
 {
 	int		i;
 	char	**nv;
