@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 15:45:36 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/01 23:50:41 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/01 14:15:11 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ int			g_waitsig;
 int			g_last_signal = 0;
 int			g_pid = 0;
 
-static void add_job_init(t_vm *vm)
+static void		add_job_init(t_vm *vm)
 {
 	if (!(vm->job = ft_memalloc(sizeof(t_job))))
 		return ;
 	vm->job->idc = 1;
 }
 
-static int	add_njob(t_job **tmp, t_vm *vm, int npid)
+static int		add_njob(t_job **tmp, t_vm *vm, int npid)
 {
 	int		i;
 
@@ -73,7 +73,7 @@ void add_job(int npid, t_vm *vm, int res)
 	display_status(tmp);
 }
 
-void		tc_handle_signals(int sig)
+void			tc_handle_signals(int sig)
 {
 	struct termios	tattr;
 

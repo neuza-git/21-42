@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ast.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/01 13:41:46 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/11/01 13:49:07 by tgascoin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef AST_H
 # define AST_H
 
@@ -35,7 +47,7 @@ void				ast_freecmd(t_cmd *cmd);
 
 t_cmd				*cmd_parse(t_token **tk);
 t_ast				*ast_build(t_token *tokens);
-void 				ast_lstfree(t_list *lst);
+void				ast_lstfree(t_list *lst);
 void				ast_freeast(t_ast **ast);
 
 #endif

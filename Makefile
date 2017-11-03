@@ -23,7 +23,8 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/builtins/ft_cd_2.c \
 	  srcs/builtins/ft_echo.c \
 	  srcs/builtins/ft_set.c \
-	  srcs/builtins/ft_env.c \
+	  srcs/builtins/ft_env_1.c \
+	  srcs/builtins/ft_env_2.c \
 	  srcs/builtins/ft_export.c \
 	  srcs/builtins/ft_setenv.c \
 	  srcs/builtins/ft_unset.c \
@@ -34,7 +35,8 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/builtins/ft_fg.c \
 	  srcs/builtins/ft_bg.c \
 	  srcs/builtins/ft_read.c \
-	  srcs/builtins/ft_readline.c \
+	  srcs/builtins/ft_readline_1.c \
+	  srcs/builtins/ft_readline_2.c \
 	  srcs/engine/en_free.c \
 	  srcs/engine/en_init.c \
 	  srcs/engine/en_print.c \

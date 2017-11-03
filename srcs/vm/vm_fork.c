@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vm_fork.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/01 15:01:54 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/11/02 13:07:47 by tgascoin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
 extern int			g_pid;
@@ -11,19 +23,21 @@ static int	do_builtin(t_cmd *cmd, t_vm *vm, int m)
 	else if (!ft_strequ(cmd->av[0], "echo"))
 	{
 		ft_perror(cmd->av[0], ERR_NOCMD);
-		return 0;
+		return (0);
 	}
 	return (1);
 }
 
-int			vm_fork_cmd(char *path, t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *))
+int			vm_fork_cmd(char *path, t_cmd *cmd, t_vm *vm, \
+		int (*f)(t_cmd *cmd, int, t_vm *))
 {
 	if (vm_isextbuiltin(cmd))
-		return (vm_fork_builtin(cmd, vm , f) > 0) ? 0 : 1;
+		return (vm_fork_builtin(cmd, vm, f) > 0) ? 0 : 1;
 	return (vm_fork(path, cmd, vm, f) > 0) ? 0 : 1;
 }
 
-int			vm_fork(char *path, t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *))
+int			vm_fork(char *path, t_cmd *cmd, t_vm *vm, \
+		int (*f)(t_cmd *cmd, int, t_vm *))
 {
 	int		res;
 
@@ -60,7 +74,8 @@ int			vm_fork(char *path, t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *
 	return (0);
 }
 
-int			vm_fork_builtin(t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *))
+int			vm_fork_builtin(t_cmd *cmd, t_vm *vm, \
+		int (*f)(t_cmd *cmd, int, t_vm *))
 {
 	int		res;
 

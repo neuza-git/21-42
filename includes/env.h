@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/01 13:47:49 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/11/01 13:49:21 by tgascoin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ENV_H
 # define ENV_H
 
@@ -28,12 +40,13 @@ typedef struct				s_envopts
 
 t_envent					*env_get(char **env);
 t_envent					*env_getentry(char *name, t_envent *env);
-void						env_setentry(char *name, char *value, t_envent **env);
-void						env_delentriy(char *name,t_envent **env);
+void						env_setentry(char *name, char *value,
+		t_envent **env);
+void						env_delentriy(char *name, t_envent **env);
 char						*env_getbin(char *name, t_envent *env);
 char						**env_dup(t_envent *env);
 void						env_free(char **env);
-void				 		envent_free(t_envent **env);
+void						envent_free(t_envent **env);
 void						env_free_entry(t_envent *entry);
 
 #endif

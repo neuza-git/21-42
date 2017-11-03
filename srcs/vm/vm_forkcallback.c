@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vm_forkcallback.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/01 15:04:58 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/11/01 15:05:15 by tgascoin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
 static int	fcb_pid0(t_cmd *cmd, t_vm *vm)
@@ -12,7 +24,7 @@ static int	fcb_pid0(t_cmd *cmd, t_vm *vm)
 		dup2(cmd->sout, 1);
 		if (cmd->flags & LFT_PIPEERR)
 			dup2(cmd->sout, 2);
-		close (cmd->sout);
+		close(cmd->sout);
 	}
 	return (vm_exec_redir(cmd, cmd->redir, vm));
 }

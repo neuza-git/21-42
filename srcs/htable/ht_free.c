@@ -1,9 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ht_free.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/31 16:16:07 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/10/31 16:16:39 by tgascoin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "htable.h"
 
-/*
-** this function do not free value and data
-** data is free in bk->data not s_htent to prevent double free
-*/
 void		ht_free_ent(t_htent *ent)
 {
 	if (ent && ent->doub)
@@ -19,6 +27,8 @@ void		ht_free_bucket(t_htbucket *bk)
 	long int		i;
 
 	i = -1;
+	if (!bk)
+		return ;
 	while ((unsigned int)(++i) <= (bk->max - bk->min))
 	{
 		if (bk->tab[i])

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shell.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/01 13:38:16 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/11/01 13:50:08 by tgascoin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SHELL_H
 # define SHELL_H
 
@@ -13,26 +25,26 @@
 # include <term.h>
 # include <curses.h>
 
-#include "vm.h"
-#include "libft.h"
+# include "vm.h"
+# include "libft.h"
 
-#define EXP_SQ 0x01
-#define EXP_DQ 0x10
-#define EXP_BQ 0x100
-#define EXP_SL 0x1000
-#define EXP_P 0x10000
+# define EXP_SQ 0x01
+# define EXP_DQ 0x10
+# define EXP_BQ 0x100
+# define EXP_SL 0x1000
+# define EXP_P 0x10000
 
-int			g_sig;
+int					g_sig;
 
-void		tc_handle_signals(int sig);
-int			tc_sigstat(int reset);
-void		tc_stop_signals();
-void		tc_listen_signals();
-void		tc_check_sin();
-int			tc_check_caps();
-char		*poor_get_line(t_read_args args );
+void				tc_handle_signals(int sig);
+int					tc_sigstat(int reset);
+void				tc_stop_signals();
+void				tc_listen_signals();
+void				tc_check_sin();
+int					tc_check_caps();
+char				*poor_get_line(t_read_args args);
 
-typedef struct      s_getcursor
+typedef struct		s_getcursor
 {
 	char			b[128];
 	int				i;
@@ -63,9 +75,9 @@ typedef struct		s_thrudir
 	t_files			*f;
 	t_files			*nh;
 	int				dir;
-}					t_thrudir;		
+}					t_thrudir;
 
-typedef struct      s_sort
+typedef struct		s_sort
 {
 	char			*tmp;
 	int				itmp;
@@ -76,7 +88,7 @@ typedef struct      s_sort
 	t_files			curr;
 }					t_sort;
 
-typedef struct      s_pos
+typedef struct		s_pos
 {
 	char			*keys;
 	char			*str;

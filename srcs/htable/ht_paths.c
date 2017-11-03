@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ht_paths.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/31 16:20:32 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/10/31 16:20:32 by tgascoin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "htable.h"
 #include <stdio.h>
 
@@ -72,7 +84,7 @@ char			*ht_getbin(char *name, t_htbucket *bk)
 			return (NULL);
 		if (!(st.st_mode & (S_IXGRP | S_IXUSR)) || S_ISDIR(st.st_mode))
 			return (0);
-		return (st.st_mode & (S_IXUSR | S_IXGRP))  ? ft_strdup(name) : NULL;
+		return (st.st_mode & (S_IXUSR | S_IXGRP)) ? ft_strdup(name) : NULL;
 	}
 	if (!(ent = ht_getval(name, bk)))
 		return (NULL);
