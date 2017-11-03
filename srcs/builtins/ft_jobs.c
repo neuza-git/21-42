@@ -6,11 +6,12 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 19:50:25 by kbagot            #+#    #+#             */
-/*   Updated: 2017/10/27 19:07:19 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/01 13:59:11 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+#include <stdio.h>
 
 void	ft_jobs(t_vm *vm)
 {

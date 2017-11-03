@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 15:23:37 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/20 14:28:13 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/01 13:19:46 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,8 @@ int			ft_open_history(char *fn, int m, t_envent *env)
 
 	fd = 0;
 	path = NULL;
-	if (env && env_getentry("HOME", env))
-		path = env_getentry("HOME", env)->value;
-	else
-		path = "/tmp";
+	path = (env && env_getentry("HOME", env) && env_getentry("HOME", \
+				env)->value) ? env_getentry("HOME", env)->value : "/tmp";
 	fname = ".ft_bash_history";
 	fp = (is_valid_file(fn, m) ? ft_strdup(fn) : ft_str3join(path, "/", fname));
 	if (is_valid_file(fp, m) != 1)

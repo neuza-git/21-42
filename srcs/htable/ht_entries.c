@@ -1,5 +1,16 @@
-#include "htable.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ht_entries.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/31 16:18:44 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/10/31 16:19:41 by tgascoin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "htable.h"
 
 void				ht_insertentry(t_htent **root, char *key, void *data)
 {
@@ -7,7 +18,6 @@ void				ht_insertentry(t_htent **root, char *key, void *data)
 
 	if (!(entry = ft_scalloc(sizeof(t_htent))))
 		return ;
-
 	entry->key = key;
 	entry->content = data;
 	entry->next = NULL;
@@ -21,10 +31,9 @@ void				ht_insertentry(t_htent **root, char *key, void *data)
 	*root = entry;
 }
 
-unsigned int		ht_hash(char *cp, unsigned int len)
+unsigned int		ht_hash(char *cp)
 {
 	unsigned int	hash;
-	(void)len;
 
 	hash = 0x01000193;
 	while (*cp)
@@ -51,12 +60,12 @@ int					ht_tmpcount(t_htent *entries)
 t_htent				*ht_getval(char *key, t_htbucket *bk)
 {
 	unsigned long int	hash;
-	t_htent			*ent;
+	t_htent				*ent;
 
 	ent = NULL;
 	if (bk)
 	{
-		hash = ht_hash(key, bk->count) - bk->min;
+		hash = ht_hash(key) - bk->min;
 		if (((hash + bk->min) >= bk->max) || !(ent = bk->tab[hash]))
 			return (NULL);
 	}

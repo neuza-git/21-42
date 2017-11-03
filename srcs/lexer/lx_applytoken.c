@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lx_applytoken.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/31 16:21:17 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/10/31 16:22:34 by tgascoin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lexer.h"
 #include <fcntl.h>
 #include <stdio.h>
@@ -75,9 +87,9 @@ int			lx_verifytokens(t_token *tok)
 		if (tok->flag == LXS_SQUOT || tok->flag == LXS_DQUOT)
 			lx_doescape(tok);
 		else if ((tok->flag & LXS_TOKEN && \
-				((tok->next && tok->next->flag & LXS_TOKEN \
-				  && !(tok->next->flag & LXS_SQUOT) && !(tok->next->flag & LXS_DQUOT)) \
-				 || !tok->next)) || !lx_applytoken(tok))
+				((tok->next && tok->next->flag & LXS_TOKEN && !(tok->next->flag\
+				& LXS_SQUOT) && !(tok->next->flag & LXS_DQUOT)) \
+					|| !tok->next)) || !lx_applytoken(tok))
 		{
 			ft_perror(tok->value, ERR_NOTOKEN);
 			return (0);

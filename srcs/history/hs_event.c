@@ -6,17 +6,17 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 14:07:35 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/21 15:35:48 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/01 13:41:35 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "history.h"
+#include <stdio.h>
 
-static char *get_x_param(int p, char *lcmd)
+static char	*get_x_param(int p, char *lcmd)
 {
 	int		i;
 	int		w;
-	int		s;
 	int		ni;
 	char	*new;
 
@@ -24,26 +24,14 @@ static char *get_x_param(int p, char *lcmd)
 	i = 0;
 	ni = 0;
 	new = NULL;
-	while (lcmd[i] != '\0')
+	while (lcmd && lcmd[i] != '\0')
 	{
 		while (lcmd[i] == ' ')
 			i++;
 		if (lcmd[i] != '\0')
 			w++;
 		if (w == p)
-		{
-			w = i;
-			while (lcmd[i] != ' ' && lcmd[i] != '\0')
-				i++;
-			s = i - w;
-			if (s > 0)
-				new = malloc(sizeof(char*) * (s + 1));
-			i = w;
-			while (lcmd[i] != ' ' && lcmd[i] != '\0')
-				new[ni++] = lcmd[i++];
-			new[ni] = '\0';
-			return (new);
-		}
+			return (return_x_param(lcmd, i));
 		else
 		{
 			while (lcmd[i] != ' ' && lcmd[i] != '\0')
@@ -98,8 +86,7 @@ void		ft_event_single(t_hs *n, char **cur)
 	int		i2;
 	char	*str;
 
-	str = *cur;
-	while (str && n != NULL)
+	while ((str = *cur) && n != NULL)
 	{
 		i1 = 1;
 		i2 = 0;
@@ -114,8 +101,7 @@ void		ft_event_single(t_hs *n, char **cur)
 	}
 	if (n && str[i1] == '\0' && i1 != 1)
 	{
-		ft_putstr(n->cmd);
-		ft_putchar('\n');
+		ft_putendl(n->cmd);
 		ft_strdel(cur);
 		*cur = ft_strdup(n->cmd);
 	}
@@ -142,8 +128,7 @@ void		ft_event_double(t_hs *n, char **cur)
 		new = ft_strdup(n->cmd);
 	if (new)
 	{
-		ft_putstr(new);
-		ft_putchar('\n');
+		ft_putendl(new);
 		ft_strdel(cur);
 		*cur = new;
 	}

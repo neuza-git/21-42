@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:47:00 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/21 15:15:58 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/02 14:52:58 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_ast	*vm_exec_andentry(t_ast *entry, t_vm *vm, int *out)
 	return (entry);
 }
 
-int		vm_readast(t_vm	*vm, t_ast *ptr, int *out)
+int		vm_readast(t_vm *vm, t_ast *ptr, int *out)
 {
 	if (!vm || !vm->ast)
 		return (1);

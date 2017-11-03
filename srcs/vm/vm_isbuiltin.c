@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:47:56 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/27 18:05:42 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/01 15:05:33 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int		vm_isbuiltin(t_cmd *cmd, t_vm *vm, int *out)
 	else if (ft_strequ(cmd->av[0], "env"))
 		ft_env(cmd, &vm->env, vm, out);
 	else if (ft_strequ(cmd->av[0], "setenv"))
-		ft_setenv(cmd->av, &vm->env, &vm->local);
+		ft_setenv(cmd->av, &vm->env, &vm->local, &vm->htable);
 	else if (ft_strequ(cmd->av[0], "unsetenv"))
-		ft_unsetenv(cmd, &vm->env);
+		ft_unsetenv(cmd->av, &vm->env, &vm->htable);
 	else if (ft_strequ(cmd->av[0], "unset"))
 		ft_unset(cmd->av, &vm->local);
 	else if (ft_strequ(cmd->av[0], "export"))
 		ft_export(cmd->av, &vm->env, vm->local);
-	else if	(ft_strequ(cmd->av[0], "exit"))
+	else if (ft_strequ(cmd->av[0], "exit"))
 		ft_exit(cmd->av[1], out);
 	else if (ft_strequ(cmd->av[0], "jobs"))
 		ft_jobs(vm);
@@ -34,10 +34,10 @@ int		vm_isbuiltin(t_cmd *cmd, t_vm *vm, int *out)
 		ft_fg(cmd->av[1], vm);
 	else if (ft_strequ(cmd->av[0], "bg"))
 		ft_bg(cmd->av[1], vm);
-	else if	(ft_strequ(cmd->av[0], "read"))
+	else if (ft_strequ(cmd->av[0], "read"))
 		ft_read(cmd->av, &vm->local, &vm->env);
 	else if (ft_strequ(cmd->av[0], "set"))
-		ft_set(cmd->av, &vm->env, &vm->local);
+		ft_set(cmd->av, &vm->env, &vm->local, &vm->htable);
 	else
 		return (0);
 	return (1);

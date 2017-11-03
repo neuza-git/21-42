@@ -6,7 +6,7 @@
 /*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 17:39:11 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/09/13 13:39:48 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/01 13:50:01 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@
 # define XF_NONE     0
 # define XF_OCCUPIED 1
 
-typedef	struct	s_xmap
+typedef	struct		s_xmap
 {
-	void		**map;
-	int			flags;
-	size_t		ptr;
-	size_t		size;
-}				t_xmap;
+	void			**map;
+	int				flags;
+	size_t			ptr;
+	size_t			size;
+}					t_xmap;
 
 typedef struct		s_list
 {
@@ -149,7 +149,8 @@ char				*ft_strndup(const char *s1, size_t size);
 char				*ft_str3join(char *s1, char *s2, char *s3);
 
 char				*ft_xstrdup(const char *str, int ref);
-char				*ft_xstrsub(char const *s, unsigned int start, size_t len, int ref);
+char				*ft_xstrsub(char const *s, unsigned int start, \
+		size_t len, int ref);
 void				*ft_salloc(size_t size);
 void				*ft_scalloc(size_t size);
 void				*ft_xalloc(size_t size, int ref);

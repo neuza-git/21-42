@@ -6,12 +6,34 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 13:51:47 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/31 13:16:48 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/01 13:41:18 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "history.h"
 #include "vm.h"
+
+char			*return_x_param(char *lcmd, int i)
+{
+	int		w;
+	int		ni;
+	char	*new;
+	int		s;
+
+	ni = 0;
+	w = i;
+	while (lcmd[i] != ' ' && lcmd[i] != '\0')
+		i++;
+	s = i - w;
+	if (s > 0)
+		new = malloc(sizeof(char*) * (s + 1));
+	i = w;
+	while (lcmd[i] != ' ' && lcmd[i] != '\0')
+		new[ni++] = lcmd[i++];
+	new[ni] = '\0';
+	//dprintf(open("/dev/ttys003", O_WRONLY), "(%s)\n", new);
+	return (new);
+}
 
 t_hs			*hs_create_node(char *str, int m, t_hs *prev)
 {

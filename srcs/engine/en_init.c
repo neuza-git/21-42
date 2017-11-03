@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 13:14:02 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/31 13:14:42 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/01 12:56:59 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	enx_free(t_lexer **lex, t_engine *engine)
 {
 	ft_strdel(&engine->buffer);
 	ft_strdel(&engine->vm->buffer);
-  lx_free(lex);
+	lx_free(lex);
 	engine->buffer = NULL;
 }
 

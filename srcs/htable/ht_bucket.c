@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ht_bucket.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/31 16:15:42 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/11/01 13:01:50 by tgascoin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "htable.h"
 
-static t_htbucket	*init_bucket()
+static t_htbucket	*init_bucket(void)
 {
 	t_htbucket	*ret;
 
@@ -21,7 +33,7 @@ static void			init_bucket_limits(t_htbucket *bk, t_htent *lst)
 	tmp = lst;
 	while (tmp)
 	{
-		tmp->hash = ht_hash(tmp->key, bk->count);
+		tmp->hash = ht_hash(tmp->key);
 		(bk->max < tmp->hash) ? bk->max = tmp->hash : 0;
 		bk->min = (!bk->min) ? bk->max : bk->min;
 		(bk->min > tmp->hash) ? bk->min = tmp->hash : 0;

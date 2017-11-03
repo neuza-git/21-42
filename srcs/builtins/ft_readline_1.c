@@ -6,13 +6,13 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 11:01:12 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/31 13:08:54 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/03 12:17:13 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-static void		p_initgl(t_pos *pos, t_read_args args)
+void			p_initgl(t_pos *pos, t_read_args args)
 {
 	tcgetattr(args.u, &pos->default_term);
 	if (args.e)
@@ -39,44 +39,21 @@ static void		p_initgl(t_pos *pos, t_read_args args)
 	pos->i = 0;
 }
 
-static int		ft_shall_leave(char *keys, char *str, t_read_args args, int m)
-{
-	if (m && args.n && (ft_atoi(args.n)) <= (int)ft_strlen(str))
-		return (1);
-	if (args.d && args.d[0] && keys[0] == args.d[0])
-		return (1);
-	if (keys[0] == 10)
-	{
-		if (!args.r && str && str[ft_strlen(str) - 1] == '\\')
-		{
-			if (m)
-				ft_putstr("> ");
-			return (((!m) ? 1 : 0));
-		}
-		if (args.e && m)
-			ft_putchar('\n');
-		return (1);
-	}
-	if (keys[0] == 4 && ft_strlen(str) == 0)
-		return (1);
-	return (0);
-}
-
-static int		ft_insertkey(char *key, t_pos *pos, int e)
+static int		ft_insertkey(char *k, t_pos *pos, int e)
 {
 	char	*tmp;
 
-	if ((e && printable(key)) || (e == 0 && key[0] != 127))
+	if ((e && printable(k)) || (e == 0 && k[0] != 127))
 	{
 		if (e)
 		{
 			ft_putstr(tgetstr("im", NULL));
-			ft_putstr(key);
+			ft_putstr(k);
 			ft_putstr(tgetstr("ei", NULL));
 		}
-		tmp = (pos->str) ? ft_strjoin_at(pos->str, key, pos->i) : ft_strdup(key);
-		pos->i += ft_strlen(key);
-		pos->imax += ft_strlen(key);
+		tmp = (pos->str) ? ft_strjoin_at(pos->str, k, pos->i) : ft_strdup(k);
+		pos->i += ft_strlen(k);
+		pos->imax += ft_strlen(k);
 		ft_strdel(&pos->str);
 		pos->str = tmp;
 		if (pos->i != pos->imax)
@@ -93,14 +70,7 @@ static int		ft_pka(int e, int size, char *key, t_pos *pos)
 	if (size == 1 && key[0] == 127)
 	{
 		if (e == 0)
-		{
-			ft_putstr(tgetstr("dm", NULL));
-			ft_putstr(tgetstr("le", NULL));
-			ft_putstr(tgetstr("dc", NULL));
-			ft_putstr(tgetstr("le", NULL));
-			ft_putstr(tgetstr("dc", NULL));
-			ft_putstr(tgetstr("ed", NULL));
-		}
+			print_delete();
 		return (ft_key_bs(pos, &pos->i, &pos->str, 1));
 	}
 	if (e == 0)
@@ -117,30 +87,19 @@ static int		ft_pka(int e, int size, char *key, t_pos *pos)
 	return (0);
 }
 
-char			*poor_get_line(t_read_args args)
+char			*poor_return_line(t_read_args args)
 {
-	int		size;
-	char	buffer[1024];
 	t_pos	pos;
-	int		pid;
+	char	buffer[1024];
 
-	pid = -1;
-	if (args.t)
-		pid = fork();
 	p_initgl(&pos, args);
-	if (pid == 0)
-	{
-		sleep(ft_atoi(args.t));
-		ioctl(args.u, TIOCSTI, "\n");
-		exit(1);
-	}
-	while (1 && pid != 0)
+	while (1)
 	{
 		if (pos.keys == NULL)
 		{
 			ft_memset(buffer, '\0', sizeof(buffer));
-			size = read(0, buffer, sizeof(buffer));
-			pos.keys = ft_strndup(buffer, size);
+			pos.s = read(0, buffer, sizeof(buffer));
+			pos.keys = ft_strndup(buffer, pos.s);
 		}
 		if (!win_size_ch(&pos, 0))
 		{
@@ -153,6 +112,6 @@ char			*poor_get_line(t_read_args args)
 		else
 			ft_strdel(&pos.keys);
 	}
-	tcsetattr(args.u, TCSANOW, &pos.default_term);
+	ft_strdel(&pos.keys);
 	return (pos.str);
 }

@@ -6,11 +6,12 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 20:48:20 by kbagot            #+#    #+#             */
-/*   Updated: 2017/10/27 21:14:18 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/01 13:59:39 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+#include <stdio.h>
 
 extern int g_pid;
 
