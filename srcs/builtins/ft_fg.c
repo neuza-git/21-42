@@ -15,15 +15,13 @@
 
 extern int g_pid;
 
-static void	del_job(char *arg, t_vm *vm)
+void	del_job(int i, t_vm *vm)
 {
-	int		i;
 	t_job	*job;
 	t_job	*bjob;
 
 	job = vm->job;
 	bjob = NULL;
-	(arg) ? (i = ft_atoi(arg)) : (i = 0);
 	while (job)
 	{
 		if (job->idc == i)
@@ -52,6 +50,8 @@ void	ft_fg(char *arg, t_vm *vm)
 	int res;
 	t_job *job;
 
+	update_jobs(vm, 1);
+	clear_job(vm);
 	job = vm->job;
 	res = 0;
 	(arg) ? (i = ft_atoi(arg)) : (i = 0);
@@ -66,17 +66,15 @@ void	ft_fg(char *arg, t_vm *vm)
 			g_pid = job->id;
 			tcsetpgrp(STDIN_FILENO, job->id);
 			waitpid(job->id, &res, WUNTRACED);
-			arg = ft_itoa(job->idc);
 			tcsetpgrp(STDIN_FILENO, getpid());
 			if (WIFSTOPPED(res))
-				add_job(g_pid, vm);//todo 
+				add_job(g_pid, vm, res);//todo 
 			else if (WIFSIGNALED(res) || WIFEXITED(res))
-				del_job(arg, vm);
+				del_job(job->idc, vm);
 		}
 		else
 			printf("%s%s%s\n", "42sh: fg: ", arg, " no such job"); //TODOERROr
 	}
 	else
 		printf("%s\n", "42sh: fg: current: no such job");// TODOerror
-	ft_strdel(&arg);
 }

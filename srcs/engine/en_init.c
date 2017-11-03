@@ -69,6 +69,8 @@ void		en_loop(t_engine *engine, int *out)
 				tc_listen_signals();
 			}
 		}
+		update_jobs(engine->vm, 1);
+		clear_job(engine->vm);
 		enx_free(&lex, engine);
 	}
 }

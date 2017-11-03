@@ -19,6 +19,8 @@ void	ft_bg(char *arg, t_vm *vm)
 	int res;
 	t_job *job;
 
+	update_jobs(vm, 1);
+	clear_job(vm);
 	job = vm->job;
 	res = 0;
 	(arg) ? (i = ft_atoi(arg)) : (i = 0);
@@ -28,7 +30,7 @@ void	ft_bg(char *arg, t_vm *vm)
 			job = job->next;
 		if (job->idc == i || !arg)
 		{
-			printf("%s\n", job->name);
+			printf("[%d] %s\n", job->idc, job->name);
 			kill(- job->id, SIGCONT);
 		}
 	else
