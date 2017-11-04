@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/08 10:55:13 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/31 12:34:11 by tgascoin         ###   ########.fr       */
+/*   Created: 2017/11/04 15:38:14 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/11/04 15:38:22 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void		initgl(t_engine *en, t_pos *pos, char *hdstr, int hd)
 	pos->h = 0;
 	pos->uh = 0;
 	pos->exp = 0;
+	pos->hdstr = hdstr;
 	pos->imax = 0;
 	pos->rhs = NULL;
 	pos->crstr = NULL;
@@ -80,3 +81,4 @@ void		initgl(t_engine *en, t_pos *pos, char *hdstr, int hd)
 	ft_putstr_fd(tgetstr("am", NULL), pos->tfd);
 	pos->i = 0;
 }
+

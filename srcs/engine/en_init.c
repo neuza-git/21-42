@@ -6,11 +6,10 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 13:14:02 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/01 12:56:59 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/04 13:46:28 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine.h"
 #include "shell.h"
 #include "history.h"
 
@@ -57,7 +56,7 @@ void		en_loop(t_engine *engine, int *out)
 		lex->buff = engine->buffer;
 		lex->ptr = lex->buff;
 		lex->stat = LXS_DEF;
-		lx_gettokens(lex);
+		lx_gettokens(lex, engine);
 		lx_remove_uslesstoken(&lex->tokens);
 		if (lex->tokens && lex->tokens->value && lex->tokens->value[0] != '\0')
 		{

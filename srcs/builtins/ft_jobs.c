@@ -6,7 +6,7 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 19:50:25 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/01 13:59:11 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/03 15:19:34 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	display_status(t_job *i)
 		i->dead = 1;
 		ret = ft_strcpy(status, "Terminated");
 	}
+	ret = NULL;
 	if (!i->next)
 		printf("[%d]+ %s  %s  %d\n", i->idc, ret, i->name, i->id);
 	else if (i->next && !i->next->next)

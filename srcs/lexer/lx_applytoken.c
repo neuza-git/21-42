@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 16:21:17 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/31 16:22:34 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/04 14:41:03 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ int			lx_applytoken(t_token *tok)
 	if (!tok)
 		return (0);
 	if (tok->flag == LXS_TOKEN)
+	{
 		tok->flag = lx_get_flag(tok->value);
+	}
 	else if (tok->flag == LXS_RDAV)
 		tok->flag = LFT_RDAV;
 	else
@@ -86,14 +88,21 @@ int			lx_verifytokens(t_token *tok)
 	{
 		if (tok->flag == LXS_SQUOT || tok->flag == LXS_DQUOT)
 			lx_doescape(tok);
-		else if ((tok->flag & LXS_TOKEN && \
-				((tok->next && tok->next->flag & LXS_TOKEN && !(tok->next->flag\
-				& LXS_SQUOT) && !(tok->next->flag & LXS_DQUOT)) \
-					|| !tok->next)) || !lx_applytoken(tok))
+		else if ((tok->flag & LXS_TOKEN && ((tok->next && tok->next->flag & \
+			LXS_TOKEN && !(tok->next->flag & LXS_SQUOT) && !(tok->next->flag &\
+			LXS_DQUOT)) || (!tok->next && !(ft_strequ(tok->value, "&")) ))) \
+			|| !lx_applytoken(tok))
 		{
 			ft_perror(tok->value, ERR_NOTOKEN);
 			return (0);
 		}
+		else if (tok->flag & LXS_TOKEN && tok->next && \
+			ft_strequ(tok->value, "&") && (tok->next->flag & LXS_TOKEN))
+		{
+			ft_perror(tok->value, ERR_NOTOKEN);
+			return (0);
+		}
+	//	dprintf(open("/dev/ttys003", O_WRONLY), "[%s, %d]\n", tok->value, tok->flag);
 		tok = tok->next;
 	}
 	return (1);

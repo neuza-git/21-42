@@ -6,11 +6,12 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 16:31:29 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/31 16:31:30 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/03 15:31:30 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
+#include <stdio.h>
 
 int			is_wdpart(int stat)
 {

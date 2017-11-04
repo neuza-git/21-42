@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 13:38:16 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/01 13:50:08 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/04 15:36:23 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct		s_pos
 {
 	char			*keys;
 	char			*str;
+	char			*hdstr;
 	char			*rest;
 	int				s;
 	int				ss;
