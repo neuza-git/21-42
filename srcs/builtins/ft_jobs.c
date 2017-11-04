@@ -6,7 +6,7 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 19:50:25 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/01 13:59:11 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/04 12:36:37 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	update_jobs(t_vm *vm, int display)
 	}
 }
 
-void clear_job(t_vm *vm)
+void	clear_job(t_vm *vm)
 {
 	t_job *i;
 
@@ -46,33 +46,6 @@ void clear_job(t_vm *vm)
 		else
 			i = i->next;
 	}
-}
-
-void	display_status(t_job *i)
-{
-	char	status[20];
-	char	*ret;
-
-	if (WIFCONTINUED(i->status))
-		ret = ft_strcpy(status, "Running");
-	else if (WIFEXITED(i->status) && WEXITSTATUS(i->status))
-	{
-		ret = ft_strcpy(status, "Done");
-		i->dead = 1;
-	}
-	else if (WIFSTOPPED(i->status))
-		ret = ft_strcpy(status, "Stopped");
-	else if (WIFSIGNALED(i->status))
-	{
-		i->dead = 1;
-		ret = ft_strcpy(status, "Terminated");
-	}
-	if (!i->next)
-		printf("[%d]+ %s  %s  %d\n", i->idc, ret, i->name, i->id);
-	else if (i->next && !i->next->next)
-		printf("[%d]- %s  %s  %d\n", i->idc, ret, i->name, i->id);
-	else
-		printf("[%d]  %s  %s  %d\n", i->idc, ret, i->name, i->id);
 }
 
 void	ft_jobs(t_vm *vm)
