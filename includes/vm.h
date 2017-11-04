@@ -6,7 +6,7 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 20:10:12 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/03 14:42:15 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/04 12:37:04 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void		del_job(int i, t_vm *vm);
 void		clear_job(t_vm *vm);
 void		update_jobs(t_vm *vm, int display);
 void		display_status(t_job *i);
+void		bgfg_error(char *arg, char *fct, t_job *job);
 
 void        treat_var(char ***cmd, t_envent **locals, t_envent **env);
 

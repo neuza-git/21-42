@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 15:01:54 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/03 14:42:33 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/04 17:08:53 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,13 @@ int			vm_fork_cmd(char *path, t_cmd *cmd, t_vm *vm, \
 		return (vm_fork_builtin(cmd, vm, f) > 0) ? 0 : 1;
 	return (vm_fork(path, cmd, vm, f) > 0) ? 0 : 1;
 }
-
+/*
+void		wait_p()
+{
+	
+	
+}
+*/
 int			vm_fork(char *path, t_cmd *cmd, t_vm *vm, \
 		int (*f)(t_cmd *cmd, int, t_vm *))
 {
@@ -67,7 +73,7 @@ int			vm_fork(char *path, t_cmd *cmd, t_vm *vm, \
 		tcsetpgrp(STDIN_FILENO, getpid());
 		if (WIFSTOPPED(res) && cmd->pid == g_pid)
 			add_job(g_pid, vm, res);
-		else if (WIFSIGNALED(res)/* || WIFEXITED(res)*/)
+		else if (WIFSIGNALED(res))
 			printf("\n");
 		(f)(cmd, cmd->pid, vm);
 		return (WEXITSTATUS(res));
