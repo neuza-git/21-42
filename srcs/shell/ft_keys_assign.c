@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 16:00:09 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/31 13:11:39 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/04 15:42:13 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ static int	ft_special_char(char *k, t_pos *p)
 			(p->exp) ? ft_putstr_fd("\n", p->tfd) : "";
 			return (1);
 		}
-		if (k[0] == 10 && k[1] == '\0' && p->hd == 2)
+		if (k[0] == 10 && k[1] == '\0' && (p->hd == 2 && !ft_leave_hd(p->str, p->hdstr)))
+		{
+			dprintf(open("/dev/ttys003", O_WRONLY), "AFFICHE RIEN\n");
 			return (0);
+		}
 		if (k[0] == 10 && ((k[1] == '\0' && !p->exp)))
 			return (1);
 		if (k[0] == 10 && k[1] == '\0' \
@@ -69,7 +72,8 @@ int			ft_char_input(t_pos *pos, char *k)
 {
 	char *tmp;
 
-	if (((pos->imax + 1 + (pos->uh - pos->h)) / pos->uh) < pos->width)
+	if (pos->width != 0 && ((pos->imax + 1 + \
+					(pos->uh - pos->h)) / pos->uh) < pos->width)
 	{
 		ft_putstr_fd(tgetstr("im", NULL), pos->tfd);
 		(!(pos->hd == 1 && !pos->str)) ? ft_putstr_fd(k, pos->tfd) : "";

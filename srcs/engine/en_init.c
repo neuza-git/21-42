@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine.h"
 #include "shell.h"
 #include "history.h"
 
@@ -56,7 +55,7 @@ void		en_loop(t_engine *engine, int *out)
 		lex->buff = engine->buffer;
 		lex->ptr = lex->buff;
 		lex->stat = LXS_DEF;
-		lx_gettokens(lex);
+		lx_gettokens(lex, engine);
 		lx_remove_uslesstoken(&lex->tokens);
 		if (lex->tokens && lex->tokens->value && lex->tokens->value[0] != '\0')
 		{

@@ -6,11 +6,13 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:49:12 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/02 11:41:51 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/04 15:10:55 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
+#include <stdio.h>
+#include <fcntl.h>
 
 static int	rdout_andsetadd(t_ast *rd, t_list *av)
 {
@@ -40,7 +42,7 @@ static int	rdout_setadd(t_ast *rd, t_list *av)
 	return (0);
 }
 
-static int	rdout_setaddand(t_ast *rd, t_list *av)
+static int	rdout_setaddand(t_list *av)
 {
 	int	fds[2];
 
@@ -59,14 +61,19 @@ static int	rdout_setaddand(t_ast *rd, t_list *av)
 			fds[1] = fds[0];
 			fds[0] = 1;
 		}
-		if (fds[0] <= 2 && fds[0] >= 0 && fds[1] >= 0 && fds[0] <= 2)
+		if (fds[0] <= 2 && fds[0] >= 0 && fds[1] >= 0 && fds[1] <= 2)
 		{
 			dup2(fds[1], fds[0]);
 			return (1);
 		}
+		else
+		{
+			dup2(fds[0], fds[1]);
+			return (1);
+		}
 	}
-	ft_perror("invalid file descriptor", 0);
-	return (rd) ? 0 : 0;
+		ft_perror("invalid file descriptor", 0);
+	return (0);
 }
 
 int			vm_exec_rdout(t_ast *rd)
@@ -79,6 +86,6 @@ int			vm_exec_rdout(t_ast *rd)
 	else if (rd->flags & (LFT_RDOSET | LFT_RDOADD))
 		return (rdout_setadd(rd, av));
 	else if (rd->flags & (LFT_RDOSETAND | LFT_RDOADDAND))
-		return (rdout_setaddand(rd, av));
+		return (rdout_setaddand(av));
 	return (0);
 }

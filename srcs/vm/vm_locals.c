@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 11:56:07 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/30 13:09:53 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/03 16:50:55 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,20 @@ void		treat_var(char ***cmd, t_envent **locals, t_envent **env)
 	char	**t;
 	int		i;
 
-	t = *cmd;
+	(void)t;
+	(void)i;
+	(void)env;
+	(void)locals;
+	(void)cmd;
+	//t = *cmd;
 	i = 0;
+	if (10 == 11)
+		ft_show_var(&t[i], *locals, *env);
+	/*
 	while (t[i])
 	{
 		if (ft_show_var(&t[i], *locals, *env))
 			i--;
 		i++;
-	}
+	}*/
 }

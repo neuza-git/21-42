@@ -66,6 +66,7 @@ int		vm_readast(t_vm *vm, t_ast *ptr, int *out)
 		return (1);
 	while (ptr && !g_out)
 	{
+		//printf("%d\n", ptr->flags);
 		if (ptr->flags & LFT_OROR && ptr->right && ptr->right->left)
 			ptr = vm_exec_orentry(ptr, vm, out);
 		else if (ptr->flags & LFT_ANDAND)

@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 13:27:14 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/31 14:25:06 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/04 16:47:56 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 static void	ft_yet_exp(unsigned int exp, int hd, char *hdstr)
 {
-	if (!(exp & EXP_SL) && !(exp & EXP_P))
-		ft_perror(NULL, ERR_UNEXPCT);
+	(void)hd;
+	(void)hdstr;
+	//if (!(exp & EXP_SL) && !(exp & EXP_P))
+	//	ft_perror(NULL, ERR_UNEXPCT);
 	if (exp & EXP_SQ)
 		ft_putstr_fd("'", 2);
 	if (exp & EXP_DQ)
@@ -25,8 +27,8 @@ static void	ft_yet_exp(unsigned int exp, int hd, char *hdstr)
 		ft_putstr_fd("`", 2);
 	if (exp & EXP_P)
 		ft_putstr_fd("|", 2);
-	if (hd == 2)
-		ft_putstr_fd(hdstr, 2);
+	//if (hd == 2)
+	//	ft_putstr_fd(hdstr, 2);
 	ft_putstr_fd("\n", 2);
 	ft_perror(NULL, ERR_ENDOFF);
 }
@@ -38,7 +40,7 @@ int			ft_leave_hd(char *str, char *hdstr)
 	if (str && hdstr)
 	{
 		new = ft_str3join("\n", hdstr, "\n");
-		if (ft_strstr(str, new))
+		if (ft_strstr(str, new) || ft_strnequ(str, new + 1, ft_strlen(new + 1)))
 		{
 			ft_strdel(&new);
 			return (1);
