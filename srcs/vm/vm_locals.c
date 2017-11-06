@@ -71,7 +71,6 @@ static int	ft_show_var(char **str, t_envent *locals, t_envent *env)
 	int		size;
 	int		val_size;
 	t_sv	s;
-	char	*cur;
 
 	i = 0;
 	size = 0;
@@ -86,7 +85,6 @@ static int	ft_show_var(char **str, t_envent *locals, t_envent *env)
 	if (s.name)
 	{
 		size = ft_strlen(*str);
-		cur = *str;
 		ft_delete(str, s.dollar + val_size - 1, size, 1);
 		ft_strdel(&s.name);
 		return (1);
@@ -99,20 +97,14 @@ void		treat_var(char ***cmd, t_envent **locals, t_envent **env)
 	char	**t;
 	int		i;
 
-	(void)t;
-	(void)i;
-	(void)env;
-	(void)locals;
-	(void)cmd;
-	//t = *cmd;
+	t = *cmd;
 	i = 0;
 	if (10 == 11)
 		ft_show_var(&t[i], *locals, *env);
-	/*
 	while (t[i])
 	{
 		if (ft_show_var(&t[i], *locals, *env))
 			i--;
 		i++;
-	}*/
+	}
 }

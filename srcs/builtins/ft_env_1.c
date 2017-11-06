@@ -61,10 +61,12 @@ static void		exete(t_senv *s, t_vm *vm, t_cmd *cmd, int *out)
 	vm->reg &= ~VRF_NEW_PATH;
 }
 
-void			ft_env(t_cmd *cmd, t_envent **e, t_vm *vm, int *out)
+void			ft_env(t_cmd *cmd, t_envent **e, t_vm *vm)
 {
 	t_senv	s;
+	int		out;
 
+	out = 0;
 	s.env = (*e) ? *e : NULL;
 	s.fptr = NULL;
 	if (!(s.opts = get_opts(cmd)))
@@ -79,7 +81,7 @@ void			ft_env(t_cmd *cmd, t_envent **e, t_vm *vm, int *out)
 	else
 		s.env = get_newentries(s.opts, cmd, vm);
 	s.fptr = s.env;
-	(s.opts->affenv) ? print_env(s.fptr, s.opts) : exete(&s, vm, cmd, out);
+	(s.opts->affenv) ? print_env(s.fptr, s.opts) : exete(&s, vm, cmd, &out);
 	free(s.opts);
 	(s.env) ? envent_free(&s.env) : NULL;
 }

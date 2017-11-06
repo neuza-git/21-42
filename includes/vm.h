@@ -6,7 +6,7 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 20:10:12 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/04 12:37:04 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/03 14:42:15 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int					vm_exec_rdin(t_ast *redir);
 int					vm_open_dup(char *name, int fd, int flags);
 void				vm_duplocals(t_envent *loc, t_token **toks);
 
-void				ft_env(t_cmd *cmd, t_envent **ev, t_vm *vm, int *out);
+void				ft_env(t_cmd *cmd, t_envent **ev, t_vm *vm);
 
 void				ft_history(char **av, t_vm *vm, t_envent *env, int m);
 
@@ -102,7 +102,6 @@ void		del_job(int i, t_vm *vm);
 void		clear_job(t_vm *vm);
 void		update_jobs(t_vm *vm, int display);
 void		display_status(t_job *i);
-void		bgfg_error(char *arg, char *fct, t_job *job);
 
 void        treat_var(char ***cmd, t_envent **locals, t_envent **env);
 

@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:49:41 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/03 18:58:30 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/09/20 13:49:41 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_vm		*vm_init(char **environ)
 	new->reg = 0;
 	new->work = NULL;
 	new->htable = NULL;
-	new->job = NULL;
 	if (env_getentry("PATH", new->env))
 		new->htable = ht_loadbinaries(env_getentry("PATH", new->env)->value);
 	return (new);

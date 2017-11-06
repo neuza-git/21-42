@@ -17,13 +17,9 @@ static char	*get_x_param(int p, char *lcmd)
 {
 	int		i;
 	int		w;
-	int		ni;
-	char	*new;
 
 	w = -1;
 	i = 0;
-	ni = 0;
-	new = NULL;
 	while (lcmd && lcmd[i] != '\0')
 	{
 		while (lcmd[i] == ' ')

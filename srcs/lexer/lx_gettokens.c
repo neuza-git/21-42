@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 16:22:44 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/03 18:26:28 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/06 11:25:29 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,26 @@ static int	get_fd_heredoc(t_engine *en, char *eof)
 {
 	int		fd[2];
 	char	*line;
+	int		i;
+	int		size;
 
+	i = 0;
 	pipe(fd);
 	line = get_line(en, 2, eof);
+	if (ft_leave_hd(line, eof))
+	{
+		write(1, "\n", 1);
+		while (eof[i])
+		{
+			size = ft_strlen(line);
+			ft_delete(&line, size - ft_strlen(eof) + 1, size, 1);
+			i++;
+		}
+	}
 	write(fd[1], line, ft_strlen(line));
 	ft_strdel(&line);
 	close(fd[1]);
-	dprintf(open("/dev/ttys003", O_WRONLY), "(%d)\n", fd[0]);
+	//dprintf(open("/dev/ttys003", O_WRONLY), "(%d)\n", fd[0]);
 	return ((fd[0]));
 }
 
@@ -78,7 +91,7 @@ static void	hd(t_lexer *lx, t_engine *en)
 		lx->ptr++;
 	}
 	ft_lstaddfront((t_list **)&lx->tokens,\
-			(t_list *)lx_newtoken(ft_strdup(ft_itoa(get_fd_heredoc(en, lx->tmp + 2))), 8));
+			(t_list *)lx_newtoken(ft_itoa(get_fd_heredoc(en, lx->tmp + 2)), 8));
 	ft_lstaddfront((t_list **)&lx->tokens,\
 			(t_list *)lx_newtoken(ft_strdup(">&"), 5));
 	ft_lstaddfront((t_list **)&lx->tokens,\
