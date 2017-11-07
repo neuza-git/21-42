@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 16:21:17 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/04 14:41:03 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/07 17:10:50 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int			lx_get_flag(char *data)
 		return (LFT_ANDRDOSET);
 	if (ft_strequ(data, LST_PIPEAND))
 		return (LFT_PIPE | LFT_PIPEERR);
+	if (ft_strequ(data, LST_AND))
+		return (LFT_SEP);
 	return (LXS_NONE);
 }
 
@@ -89,20 +91,13 @@ int			lx_verifytokens(t_token *tok)
 		if (tok->flag == LXS_SQUOT || tok->flag == LXS_DQUOT)
 			lx_doescape(tok);
 		else if ((tok->flag & LXS_TOKEN && ((tok->next && tok->next->flag & \
-			LXS_TOKEN && !(tok->next->flag & LXS_SQUOT) && !(tok->next->flag &\
-			LXS_DQUOT)) || (!tok->next && !(ft_strequ(tok->value, "&")) ))) \
+		LXS_TOKEN && (tok->next->flag != LXS_SQUOT && tok->next->flag != \
+		LXS_DQUOT)))) \
 			|| !lx_applytoken(tok))
 		{
 			ft_perror(tok->value, ERR_NOTOKEN);
 			return (0);
 		}
-		else if (tok->flag & LXS_TOKEN && tok->next && \
-			ft_strequ(tok->value, "&") && (tok->next->flag & LXS_TOKEN))
-		{
-			ft_perror(tok->value, ERR_NOTOKEN);
-			return (0);
-		}
-	//	dprintf(open("/dev/ttys003", O_WRONLY), "[%s, %d]\n", tok->value, tok->flag);
 		tok = tok->next;
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 16:00:09 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/06 11:25:41 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/07 17:21:57 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ int			ft_keysassign(char *keys, t_pos *pos, int size)
 	}
 	if (pos->t && keys[0] != 9)
 		pos->t = 0;
+	if (pos->hd == 2 && illegal_in_hd(keys, size, pos->str))
+		return (1);
 	if (!ft_special_char(keys, pos))
 	{
 		if (pos->hd == 4)

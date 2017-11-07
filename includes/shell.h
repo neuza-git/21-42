@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 13:38:16 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/04 15:36:23 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/07 17:21:31 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,5 +186,6 @@ void				delete_list(t_files **h);
 int					isp(char *str);
 int					printable(char *str);
 int					not_escaped(char *str, int i);
+int					illegal_in_hd(char *key, int size, char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 16:22:44 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/06 11:25:29 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/07 15:00:26 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,15 @@ static int	get_fd_heredoc(t_engine *en, char *eof)
 	if (ft_leave_hd(line, eof))
 	{
 		write(1, "\n", 1);
-		while (eof[i])
+		while (line && eof && eof[i])
 		{
 			size = ft_strlen(line);
 			ft_delete(&line, size - ft_strlen(eof) + 1, size, 1);
 			i++;
 		}
 	}
+	else if (line && line[0] == '\0')
+		write(1, "\n", 1);
 	write(fd[1], line, ft_strlen(line));
 	ft_strdel(&line);
 	close(fd[1]);

@@ -6,11 +6,13 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 13:12:50 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/31 13:12:51 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/07 16:44:46 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
+#include <stdio.h>
+#include <fcntl.h>
 
 static void	cmd_addfront(t_cmd **cmd, t_cmd *new)
 {
@@ -46,7 +48,7 @@ t_ast		*ast_parse(t_token *token)
 	if (!(rt = ft_memalloc(sizeof(t_ast))))
 		return (NULL);
 	rt->flags = LFD_CMD;
-	while (token && !(token->flag & LFT_SEP))
+	while (token && !(token->flag & LFT_SEP || ft_strequ(token->value, "&")))
 	{
 		if (!(tmp = cmd_parse(&token)))
 			return (NULL);
@@ -70,8 +72,9 @@ int			ast_build_sections(t_token *tokens, t_ast **root)
 	tmp = tokens;
 	while (tokens)
 	{
-		if ((tokens->flag & LFT_SEP))
+		if ((tokens->flag & LFT_SEP || ft_strequ(tokens->value, "&")))
 		{
+			//dprintf(open("/dev/ttys003", O_WRONLY), "[%s]\n", (tokens->value));
 			if (!tokens->next)
 				return (1);
 			if (!(parsed = ast_parse(tmp)))
