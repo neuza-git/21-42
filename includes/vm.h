@@ -64,7 +64,7 @@ void				vm_loadast(t_vm *vm, t_ast *ast);
 int					vm_readast(t_vm	*vm, t_ast *ast, int *out);
 int					vm_isbuiltin(t_cmd *cmd, t_vm *vm, int *out);
 int					vm_isextbuiltin(t_cmd *cmd);
-void				vm_kill_cmds(t_cmd *cmd);
+void				vm_kill_cmds(t_vm *vm);
 void				ft_setenv(char **av, t_envent **env, t_envent **l, \
 		t_htbucket **ht);
 void				ft_set(char **av, t_envent **env, t_envent **l,\
@@ -103,6 +103,7 @@ void		clear_job(t_vm *vm);
 void		update_jobs(t_vm *vm, int display);
 void		display_status(t_job *i);
 void		bgfg_error(char *arg, char *fct, t_job *job);
+void		wait_p(pid_t pid, pid_t pgid, int *res);
 
 void        treat_var(char ***cmd, t_envent **locals, t_envent **env);
 

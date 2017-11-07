@@ -11,13 +11,23 @@
 /* ************************************************************************** */
 
 #include "vm.h"
+#include <stdio.h>
 
-void	vm_kill_cmds(t_cmd *cmd)
+extern int g_pid;
+
+void	vm_kill_cmds(t_vm *vm)
 {
-	while (cmd)
+	t_job *j;
+
+	j = vm->job;
+	printf("[%d]\n", g_pid);
+	while (j)
 	{
-		//	if (cmd->pid)
-		//	kill(cmd->pid, SIGKILL);
-		cmd = cmd->next;
+		if (j->id == g_pid)
+			return ;
+		printf("[%d]\n", j->id);
+		j = j->next;
 	}
+//	if (j == NULL)
+//		kill(-g_pid, SIGKILL);
 }

@@ -55,7 +55,7 @@ int			vm_exec(t_cmd *cmd, int flags, t_vm *vm, int *out)
 		cmd->flags = flags;
 		(cmd->next) ? (vm_pipe_cmd(cmd)) : NULL;
 		ret = (vm_fork_cmd(path, cmd, vm, &vm_fcb_piped));
-		//(!cmd->next) ? (vm_kill_cmds(vm->work)) : NULL;
+		(!cmd->next) ? (vm_kill_cmds(vm)) : NULL;
 	}
 	else
 		ret = vm_fork_cmd(path, cmd, vm, &vm_fcb_def);

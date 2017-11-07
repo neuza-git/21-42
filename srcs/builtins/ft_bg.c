@@ -16,11 +16,9 @@
 void	ft_bg(char *arg, t_vm *vm)
 {
 	int		i;
-	int		res;
 	t_job	*job;
 
 	job = vm->job;
-	res = 0;
 	i = (arg) ? ft_atoi(arg) : 0;
 	if (job)
 	{

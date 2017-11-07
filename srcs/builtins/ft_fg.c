@@ -13,8 +13,6 @@
 #include "builtins.h"
 #include <stdio.h>
 
-extern int	g_pid;
-
 void		ft_fg(char *arg, t_vm *vm)
 {
 	int		i;
@@ -32,14 +30,17 @@ void		ft_fg(char *arg, t_vm *vm)
 		{
 			printf("%s\n", job->name);
 			kill(-job->id, SIGCONT);
-			g_pid = job->id;
-			tcsetpgrp(STDIN_FILENO, job->id);
-			waitpid(job->id, &res, WUNTRACED);
-			tcsetpgrp(STDIN_FILENO, getpid());
+	tcsetpgrp(STDIN_FILENO, job->id);
+	waitpid(-job->id, &res, WUNTRACED);
+	tcsetpgrp(STDIN_FILENO, getpid());
+	//		wait_p(job->id, job->id, &res);
 			if (WIFSTOPPED(res))
-				add_job(g_pid, vm, res);
+				add_job(job->id, vm, res);
 			else if (WIFSIGNALED(res) || WIFEXITED(res))
+			{
+				kill(-job->id, SIGKILL);
 				del_job(job->idc, vm);
+			}
 		}
 		else
 			bgfg_error(arg, "fg", job);
