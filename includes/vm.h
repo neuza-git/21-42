@@ -6,7 +6,7 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 20:10:12 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/03 14:42:15 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/09 15:49:01 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void				vm_loadast(t_vm *vm, t_ast *ast);
 int					vm_readast(t_vm	*vm, t_ast *ast, int *out);
 int					vm_isbuiltin(t_cmd *cmd, t_vm *vm, int *out);
 int					vm_isextbuiltin(t_cmd *cmd);
-void				vm_kill_cmds(t_vm *vm);
+void				vm_kill_cmds(t_cmd *cmd);
 void				ft_setenv(char **av, t_envent **env, t_envent **l, \
 		t_htbucket **ht);
 void				ft_set(char **av, t_envent **env, t_envent **l,\

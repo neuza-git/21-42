@@ -6,14 +6,14 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 20:48:20 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/01 13:59:39 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/09 15:47:17 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include <stdio.h>
 
-void		ft_fg(char *arg, t_vm *vm)
+void		del_job(int i, t_vm *vm)
 {
 	t_job	*job;
 	t_job	*bjob;
