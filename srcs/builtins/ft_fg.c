@@ -13,9 +13,7 @@
 #include "builtins.h"
 #include <stdio.h>
 
-extern int g_pid;
-
-void	del_job(int i, t_vm *vm)
+void		ft_fg(char *arg, t_vm *vm)
 {
 	t_job	*job;
 	t_job	*bjob;
@@ -62,15 +60,18 @@ void	ft_fg(char *arg, t_vm *vm)
 		if (job->idc == i || !arg)
 		{
 			printf("%s\n", job->name);
-			kill(- job->id, SIGCONT);
-			g_pid = job->id;
-			tcsetpgrp(STDIN_FILENO, job->id);
-			waitpid(job->id, &res, WUNTRACED);
-			tcsetpgrp(STDIN_FILENO, getpid());
+			kill(-job->id, SIGCONT);
+	tcsetpgrp(STDIN_FILENO, job->id);
+	waitpid(-job->id, &res, WUNTRACED);
+	tcsetpgrp(STDIN_FILENO, getpid());
+	//		wait_p(job->id, job->id, &res);
 			if (WIFSTOPPED(res))
-				add_job(g_pid, vm, res);//todo 
+				add_job(job->id, vm, res);
 			else if (WIFSIGNALED(res) || WIFEXITED(res))
+			{
+				kill(-job->id, SIGKILL);
 				del_job(job->idc, vm);
+			}
 		}
 		else
 			printf("%s%s%s\n", "42sh: fg: ", arg, " no such job"); //TODOERROr

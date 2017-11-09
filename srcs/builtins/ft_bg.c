@@ -15,16 +15,13 @@
 
 void	ft_bg(char *arg, t_vm *vm)
 {
-	int i;
-	int res;
-	t_job *job;
+	int		i;
+	t_job	*job;
 
 	update_jobs(vm, 1);
 	clear_job(vm);
 	job = vm->job;
-	res = 0;
-	(void)res;
-	(arg) ? (i = ft_atoi(arg)) : (i = 0);
+	i = (arg) ? ft_atoi(arg) : 0;
 	if (job)
 	{
 		while (job->next && (job->idc != i))
