@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 16:21:17 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/07 17:10:50 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/09 16:22:39 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int			lx_get_flag(char *data)
 	if (ft_strequ(data, LST_PIPEAND))
 		return (LFT_PIPE | LFT_PIPEERR);
 	if (ft_strequ(data, LST_AND))
-		return (LFT_SEP);
+		return (LFT_SEP | LFT_AND);
 	return (LXS_NONE);
 }
 

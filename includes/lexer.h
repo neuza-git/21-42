@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 13:45:30 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/04 13:47:55 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/09 16:54:16 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@
 
 # define LM_RDTOKEN 0x1E00FC0
 # define LM_RDOUTTOKEN 0xF0640
+# define LFT_AND 0x2000000
 # define LFT_ANDAND 0x800000
 # define LFT_OROR 0x400000
 # define LFT_DUPFLAGS 0x200000

@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 15:45:36 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/03 15:12:56 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/09 21:35:27 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,61 +16,33 @@ int			g_waitsig;
 int			g_last_signal = 0;
 int			g_pid = 0;
 
-static void		add_job_init(t_vm *vm)
+void	display_status(t_job *i)
 {
-	if (!(vm->job = ft_memalloc(sizeof(t_job))))
-		return ;
-	vm->job->idc = 1;
-}
+	char	status[20];
+	char	*ret;
 
-static int		add_njob(t_job **tmp, t_vm *vm, int npid)
-{
-	int		i;
-
-	*tmp = vm->job;
-	while ((*tmp)->next)
+	ft_bzero(status, 20);
+	ret = NULL;
+	if (WIFCONTINUED(i->status))
+		ret = ft_strcpy(status, "Running");
+	else if (WIFEXITED(i->status))
 	{
-		if ((*tmp)->id == npid)
-			return (1);
-		*tmp = (*tmp)->next;
+		ret = ft_strcpy(status, "Done");
+		i->dead = 1;
 	}
-	i = (*tmp)->idc + 1;
-	if ((*tmp)->id == npid)
-		return (1);
-	if (!((*tmp)->next = ft_memalloc(sizeof(t_job))))
-		return (1);
-	*tmp = (*tmp)->next;
-	(*tmp)->idc = i;
-	return (0);
-}
-
-void add_job(int npid, t_vm *vm, int res)
-{
-	t_job	*tmp;
-
-	tmp = NULL;
-	update_jobs(vm, 1);
-	if (!vm->job)
+	else if (WIFSTOPPED(i->status))
+		ret = ft_strcpy(status, "Stopped");
+	else if (WIFSIGNALED(i->status))
 	{
-		add_job_init(vm);
-		tmp = vm->job;
+		i->dead = 1;
+		ret = ft_strcpy(status, "Terminated");
 	}
-	else if (vm->job)
-	{
-		if (add_njob(&tmp, vm, npid))
-		{
-			ft_putchar('\n');
-			display_status(tmp);
-			return ;
-		}
-	}
-	tmp->name = ft_strdup(vm->buffer);
-	tmp->status = res;
-	tmp->dead = 0;
-	tmp->id = npid;
-	tmp->next = NULL;
-	ft_putchar('\n');
-	display_status(tmp);
+	if (!i->next)
+		printf("[%d]+ %d %s   %s\n", i->idc, i->id, ret, i->name);
+	else if (i->next && !i->next->next)
+		printf("[%d]- %d %s   %s\n", i->idc, i->id, ret, i->name);
+	else
+		printf("[%d]  %d %s   %s\n", i->idc, i->id, ret, i->name);
 }
 
 void			tc_handle_signals(int sig)
@@ -85,13 +57,8 @@ void			tc_handle_signals(int sig)
 			g_sig = sig;
 	}
 }
-/*
-void		tc_siglast(t_engine *engine)
-{
-	(g_last_signal == SIGTSTP) ? add_job(g_pid, engine) : NULL;
-}
-*/
-void		tc_ign_exec()
+
+void		tc_ign_exec(void)
 {
 	signal(SIGSTOP, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
@@ -106,7 +73,6 @@ void		tc_stop_signals(void)
 {
 	g_last_signal = 0;
 	g_waitsig = 0;
-	//waitpid(pid, &status, WNOHANG); CHECK ALL JOBS STATUS  look at  sigchld
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGSTOP, SIG_IGN);
 	signal(SIGINT, SIG_IGN);
@@ -115,13 +81,12 @@ void		tc_stop_signals(void)
 	signal(SIGTTOU, SIG_IGN);
 }
 
-void		tc_listen_signals()
+void		tc_listen_signals(void)
 {
 	g_waitsig = 1;
 	signal(SIGINT, &tc_handle_signals);
 	signal(SIGQUIT, &tc_handle_signals);
 	signal(SIGWINCH, &tc_handle_signals);
 	signal(SIGTSTP, SIG_IGN);
-//	tc_siglast(engine);
 	g_pid = 0;
 }
