@@ -6,7 +6,7 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 20:10:12 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/09 15:49:01 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/09 16:59:03 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define VRF_SKIP 0x1
 # define VRF_LAST_KO 0x10
 # define VRF_NEW_PATH 0x18
+# define BG 0x1
+# define FG 0x2
 
 typedef struct		s_job
 {
@@ -50,6 +52,7 @@ typedef struct		s_vm
 	int				newpid;
 	t_job			*job;
 	char			*buffer;
+	int				execm;
 }					t_vm;
 
 typedef struct		s_sv

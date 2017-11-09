@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 15:01:54 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/08 13:16:38 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/09 22:23:27 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,16 @@ static int fork_status(t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *))
 	res = 0;
 	setpgid(cmd->pid, g_pid);
 	(f)(cmd, -2, vm);
-	wait_p(cmd->pid, g_pid, &res);
+	if (vm->execm == FG)
+		wait_p(cmd->pid, g_pid, &res);
+	else
+		add_job(g_pid, vm, 4991);
 	if (WIFSTOPPED(res) && cmd->pid == g_pid)
 		add_job(g_pid, vm, res);
-	else if (WIFSIGNALED(res) || WIFEXITED(res))
-	{
-		kill(-g_pid, SIGKILL);
+	else if (WIFSIGNALED(res))
 		printf("\n");
-	}
+	if (vm->execm == FG && !(WIFSTOPPED(res)))
+			kill(-g_pid, SIGKILL);
 	(f)(cmd, cmd->pid, vm);
 	return (WEXITSTATUS(res));
 }
@@ -86,7 +88,7 @@ int			vm_fork(char *path, t_cmd *cmd, t_vm *vm, \
 		exit(EXIT_FAILURE);
 	}
 	else if (cmd->pid > 0)
-		return(fork_status(cmd, vm, f));
+		return (fork_status(cmd, vm, f));
 	return (0);
 }
 
