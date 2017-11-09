@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 13:38:16 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/04 15:36:23 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/08 11:52:08 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void				initgl(t_engine *engine, t_pos *pos, char *hdstr, int hd);
 char				*ft_crest(char **rest, char *keys);
 void				cut_multiple_lines(t_engine *e, t_pos *pos);
 int					ft_clear_line(int i, t_pos pos, char *str, int nc);
-char				*leave_gl(t_engine *e, t_pos pos, char *hdstr, int m);
+char				*leave_gl(t_engine *e, t_pos pos, int m);
 int					ft_leave_hd(char *str, char *hdstr);
 
 int					ft_keysassign(char *key, t_pos *pos, int size);
@@ -186,5 +186,6 @@ void				delete_list(t_files **h);
 int					isp(char *str);
 int					printable(char *str);
 int					not_escaped(char *str, int i);
+int					illegal_in_hd(char *key, int size, char *str);
 
 #endif

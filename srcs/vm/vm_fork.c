@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 15:01:54 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/04 17:08:53 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/08 13:16:38 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ static int	do_builtin(t_cmd *cmd, t_vm *vm, int m)
 {
 	if (ft_strequ(cmd->av[0], "echo") && m)
 		ft_echo(cmd);
-	if (ft_strequ(cmd->av[0], "history"))
+	else if (ft_strequ(cmd->av[0], "history"))
 		ft_history(cmd->av, vm, vm->env, m);
-	else if (!ft_strequ(cmd->av[0], "echo"))
+	else if (ft_strequ(cmd->av[0], "env") && m)
+		ft_env(cmd, &vm->env, vm);
+	else if (ft_strequ(cmd->av[0], "set") && m)
+		 ft_set(cmd->av, &vm->env, &vm->local, &vm->htable);
+	else if (m)
 	{
 		ft_perror(cmd->av[0], ERR_NOCMD);
 		return (0);

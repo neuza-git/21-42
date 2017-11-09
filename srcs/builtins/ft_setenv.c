@@ -14,7 +14,7 @@
 
 void	ft_setenv(char **av, t_envent **env, t_envent **l, t_htbucket **ht)
 {
-	if (!av[1])
+	if (!av[1] || (av[1] && av[2] && av[3]))
 		return (ft_putendl("usage: setenv [NAME] [VALUE]"));
 	if (ft_sc(av[1], '=') || ft_sc(av[2], '='))
 		return (ft_putendl("NAME and VALUE can't contain the character \'=\'"));

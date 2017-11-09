@@ -97,20 +97,14 @@ void		treat_var(char ***cmd, t_envent **locals, t_envent **env)
 	char	**t;
 	int		i;
 
-	(void)t;
-	(void)i;
-	(void)env;
-	(void)locals;
-	(void)cmd;
-	//t = *cmd;
+	t = *cmd;
 	i = 0;
 	if (10 == 11)
 		ft_show_var(&t[i], *locals, *env);
-	/*
 	while (t[i])
 	{
 		if (ft_show_var(&t[i], *locals, *env))
 			i--;
 		i++;
-	}*/
+	}
 }

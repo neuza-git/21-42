@@ -68,7 +68,6 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/shell/ft_ctrl_r_2.c \
 	  srcs/shell/tc_signal.c \
 	  srcs/shell/tc_utils.c \
-	  srcs/shell/tc_jobs.c \
 	  srcs/shell/ft_autocomplete_1.c \
 	  srcs/shell/ft_autocomplete_2.c \
 	  srcs/shell/ft_autocomplete_3.c \

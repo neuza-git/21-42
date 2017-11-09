@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 16:22:44 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/03 18:26:28 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/09 14:55:44 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,30 @@ static int	get_fd_heredoc(t_engine *en, char *eof)
 {
 	int		fd[2];
 	char	*line;
+	int		i;
+	int		size;
+	char	*tmp;
 
+	i = 0;
 	pipe(fd);
 	line = get_line(en, 2, eof);
-	write(fd[1], line, ft_strlen(line));
+	if (ft_leave_hd(line, eof))
+	{
+		(ft_strequ(tmp = ft_strjoin(eof, "\n"), line)) ? ft_strdel(&line) \
+			: (void)write(1, "\n", 1);
+		ft_strdel(&tmp);
+		while (line && eof && eof[i])
+		{
+			size = ft_strlen(line);
+			ft_delete(&line, size - ft_strlen(eof) + 1, size, 1);
+			i++;
+		}
+	}
+	else if (line && line[0] == '\0')
+		write(1, "\n", 1);
+	(line) ? (void)write(fd[1], line, ft_strlen(line)) : "";
 	ft_strdel(&line);
 	close(fd[1]);
-	dprintf(open("/dev/ttys003", O_WRONLY), "(%d)\n", fd[0]);
 	return ((fd[0]));
 }
 
@@ -78,12 +95,11 @@ static void	hd(t_lexer *lx, t_engine *en)
 		lx->ptr++;
 	}
 	ft_lstaddfront((t_list **)&lx->tokens,\
-			(t_list *)lx_newtoken(ft_strdup(ft_itoa(get_fd_heredoc(en, lx->tmp + 2))), 8));
+			(t_list *)lx_newtoken(ft_itoa(get_fd_heredoc(en, lx->tmp + 2)), 8));
 	ft_lstaddfront((t_list **)&lx->tokens,\
 			(t_list *)lx_newtoken(ft_strdup(">&"), 5));
 	ft_lstaddfront((t_list **)&lx->tokens,\
 			(t_list *)lx_newtoken(ft_strdup("0"), 2));
-
 }
 
 t_lexer		*lx_gettokens(t_lexer *lx, t_engine *en)

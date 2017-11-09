@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 13:14:02 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/03 19:01:31 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/06 11:01:18 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ t_engine	*en_init(int flags, char **env)
 	engine->cp = NULL;
 	engine->rest = NULL;
 	engine->vm->hs = ft_create_history(engine->vm->env);
+	engine->vm->job = NULL;
+	engine->vm->buffer = NULL;
 	engine->tfd = open(ttyname(0), O_WRONLY);
 	engine->buffer = NULL;
 	engine->flags = flags;

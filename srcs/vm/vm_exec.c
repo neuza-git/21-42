@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:48:41 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/02 11:36:36 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/09 13:54:44 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			vm_exec(t_cmd *cmd, int flags, t_vm *vm, int *out)
 		cmd->flags = flags;
 		(cmd->next) ? (vm_pipe_cmd(cmd)) : NULL;
 		ret = (vm_fork_cmd(path, cmd, vm, &vm_fcb_piped));
-		(!cmd->next) ? (vm_kill_cmds(vm)) : NULL;
+		(!cmd->next) ? (vm_kill_cmds(vm->work)) : NULL;
 	}
 	else
 		ret = vm_fork_cmd(path, cmd, vm, &vm_fcb_def);

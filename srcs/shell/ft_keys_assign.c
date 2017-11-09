@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 16:00:09 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/04 15:42:13 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/07 17:21:57 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,9 @@ static int	ft_special_char(char *k, t_pos *p)
 			(p->exp) ? ft_putstr_fd("\n", p->tfd) : "";
 			return (1);
 		}
-		if (k[0] == 10 && k[1] == '\0' && (p->hd == 2 && !ft_leave_hd(p->str, p->hdstr)))
-		{
-			dprintf(open("/dev/ttys003", O_WRONLY), "AFFICHE RIEN\n");
-			return (0);
-		}
+		//dprintf(open("/dev/ttys004", O_WRONLY), "AFFICHE RIEN\n");
+		if (k[0] == 10 && k[1] == '\0' && p->hd == 2)
+			return (!ft_leave_hd(p->str, p->hdstr) ? 0 : 1);
 		if (k[0] == 10 && ((k[1] == '\0' && !p->exp)))
 			return (1);
 		if (k[0] == 10 && k[1] == '\0' \
@@ -125,6 +123,8 @@ int			ft_keysassign(char *keys, t_pos *pos, int size)
 	}
 	if (pos->t && keys[0] != 9)
 		pos->t = 0;
+	if (pos->hd == 2 && illegal_in_hd(keys, size, pos->str))
+		return (1);
 	if (!ft_special_char(keys, pos))
 	{
 		if (pos->hd == 4)

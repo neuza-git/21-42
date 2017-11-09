@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 15:38:14 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/04 15:38:22 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/08 11:47:05 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,3 @@ void		initgl(t_engine *en, t_pos *pos, char *hdstr, int hd)
 	ft_putstr_fd(tgetstr("am", NULL), pos->tfd);
 	pos->i = 0;
 }
-
