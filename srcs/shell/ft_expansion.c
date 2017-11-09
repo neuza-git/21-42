@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 12:42:07 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/07 17:23:46 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/08 11:50:40 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int				illegal_in_hd(char *key, int size, char *str)
 	if ((size == 3 && key[0] == 27 && key[1] == 91 && key[2] == 68) || \
 		(size == 3 && key[0] == 27 && key[1] == 91 && key[2] == 67) || \
 		(size == 4 && key[0] == 27 && key[1] == 91 && key[2] == 51 \
-		 && key[3] == 126) || \
+			&& key[3] == 126) || \
 		(size == 1 && key[0] == 4 && g_sig == 0 && str != NULL \
-		 && str[0] != '\0') || \
+			&& str[0] != '\0') || \
 		(size == 1 && key[0] == 127) || \
 		printable(key) || (size == 1 && key[0] == 10))
 		return (0);
