@@ -6,19 +6,17 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 13:27:14 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/06 11:39:07 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/08 11:51:57 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include "history.h"
 
-static void	ft_yet_exp(unsigned int exp, int hd, char *hdstr)
+static void	ft_yet_exp(unsigned int exp, int hd)
 {
-	(void)hd;
-	(void)hdstr;
-	//if (!(exp & EXP_SL) && !(exp & EXP_P))
-	//	ft_perror(NULL, ERR_UNEXPCT);
+	if (hd != 2 && !(exp & EXP_SL) && !(exp & EXP_P))
+		ft_perror(NULL, ERR_UNEXPCT);
 	if (exp & EXP_SQ)
 		ft_putstr_fd("'", 2);
 	if (exp & EXP_DQ)
@@ -27,8 +25,6 @@ static void	ft_yet_exp(unsigned int exp, int hd, char *hdstr)
 		ft_putstr_fd("`", 2);
 	if (exp & EXP_P)
 		ft_putstr_fd("|", 2);
-	//if (hd == 2)
-	//	ft_putstr_fd(hdstr, 2);
 	ft_putstr_fd("\n", 2);
 	ft_perror(NULL, ERR_ENDOFF);
 }
@@ -56,7 +52,7 @@ int			ft_leave_hd(char *str, char *hdstr)
 	return (0);
 }
 
-char		*leave_gl(t_engine *e, t_pos p, char *hdstr, int m)
+char		*leave_gl(t_engine *e, t_pos p, int m)
 {
 	int		out;
 
@@ -73,7 +69,7 @@ char		*leave_gl(t_engine *e, t_pos p, char *hdstr, int m)
 		out = 3;
 	(out != 2 && m == 0) ? ft_strdel(&p.str) : "";
 	ft_strdel(&p.keys);
-	(out == 4 && p.hd != 2) ? ft_yet_exp(p.exp, p.hd, hdstr) : "";
+	(out == 4 && p.hd != 2) ? ft_yet_exp(p.exp, p.hd) : "";
 	g_sig = 0;
 	(out == 1) ? ft_putstr_fd("exit", p.tfd) : "";
 	(p.hd != 1 && !(p.hd == 2)) ? ft_putstr_fd("\n", p.tfd) : "";
