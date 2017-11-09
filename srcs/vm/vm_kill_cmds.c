@@ -6,24 +6,18 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:48:27 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/09 15:22:00 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/09 15:37:37 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-#include <stdio.h>
 
-extern int g_pid;
-
-void	vm_kill_cmds(t_vm *vm)
+void	vm_kill_cmds(t_cmd *cmd)
 {
-	t_job *j;
-
-	j = vm->job;
-	printf("[%d]\n", g_pid);
-	while (j)
+	while (cmd)
 	{
+		if (cmd->pid)
+			kill(cmd->pid, SIGPIPE);
+		cmd = cmd->next;
 	}
-//	if (j == NULL)
-//		kill(-g_pid, SIGKILL);
 }
