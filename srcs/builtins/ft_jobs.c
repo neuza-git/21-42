@@ -6,7 +6,7 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 19:50:25 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/03 15:19:34 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/09 22:37:33 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ void	update_jobs(t_vm *vm, int display)
 	i = vm->job;
 	while (i)
 	{
-		if (waitpid(i->id, &res, WUNTRACED | WNOHANG | WCONTINUED) > 0)
+		if (waitpid(-i->id, &res, WUNTRACED | WNOHANG | WCONTINUED) > 0)
 		{
+			while (waitpid(-i->id, NULL, WUNTRACED | WNOHANG | WCONTINUED) > 0)
+				continue ;
 			i->status = res;
 			(display) ? display_status(i) : NULL;
 		}
@@ -39,6 +41,7 @@ void clear_job(t_vm *vm)
 	{
 		if (i->dead)
 		{
+			kill(-i->id, SIGKILL);
 			del_job(i->idc, vm);
 			i = vm->job;
 			continue ;
@@ -46,34 +49,6 @@ void clear_job(t_vm *vm)
 		else
 			i = i->next;
 	}
-}
-
-void	display_status(t_job *i)
-{
-	char	status[20];
-	char	*ret;
-
-	if (WIFCONTINUED(i->status))
-		ret = ft_strcpy(status, "Running");
-	else if (WIFEXITED(i->status) && WEXITSTATUS(i->status))
-	{
-		ret = ft_strcpy(status, "Done");
-		i->dead = 1;
-	}
-	else if (WIFSTOPPED(i->status))
-		ret = ft_strcpy(status, "Stopped");
-	else if (WIFSIGNALED(i->status))
-	{
-		i->dead = 1;
-		ret = ft_strcpy(status, "Terminated");
-	}
-	ret = NULL;
-	if (!i->next)
-		printf("[%d]+ %s  %s  %d\n", i->idc, ret, i->name, i->id);
-	else if (i->next && !i->next->next)
-		printf("[%d]- %s  %s  %d\n", i->idc, ret, i->name, i->id);
-	else
-		printf("[%d]  %s  %s  %d\n", i->idc, ret, i->name, i->id);
 }
 
 void	ft_jobs(t_vm *vm)

@@ -6,7 +6,7 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 20:10:12 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/03 14:42:15 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/09 16:59:03 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define VRF_SKIP 0x1
 # define VRF_LAST_KO 0x10
 # define VRF_NEW_PATH 0x18
+# define BG 0x1
+# define FG 0x2
 
 typedef struct		s_job
 {
@@ -50,6 +52,7 @@ typedef struct		s_vm
 	int				newpid;
 	t_job			*job;
 	char			*buffer;
+	int				execm;
 }					t_vm;
 
 typedef struct		s_sv
@@ -102,6 +105,8 @@ void		del_job(int i, t_vm *vm);
 void		clear_job(t_vm *vm);
 void		update_jobs(t_vm *vm, int display);
 void		display_status(t_job *i);
+void		bgfg_error(char *arg, char *fct, t_job *job);
+void		wait_p(pid_t pid, pid_t pgid, int *res);
 
 void        treat_var(char ***cmd, t_envent **locals, t_envent **env);
 

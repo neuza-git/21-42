@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 15:01:54 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/08 13:16:38 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/09 22:23:27 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,40 @@ int			vm_fork_cmd(char *path, t_cmd *cmd, t_vm *vm, \
 	return (vm_fork(path, cmd, vm, f) > 0) ? 0 : 1;
 }
 
+void		wait_p(pid_t pid, pid_t pgid, int *res)
+{
+	tcsetpgrp(STDIN_FILENO, pgid);
+	waitpid(pid, res, WUNTRACED);
+	tcsetpgrp(STDIN_FILENO, getpid());
+}
+
+static int fork_status(t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *))
+{
+	int res;
+
+	res = 0;
+	setpgid(cmd->pid, g_pid);
+	(f)(cmd, -2, vm);
+	if (vm->execm == FG)
+		wait_p(cmd->pid, g_pid, &res);
+	else
+		add_job(g_pid, vm, 4991);
+	if (WIFSTOPPED(res) && cmd->pid == g_pid)
+		add_job(g_pid, vm, res);
+	else if (WIFSIGNALED(res))
+		printf("\n");
+	if (vm->execm == FG && !(WIFSTOPPED(res)))
+			kill(-g_pid, SIGKILL);
+	(f)(cmd, cmd->pid, vm);
+	return (WEXITSTATUS(res));
+}
+
 int			vm_fork(char *path, t_cmd *cmd, t_vm *vm, \
 		int (*f)(t_cmd *cmd, int, t_vm *))
 {
-	int		res;
-
 	cmd->pid = fork();
 	if (!g_pid)
 		g_pid = cmd->pid;
-	res = 0;
 	if (cmd->pid < 0)
 	{
 		ft_perror(NULL, ERR_FORK);
@@ -63,19 +88,7 @@ int			vm_fork(char *path, t_cmd *cmd, t_vm *vm, \
 		exit(EXIT_FAILURE);
 	}
 	else if (cmd->pid > 0)
-	{
-		setpgid(cmd->pid, g_pid);
-		tcsetpgrp(STDIN_FILENO, g_pid);
-		(f)(cmd, -2, vm);
-		waitpid(cmd->pid, &res, WUNTRACED);
-		tcsetpgrp(STDIN_FILENO, getpid());
-		if (WIFSTOPPED(res) && cmd->pid == g_pid)
-			add_job(g_pid, vm, res);
-		else if (WIFSIGNALED(res)/* || WIFEXITED(res)*/)
-			printf("\n");
-		(f)(cmd, cmd->pid, vm);
-		return (WEXITSTATUS(res));
-	}
+		return (fork_status(cmd, vm, f));
 	return (0);
 }
 
