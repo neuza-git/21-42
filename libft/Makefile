@@ -102,6 +102,25 @@ SRC = ft_atoi.c \
 	   ft_xmap.c \
 	   ft_salloc.c \
 	   ft_tabdel.c \
+	   ft_capitalizer.c \
+	   ft_char_itoa_base.c \
+	   ft_itoa.c \
+	   ft_itoa_base.c \
+	   ft_litoa_base.c \
+	   ft_llitoa_base.c \
+	   ft_max_itoa_base.c \
+	   ft_short_itoa_base.c \
+	   ft_size_itoa_base.c \
+	   ft_uchar_itoa_base.c \
+	   ft_uitoa_base.c \
+	   ft_ulitoa_base.c \
+	   ft_ullitoa_base.c \
+	   ft_umax_itoa_base.c \
+	   ft_ushort_itoa_base.c \
+	   ft_wbytelen.c \
+	   ft_wcharlen.c \
+	   ft_wstrlen.c \
+	   ft_power.c
 
 OBJ = $(SRC:.c=.o)
 
