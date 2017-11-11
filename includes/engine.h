@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 13:43:14 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/04 13:48:17 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/10 12:41:25 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct		s_engine
 	char			*buffer;
 	int				tfd;
 	char			*cp;
+	char			*fds;
 	char			*rest;
 	int				flags;
 }					t_engine;
