@@ -165,4 +165,23 @@ t_list				*ft_xlstnew(void *content, size_t content_size, int ref);
 int					get_next_line(int fd, char **line);
 int					xget_next_line(int fd, char **line, int ref);
 
+void				ft_capitalizer(char *s);
+uintmax_t			ft_power(int n, int p);
+size_t				ft_wbytelen(wchar_t *ws);
+int					ft_wcharlen(wchar_t wchar);
+size_t				ft_wstrlen(wchar_t *ws);
+
+char				*ft_char_itoa_base(signed char nb, int base);
+char				*ft_itoa_base(int nb, int base);
+char				*ft_litoa_base(long int nb, int base);
+char				*ft_llitoa_base(long long int nb, int base);
+char				*ft_max_itoa_base(intmax_t nb, int base);
+char				*ft_short_itoa_base(short int nb, int base);
+char				*ft_size_itoa_base(size_t nb, int base);
+char				*ft_uchar_itoa_base(unsigned char nb, int base);
+char				*ft_uitoa_base(unsigned int nb, int base);
+char				*ft_ulitoa_base(unsigned long int nb, int base);
+char				*ft_ullitoa_base(unsigned long long int nb, int base);
+char				*ft_umax_itoa_base(uintmax_t nb, int base);
+char				*ft_ushort_itoa_base(unsigned short int nb, int base);
 #endif
