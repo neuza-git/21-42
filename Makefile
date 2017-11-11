@@ -103,7 +103,7 @@ PATH_SRC = srcs
 
 OBJ = $(patsubst $(PATH_SRC)/%.c, obj/%.o, $(SRC))
 
-FLAGS = -g3 #-Wall -Wextra -Werror #-O3
+FLAGS = -g3 -Wall -Wextra -Werror #-O3
 
 #FLAGS = -g3
 
