@@ -17,6 +17,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdint.h>
 
 # define BUFF_SIZE 4096
 
@@ -184,4 +185,6 @@ char				*ft_ulitoa_base(unsigned long int nb, int base);
 char				*ft_ullitoa_base(unsigned long long int nb, int base);
 char				*ft_umax_itoa_base(uintmax_t nb, int base);
 char				*ft_ushort_itoa_base(unsigned short int nb, int base);
+int					ft_putnstr_fd(int fd, char *s, size_t n);
+char				*ft_rotcstring(char *s);
 #endif

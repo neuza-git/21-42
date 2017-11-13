@@ -36,7 +36,7 @@ void		ft_get(char *new)
 
 	i = -1;
 	while (new[++i] != '\0')
-		printf("\n%d :%d\n", i, new[i]);
+		ft_printf(1, "\n%d :%d\n", i, new[i]);
 }
 
 int			win_size_ch(t_pos *pos, int psize)

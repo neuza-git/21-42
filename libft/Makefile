@@ -120,7 +120,9 @@ SRC = ft_atoi.c \
 	   ft_wbytelen.c \
 	   ft_wcharlen.c \
 	   ft_wstrlen.c \
-	   ft_power.c
+	   ft_power.c \
+	   ft_putnstr_fd.c \
+	   ft_rotcstring.c
 
 OBJ = $(SRC:.c=.o)
 

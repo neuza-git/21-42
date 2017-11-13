@@ -18,31 +18,29 @@ int			g_pid = 0;
 
 void	display_status(t_job *i)
 {
-	char	status[20];
 	char	*ret;
 
-	ft_bzero(status, 20);
-	ret = NULL;
+	ret = "";
 	if (WIFCONTINUED(i->status))
-		ret = ft_strcpy(status, "Running");
+		ret = RUN;
 	else if (WIFEXITED(i->status))
 	{
-		ret = ft_strcpy(status, "Done");
+		ret = DONE;
 		i->dead = 1;
 	}
 	else if (WIFSTOPPED(i->status))
-		ret = ft_strcpy(status, "Stopped");
+		ret = STOP;
 	else if (WIFSIGNALED(i->status))
 	{
 		i->dead = 1;
-		ret = ft_strcpy(status, "Terminated");
+		ret = TERM;
 	}
 	if (!i->next)
-		printf("[%d]+ %d %s   %s\n", i->idc, i->id, ret, i->name);
+		ft_printf(1, "[%d]+ %d %s   %s\n", i->idc, i->id, ret, i->name);
 	else if (i->next && !i->next->next)
-		printf("[%d]- %d %s   %s\n", i->idc, i->id, ret, i->name);
+		ft_printf(1, "[%d]- %d %s   %s\n", i->idc, i->id, ret, i->name);
 	else
-		printf("[%d]  %d %s   %s\n", i->idc, i->id, ret, i->name);
+		ft_printf(1, "[%d]  %d %s   %s\n", i->idc, i->id, ret, i->name);
 }
 
 void			tc_handle_signals(int sig)

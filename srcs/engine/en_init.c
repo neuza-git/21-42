@@ -47,7 +47,6 @@ t_engine	*en_init(int flags, char **env)
 
 static void	clear_fds(char **fds)
 {
-	char	*cur;
 	char	**splited;
 	int		i;
 

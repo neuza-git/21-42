@@ -14,6 +14,7 @@
 # define ENV_H
 
 # include "libft.h"
+# include "ft_printf.h"
 # include <string.h>
 # include <stdlib.h>
 # include <fcntl.h>

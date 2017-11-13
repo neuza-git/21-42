@@ -55,10 +55,8 @@ char	*ft_uchar_itoa_base(unsigned char nb, int base)
 	char				*itoa;
 	char				s[16];
 	int					tab[64];
-	unsigned char		n;
 	int					i[2];
 
-	n = nb;
 	ft_init(s);
 	if ((itoa = ft_special(nb, base)) != NULL)
 		return (itoa);

@@ -60,10 +60,8 @@ char			*ft_ullitoa_base(unsigned long long int nb, int base)
 	char						*itoa;
 	char						s[16];
 	int							tab[64];
-	unsigned long long int		n;
 	int							i[2];
 
-	n = nb;
 	ft_init(s);
 	if ((itoa = ft_special(nb, base)) != NULL)
 		return (itoa);

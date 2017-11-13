@@ -28,12 +28,12 @@ void	ft_bg(char *arg, t_vm *vm)
 			job = job->next;
 		if ((job->idc == i || !arg) && WIFSTOPPED(job->status))
 		{
-			printf("[%d] %s\n", job->idc, job->name);
+			ft_printf(1, "[%d] %s\n", job->idc, job->name);
 			kill(-job->id, SIGCONT);
 		}
 		else
 			bgfg_error(arg, "bg", job);
 	}
 	else
-		printf("%s\n", "42sh: fg: current: no such job");
+		ft_printf(2, "%s\n", "42sh: fg: current: no such job");
 }

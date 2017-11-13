@@ -62,7 +62,7 @@ static int fork_status(t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *))
 	if (WIFSTOPPED(res) && cmd->pid == g_pid)
 		add_job(g_pid, vm, res);
 	else if (WIFSIGNALED(res))
-		printf("\n");
+		ft_putchar('\n');
 	if (vm->execm == FG && !(WIFSTOPPED(res)))
 			kill(-g_pid, SIGKILL);
 	(f)(cmd, cmd->pid, vm);

@@ -59,10 +59,8 @@ char			*ft_umax_itoa_base(uintmax_t nb, int base)
 	char		*itoa;
 	char		s[16];
 	int			tab[64];
-	uintmax_t	n;
 	int			i[2];
 
-	n = nb;
 	ft_init(s);
 	if ((itoa = ft_special(nb, base)) != NULL)
 		return (itoa);

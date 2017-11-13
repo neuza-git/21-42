@@ -14,6 +14,7 @@
 # define BUILTINS_H
 
 # include "vm.h"
+# include "printf.h"
 
 typedef struct	s_senv
 {

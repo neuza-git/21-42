@@ -14,9 +14,6 @@
 
 void	cut_multiple_lines(t_engine *e, t_pos *pos)
 {
-	int		i;
-
-	i = 0;
 	if (pos->hd != 2 && !pos->exp && ((e->rest != NULL) || (ft_sc(pos->keys,\
 		'\n') > 0 && !(pos->keys[0] == 10 && pos->keys[1] == '\0'))))
 	{

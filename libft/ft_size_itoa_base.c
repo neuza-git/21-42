@@ -57,10 +57,8 @@ char			*ft_size_itoa_base(size_t nb, int base)
 	char		*itoa;
 	char		s[16];
 	int			tab[64];
-	size_t		n;
 	int			i[2];
 
-	n = nb;
 	ft_init(s);
 	if ((itoa = ft_special(nb, base)) != NULL)
 		return (itoa);

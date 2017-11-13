@@ -107,7 +107,7 @@ FLAGS = -g3 -Wall -Wextra -Werror #-O3
 
 #FLAGS = -g3
 
-LIBS = -L./libft -lft -ltermcap
+LIBS = -L ./libft/ -lft -L ./ftprintf/ -lprintf -ltermcap
 
 H_FILES = includes/ast.h includes/builtins.h includes/engine.h includes/env.h \
 		  includes/lexer.h includes/libft.h includes/shell.h includes/vm.h includes/history.h includes/htable.h
@@ -120,7 +120,8 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	make -C libft/
-	$(CC) $(FLAGS) $(OBJ) libft/libft.a -o $(NAME) -I includes/ $(LIBS)
+	make -C ftprintf/
+	$(CC) $(FLAGS) $(OBJ) libft/libft.a ftprintf/libprintf.a  -o $(NAME) -I includes/ $(LIBS)
 	echo "\033[33mCreating  \033[32m[✔] \033[0m$(NAME)"
 
 obj/%.o : $(PATH_SRC)/%.c $(H_FILES)
@@ -128,14 +129,15 @@ obj/%.o : $(PATH_SRC)/%.c $(H_FILES)
 	$(CC) $(FLAGS) -c $< -o $@ -I includes/
 	echo "\033[33mCompiling \033[32m[✔] \033[0m$<"
 
-
 clean :
 	make -C libft/ clean
+	make -C ftprintf/ clean
 	/bin/rm -rf obj/
 	echo "\033[31mRemoving  \033[32m[✔] \033[0mObject files"
 
 fclean : clean
 	make -C libft/ fclean
+	make -C ftprintf/ fclean
 	/bin/rm -f $(NAME)
 	echo "\033[31mRemoving  \033[32m[✔] \033[0m$(NAME)"
 

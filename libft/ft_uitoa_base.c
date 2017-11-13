@@ -67,10 +67,8 @@ char			*ft_uitoa_base(unsigned int nb, int base)
 	char				*itoa;
 	char				s[20];
 	int					tab[64];
-	unsigned int		n;
 	int					i[2];
 
-	n = nb;
 	ft_init(s);
 	if ((itoa = ft_special(nb, base)) != NULL)
 		return (itoa);

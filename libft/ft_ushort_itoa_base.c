@@ -40,10 +40,8 @@ char			*ft_ushort_itoa_base(unsigned short int nb, int base)
 	char				*itoa;
 	char				s[16];
 	int					tab[64];
-	unsigned short int	n;
 	int					i[2];
 
-	n = nb;
 	ft_init(s);
 	if (nb == 0)
 		return (ft_strdup("0"));
