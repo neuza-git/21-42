@@ -98,7 +98,6 @@ SRC = ft_atoi.c \
 	   ft_pow.c \
 	   ft_str3join.c \
 	   ft_strndup.c \
-	   ft_xalloc.c \
 	   ft_xmap.c \
 	   ft_salloc.c \
 	   ft_tabdel.c \
@@ -119,6 +118,8 @@ SRC = ft_atoi.c \
 	   ft_ushort_itoa_base.c \
 	   ft_wbytelen.c \
 	   ft_wcharlen.c \
+	   ft_xalloc_1.c \
+	   ft_xalloc_2.c \
 	   ft_wstrlen.c \
 	   ft_power.c \
 	   ft_putnstr_fd.c \

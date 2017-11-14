@@ -6,7 +6,7 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 20:10:12 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/09 16:59:03 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/14 16:25:18 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,20 +102,19 @@ void				ft_env(t_cmd *cmd, t_envent **ev, t_vm *vm);
 
 void				ft_history(char **av, t_vm *vm, t_envent *env, int m);
 
-void		ft_jobs(t_vm *vm);
-void		ft_fg(char *arg, t_vm *vm);
-void		ft_bg(char *arg, t_vm *vm);
-void		tc_ign_exec();
-void		add_job(int g_pid, t_vm *vm, int res);
-void		del_job(int i, t_vm *vm);
-void		clear_job(t_vm *vm);
-void		update_jobs(t_vm *vm, int display);
-void		display_status(t_job *i);
-void		bgfg_error(char *arg, char *fct, t_job *job);
-void		wait_p(pid_t pid, pid_t pgid, int *res);
+void				ft_jobs(t_vm *vm);
+void				ft_fg(char *arg, t_vm *vm);
+void				ft_bg(char *arg, t_vm *vm);
+void				tc_ign_exec();
+void				add_job(int g_pid, t_vm *vm, int res);
+void				del_job(int i, t_vm *vm);
+void				clear_job(t_vm *vm);
+void				update_jobs(t_vm *vm, int display);
+void				display_status(t_job *i);
+void				bgfg_error(char *arg, char *fct, t_job *job);
+void				wait_p(pid_t pid, pid_t pgid, int *res);
 
-void        treat_var(char ***cmd, t_envent **locals, t_envent **env);
-
-void				treat_var(char ***cmd, t_envent **locals, t_envent **env);
+void        		treat_var(char ***cmd, t_envent **locals, t_envent **env);
+int					do_builtin(t_cmd *cmd, t_vm *vm, int m);
 
 #endif

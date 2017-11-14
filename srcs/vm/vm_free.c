@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 14:59:47 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/01 15:01:33 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/14 16:22:16 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		vm_free(t_vm **vm)
 	if ((*vm)->local)
 		envent_free(&(*vm)->local);
 	if ((*vm)->ast)
-		ast_freeast(&(*vm)->ast);// TODOmaybe free &(*vm)->job
+		ast_freeast(&(*vm)->ast);
 	if ((*vm)->buffer)
 		ft_strdel(&(*vm)->buffer);
 	if ((*vm)->job)

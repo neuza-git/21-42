@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_xalloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/14 16:35:14 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/11/14 16:49:42 by tgascoin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 void			*ft_xalloc(size_t size, int ref)
@@ -13,15 +25,6 @@ void			*ft_xalloc(size_t size, int ref)
 	}
 	ft_xmap(ref, XEXTENDE);
 	return (ft_xalloc(size, ref));
-}
-
-void			*ft_xcalloc(size_t size, int ref)
-{
-	void	*ret;
-
-	ret = ft_xalloc(size, ref);
-	ft_bzero(ret, size);
-	return (ret);
 }
 
 void			ft_xfree(void *ptr, int ref)
@@ -57,7 +60,7 @@ void			ft_xclear(int ref)
 	ft_xmap(ref, XFREE);
 }
 
-t_list				*ft_xlstcreate(void *content, size_t content_size, int ref)
+t_list			*ft_xlstcreate(void *content, size_t content_size, int ref)
 {
 	t_list	*lptr;
 
@@ -68,7 +71,7 @@ t_list				*ft_xlstcreate(void *content, size_t content_size, int ref)
 	return (lptr);
 }
 
-t_list				*ft_xlstnew(void *content, size_t content_size, int ref)
+t_list			*ft_xlstnew(void *content, size_t content_size, int ref)
 {
 	t_list	*lptr;
 

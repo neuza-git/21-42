@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 13:45:30 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/09 16:54:16 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/14 16:14:15 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,8 @@ int					is_wdpart(int stat);
 int					get_stat(char *c);
 int					is_token(char c);
 void				lx_remove_uslesstoken(t_token **tokens);
+
+void				put_charwd(t_lexer *lx);
+int					stat_ma(int st, int nw);
 
 #endif

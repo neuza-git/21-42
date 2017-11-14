@@ -6,25 +6,18 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:47:06 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/02 11:42:58 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/14 16:23:56 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-
-/*
-** @PARAMS
-** name		file to create or open
-** fd		file descriptor to write into
-** flags	(VRDF_APPEND: append file, if not file was trunc | VRDF_STDERR: dup stderr)
-*/
 
 int		vm_open_dup(char *name, int fd, int flags)
 {
 	int		file;
 	int		oflags;
 
-	oflags = (O_RDWR | O_CREAT);//O_RDWR ou O_WRONLY
+	oflags = (O_RDWR | O_CREAT);
 	if (!(flags & VRDF_APPEND))
 		oflags |= O_TRUNC;
 	else

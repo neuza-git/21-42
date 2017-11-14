@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_perror.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/14 16:45:22 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/11/14 16:51:01 by tgascoin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static char	*errname = "default";
+static char		*g_errname = "default";
 
-void		ft_errset(char *name)
+void			ft_errset(char *name)
 {
-	errname = name;
+	g_errname = name;
 }
 
-void		ft_perror(char *err, int flag)
+void			ft_perror(char *err, int flag)
 {
-	ft_putstr_fd(errname, 2);
+	ft_putstr_fd(g_errname, 2);
 	ft_putstr_fd(": ", 2);
 	if (err)
 		ft_putstr_fd(err, 2);
@@ -24,8 +36,8 @@ void		ft_perror(char *err, int flag)
 	if (flag == ERR_NOTOKEN)
 		ft_putstr_fd("invalid token", 2);
 	if (flag == ERR_UNEXPCT)
-		return ft_putstr_fd("unexpected EOF while looking for matching : ", 2);
+		return (ft_putstr_fd("unexpected EOF while looking for matching :", 2));
 	if (flag == ERR_ENDOFF)
-		return ft_putstr_fd("unexpected end of file", 2);
+		return (ft_putstr_fd("unexpected end of file", 2));
 	ft_putendl_fd("", 2);
 }

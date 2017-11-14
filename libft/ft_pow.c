@@ -6,14 +6,14 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 11:37:02 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/06/12 11:55:57 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/14 16:45:44 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int         ft_pow(int n, int p)
+int		ft_pow(int n, int p)
 {
-	int     i;
-	int     new;
+	int		i;
+	int		new;
 
 	new = n;
 	i = 1;

@@ -45,7 +45,8 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/env/env_getbin.c \
 	  srcs/env/env_init.c \
 	  srcs/lexer/lx_applytoken.c \
-	  srcs/lexer/lx_gettokens.c \
+	  srcs/lexer/lx_gettokens_1.c \
+	  srcs/lexer/lx_gettokens_2.c \
 	  srcs/lexer/lx_remove_uslesstokens.c \
 	  srcs/lexer/lx_token.c \
 	  srcs/shell/ft_advanced_move.c \

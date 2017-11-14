@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 12:46:00 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/21 15:20:31 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/14 16:39:34 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 void	ft_exit(char *str, int *out)
 {
 	g_out = 1;
-	if (str)
+	if (str && out)
 		*out = ft_atoi(str);
-	else
-		*out = 0;
 }

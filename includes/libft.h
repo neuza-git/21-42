@@ -6,7 +6,7 @@
 /*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 17:39:11 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/11/01 13:50:01 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/14 16:50:38 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,6 @@ char				*ft_xstrsub(char const *s, unsigned int start, \
 		size_t len, int ref);
 void				*ft_salloc(size_t size);
 void				*ft_scalloc(size_t size);
-void				*ft_xalloc(size_t size, int ref);
 void				*ft_xcalloc(size_t size, int ref);
 
 t_xmap				*ft_xmap(int ref, int mode);
@@ -187,4 +186,6 @@ char				*ft_umax_itoa_base(uintmax_t nb, int base);
 char				*ft_ushort_itoa_base(unsigned short int nb, int base);
 int					ft_putnstr_fd(int fd, char *s, size_t n);
 char				*ft_rotcstring(char *s);
+void				*ft_xalloc(size_t size, int ref);
+
 #endif

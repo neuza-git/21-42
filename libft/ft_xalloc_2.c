@@ -1,41 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_salloc.c                                        :+:      :+:    :+:   */
+/*   ft_xalloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 16:45:58 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/14 16:46:03 by tgascoin         ###   ########.fr       */
+/*   Created: 2017/11/14 16:35:14 by tgascoin          #+#    #+#             */
+/*   Updated: 2017/11/14 16:50:21 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_salloc(size_t size)
+void			*ft_xcalloc(size_t size, int ref)
 {
 	void	*ret;
 
-	if (!(ret = malloc(size)))
-		exit(1);
-	return (ret);
-}
-
-void	*ft_scalloc(size_t size)
-{
-	void	*ret;
-
-	if (!(ret = malloc(size)))
-		exit(1);
+	ret = ft_xalloc(size, ref);
 	ft_bzero(ret, size);
-	return (ret);
-}
-
-void	*ft_srealloc(void *ptr, size_t size)
-{
-	void	*ret;
-
-	if (!(ret = realloc(ptr, size)))
-		exit(1);
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 16:21:17 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/14 15:21:11 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/14 15:56:59 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-int			lx_get_flag(char *data)
+static int	lx_get_flag_ext(char *data)
 {
 	if (ft_strequ(data, LST_RDOADD))
 		return (LFT_RDOADD);
@@ -26,6 +26,13 @@ int			lx_get_flag(char *data)
 		return (LFT_RDRDOC);
 	if (ft_strequ(data, LST_PIPE))
 		return (LFT_PIPE);
+	return (0);
+}
+
+int			lx_get_flag(char *data)
+{
+	if (lx_get_flag_ext(data))
+		return (lx_get_flag_ext(data));
 	if (ft_strequ(data, LST_SEP))
 		return (LFT_SEP);
 	if (ft_strequ(data, LST_ANDAND))
