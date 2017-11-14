@@ -6,14 +6,14 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 15:01:54 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/09 22:23:27 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/14 15:17:08 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include <stdio.h>
 
-extern int			g_pid;
+extern int	g_pid;
 
 static int	do_builtin(t_cmd *cmd, t_vm *vm, int m)
 {
@@ -23,8 +23,8 @@ static int	do_builtin(t_cmd *cmd, t_vm *vm, int m)
 		ft_history(cmd->av, vm, vm->env, m);
 	else if (ft_strequ(cmd->av[0], "env") && m)
 		ft_env(cmd, &vm->env, vm);
-	else if (ft_strequ(cmd->av[0], "set") && m)
-		 ft_set(cmd->av, &vm->env, &vm->local, &vm->htable);
+	//else if (ft_strequ(cmd->av[0], "set") && m)
+	//	 ft_set(cmd->av, &vm->env, &vm->local, &vm->htable);
 	else if (m)
 	{
 		ft_perror(cmd->av[0], ERR_NOCMD);
@@ -48,7 +48,7 @@ void		wait_p(pid_t pid, pid_t pgid, int *res)
 	tcsetpgrp(STDIN_FILENO, getpid());
 }
 
-static int fork_status(t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *))
+static int	fork_status(t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *))
 {
 	int res;
 
@@ -64,7 +64,7 @@ static int fork_status(t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *))
 	else if (WIFSIGNALED(res))
 		ft_putchar('\n');
 	if (vm->execm == FG && !(WIFSTOPPED(res)))
-			kill(-g_pid, SIGKILL);
+		kill(-g_pid, SIGKILL);
 	(f)(cmd, cmd->pid, vm);
 	return (WEXITSTATUS(res));
 }

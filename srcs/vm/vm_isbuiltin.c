@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:47:56 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/01 15:05:33 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/14 15:15:14 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int		vm_isbuiltin(t_cmd *cmd, t_vm *vm, int *out)
 		ft_bg(cmd->av[1], vm);
 	else if (ft_strequ(cmd->av[0], "read"))
 		ft_read(cmd->av, &vm->local, &vm->env);
-	//else if (ft_strequ(cmd->av[0], "set"))
-	//	ft_set(cmd->av, &vm->env, &vm->local, &vm->htable);
+	else if (ft_strequ(cmd->av[0], "set"))
+		ft_set(cmd->av, &vm->env, &vm->local, &vm->htable);
 	else
 		return (0);
 	return (1);
@@ -51,7 +51,7 @@ int		vm_isextbuiltin(t_cmd *cmd)
 		return (1);
 	if (ft_strequ(cmd->av[0], "env"))
 		return (1);
-	if (ft_strequ(cmd->av[0], "set"))
-		return (1);
+	//if (ft_strequ(cmd->av[0], "set"))
+	//	return (1);
 	return (0);
 }

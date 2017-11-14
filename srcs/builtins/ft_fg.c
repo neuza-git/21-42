@@ -6,7 +6,7 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 20:48:20 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/09 19:49:00 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/14 14:58:40 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	fg_launch(t_job *job, t_vm *vm)
 {
-	int res;
+	int		res;
 
 	res = 0;
 	kill(-job->id, SIGCONT);
@@ -35,8 +35,8 @@ static void	fg_launch(t_job *job, t_vm *vm)
 
 void		ft_fg(char *arg, t_vm *vm)
 {
-	int i;
-	t_job *job;
+	int		i;
+	t_job	*job;
 
 	job = vm->job;
 	i = (arg) ? ft_atoi(arg) : 0;

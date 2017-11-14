@@ -6,7 +6,7 @@
 /*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 16:11:00 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/11/01 14:53:02 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/14 14:59:06 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_envent		*get_newenv(t_envent *env)
 {
-	char        **tmp;
-	t_envent    *ret;
-	char        **fptr;
+	char		**tmp;
+	t_envent	*ret;
+	char		**fptr;
 
 	tmp = env_dup(env);
 	ret = env_get(tmp);

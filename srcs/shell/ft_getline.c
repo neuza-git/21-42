@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 16:21:50 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/08 11:52:27 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/14 14:53:40 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ char			*get_line(t_engine *e, int hd, char *hdstr)
 	char	buffer[1024];
 	t_pos	pos;
 
+	pos.t = 0;
 	initgl(e, &pos, hdstr, hd);
 	print_prompt(pos.hd, pos.tfd);
 	while (1)

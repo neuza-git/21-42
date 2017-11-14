@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:49:12 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/04 15:10:55 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/14 15:12:04 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static int	rdout_andsetadd(t_ast *rd, t_list *av)
 {
-	if (av)//a voir ici, bash posix ne pipe pas apres une redirection mais zsh le fais :3
+	if (av)
 	{
 		return (vm_open_dup((char *)av->content, 1, (rd->flags & LFT_ANDRDOSET)\
 				? VRDF_STDERR : VRDF_STDERR | VRDF_APPEND));
@@ -33,7 +33,7 @@ static int	rdout_setadd(t_ast *rd, t_list *av)
 					(int)(*((char *)av->content)) - 48,
 					(rd->flags & LFT_RDOSET) ? 0 : VRDF_APPEND));
 	}
-	else if (av && rd->flags & RDF_RIGHTAV)//todo le lexer reconais fd meme si il est a gauche :3
+	else if (av && rd->flags & RDF_RIGHTAV)
 	{
 		return (vm_open_dup((char *)av->content, 1,\
 				(rd->flags & LFT_RDOSET) ? 0 : VRDF_APPEND));
@@ -62,17 +62,12 @@ static int	rdout_setaddand(t_list *av)
 			fds[0] = 1;
 		}
 		if (fds[0] <= 2 && fds[0] >= 0 && fds[1] >= 0 && fds[1] <= 2)
-		{
 			dup2(fds[1], fds[0]);
-			return (1);
-		}
 		else
-		{
 			dup2(fds[0], fds[1]);
-			return (1);
-		}
+		return (1);
 	}
-		ft_perror("invalid file descriptor", 0);
+	ft_perror("invalid file descriptor", 0);
 	return (0);
 }
 

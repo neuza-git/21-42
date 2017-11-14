@@ -6,7 +6,7 @@
 #    By: nbeny <nbeny@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/16 14:57:18 by nbeny             #+#    #+#              #
-#    Updated: 2017/03/15 02:22:09 by nbeny            ###   ########.fr        #
+#    Updated: 2017/11/14 14:42:50 by tgascoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ T_INC	=	./include/
 T_OBJ	=	./obj/
 
 I_INC	=	../includes/
-L_LFT	=	-L ../libft -lft
+#L_LFT	=	-L ../libft -lft
 
 CL_N	=	\033[0m
 CL_R	=	\033[31m
@@ -74,22 +74,22 @@ N_OBJ	=	$(N_SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		@echo "\n>$(CL_V)Build: $(CL_VG)$(NAME)$(CL_N)"
+#		@echo "\n$(CL_V)Build: $(CL_VG)$(NAME)$(CL_N)"
 		@ar rc $(NAME) $(OBJ)
 		@ranlib $(NAME)
 
 $(T_OBJ)%.o: $(T_SRC)%.c
-		@echo ">$(CL_V)Creat: Objects files..$(CL_N)"
+#		@echo "$(CL_V)Creat: Objects files..$(CL_N)"
 		@mkdir -p $(T_OBJ)
 		@$(CC) $(CC_FLAG) -o $@ -c $^ $(INC) $(L_LFT)
 
 clean:
-		@echo ">$(CL_R)clean: $(CL_B)$(NAME) objects$(CL_N)"
+#		@echo "$(CL_R)Clean: $(CL_B)$(NAME) objects$(CL_N)"
 		@rm -f $(OBJ)
 		@rm -Rf $(T_OBJ)
 
-fclean: clean
-		@echo ">$(CL_R)Delete: $(CL_B)$(NAME)$(CL_N)"
+fclean: 
+#		@echo "$(CL_R)Delete: $(CL_B)$(NAME)$(CL_N)"
 		@rm -f $(NAME)
 
 re: fclean all

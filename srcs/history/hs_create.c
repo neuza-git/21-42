@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 13:51:47 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/01 13:41:18 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/14 15:06:25 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ char			*return_x_param(char *lcmd, int i)
 	while (lcmd[i] != ' ' && lcmd[i] != '\0')
 		new[ni++] = lcmd[i++];
 	new[ni] = '\0';
-	//dprintf(open("/dev/ttys003", O_WRONLY), "(%s)\n", new);
 	return (new);
 }
 

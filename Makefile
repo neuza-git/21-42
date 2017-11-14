@@ -90,7 +90,6 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/vm/vm_free.c \
 	  srcs/vm/vm_init.c \
 	  srcs/vm/vm_isbuiltin.c \
-	  srcs/vm/vm_kill_cmds.c \
 	  srcs/vm/vm_open_dup.c \
 	  srcs/vm/vm_readast.c \
 	  srcs/htable/ht_bucket.c \
@@ -110,7 +109,7 @@ FLAGS = -g3 -Wall -Wextra -Werror #-O3
 LIBS = -L ./libft/ -lft -L ./ftprintf/ -lprintf -ltermcap
 
 H_FILES = includes/ast.h includes/builtins.h includes/engine.h includes/env.h \
-		  includes/lexer.h includes/libft.h includes/shell.h includes/vm.h includes/history.h includes/htable.h
+		  includes/lexer.h includes/libft.h includes/shell.h includes/vm.h includes/history.h includes/htable.h includes/ft_printf.h
 
 HEADERS = -I includes/
 

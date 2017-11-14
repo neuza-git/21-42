@@ -6,11 +6,12 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 15:38:14 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/08 11:47:05 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/14 14:53:33 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
+#include <ft_printf.h>
 
 void		ft_set_term(int tfd, int m)
 {
@@ -68,7 +69,6 @@ void		initgl(t_engine *en, t_pos *pos, char *hdstr, int hd)
 	pos->crstr = NULL;
 	pos->hs = (en->vm != NULL) ? en->vm->hs : NULL;
 	pos->uhs = (en->vm != NULL) ? en->vm->hs : NULL;
-	pos->t = 0;
 	pos->tfd = en->tfd;
 	win_size_ch(pos, 3);
 	pos->cp = en->cp;

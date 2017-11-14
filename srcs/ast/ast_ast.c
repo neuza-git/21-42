@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 13:12:26 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/10 14:30:32 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/14 14:57:21 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	ast_freenode(t_ast *node)
 {
 	if (!node)
 		return ;
-	//dprintf(open("/dev/ttys003", O_WRONLY), "12\n");
 	if ((node->flags & LFD_CMD))
 		ast_freecmd((t_cmd *)node->data);
 	else if ((node->flags & LFD_LST))
@@ -63,7 +62,6 @@ void	ast_freeast(t_ast **ast)
 		ast_freeast(&(*ast)->left);
 	if ((*ast)->right)
 		ast_freeast(&(*ast)->right);
-	//dprintf(open("/dev/ttys003", O_WRONLY), "(%s)\n", (char*)ast);
 	ast_freenode(*ast);
 	*ast = NULL;
 }

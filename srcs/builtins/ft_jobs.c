@@ -6,7 +6,7 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 19:50:25 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/09 22:37:33 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/14 15:01:51 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	update_jobs(t_vm *vm, int display)
 	}
 }
 
-void clear_job(t_vm *vm)
+void	clear_job(t_vm *vm)
 {
 	t_job *i;
 

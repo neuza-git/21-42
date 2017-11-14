@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 13:14:02 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/10 15:09:30 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/14 15:05:57 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,23 @@ t_engine	*en_init(int flags, char **env)
 	return (engine);
 }
 
-static void	clear_fds(char **fds)
+static void	clear_fds(t_engine *engine, t_lexer **lex)
 {
 	char	**splited;
 	int		i;
 
 	i = -1;
-	splited = (!fds) ? NULL : ft_strsplit(*fds, ',');
-	if (fds && splited)
+	splited = (!engine->fds) ? NULL : ft_strsplit(engine->fds, ',');
+	if (engine->fds && splited)
 	{
 		while (splited[++i])
 			close(ft_atoi(splited[i]));
 		ft_tabdel(&splited);
-		ft_strdel(fds);
+		ft_strdel(&engine->fds);
 	}
+	update_jobs(engine->vm, 1);
+	clear_job(engine->vm);
+	enx_free(lex, engine);
 }
 
 void		en_loop(t_engine *engine, int *out)
@@ -86,9 +89,6 @@ void		en_loop(t_engine *engine, int *out)
 				tc_listen_signals();
 			}
 		}
-		clear_fds(&engine->fds);
-		update_jobs(engine->vm, 1);
-		clear_job(engine->vm);
-		enx_free(&lex, engine);
+		clear_fds(engine, &lex);
 	}
 }

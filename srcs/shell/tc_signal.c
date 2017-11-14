@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 15:45:36 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/09 21:35:27 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/14 14:56:42 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int			g_waitsig;
 int			g_last_signal = 0;
 int			g_pid = 0;
 
-void	display_status(t_job *i)
+void		display_status(t_job *i)
 {
 	char	*ret;
 
@@ -43,7 +43,7 @@ void	display_status(t_job *i)
 		ft_printf(1, "[%d]  %d %s   %s\n", i->idc, i->id, ret, i->name);
 }
 
-void			tc_handle_signals(int sig)
+void		tc_handle_signals(int sig)
 {
 	struct termios	tattr;
 

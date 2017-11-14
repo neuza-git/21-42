@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 13:12:35 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/10 15:03:31 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/14 14:57:30 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static void	ast_freecmdavs(char **lst)
 		free(lst);
 }
 
-//	dprintf(open("/dev/ttys003", O_WRONLY), "1\n");
 t_cmd		*ast_newcmd(t_list *av, t_ast *redir)
 {
 	t_cmd	*new;

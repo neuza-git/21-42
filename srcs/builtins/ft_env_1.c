@@ -6,7 +6,7 @@
 /*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 16:11:00 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/11/01 14:51:46 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/14 14:59:33 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static t_envent	*get_newentries(t_envopts *opts, t_cmd *cmd, t_vm *vm)
 {
-	int         i;
-	char        *pch;
-	t_envent    *env;
+	int			i;
+	char		*pch;
+	t_envent	*env;
 
 	i = 0;
 	env = NULL;

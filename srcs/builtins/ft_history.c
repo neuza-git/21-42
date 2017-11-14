@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 15:31:42 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/19 12:26:22 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/14 15:01:27 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,7 @@ static void		ft_show_history(t_hs *h, int s)
 	while (n != NULL)
 	{
 		if (s < 0 || i2 > (i1 - s))
-		{
-			ft_putstr("   ");
-			ft_putnbr(i2);
-			ft_putchar('\t');
-			ft_putstr(n->cmd);
-			ft_putchar('\n');
-		}
+			ft_printf(1, "   %d\t%s\n", i2, n->cmd);
 		i2++;
 		n = n->next;
 	}

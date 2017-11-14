@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 16:00:09 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/07 17:21:57 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/14 14:49:35 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static int	ft_special_char(char *k, t_pos *p)
 			(p->exp) ? ft_putstr_fd("\n", p->tfd) : "";
 			return (1);
 		}
-		//dprintf(open("/dev/ttys004", O_WRONLY), "AFFICHE RIEN\n");
 		if (k[0] == 10 && k[1] == '\0' && p->hd == 2)
 			return (!ft_leave_hd(p->str, p->hdstr) ? 0 : 1);
 		if (k[0] == 10 && ((k[1] == '\0' && !p->exp)))
@@ -84,10 +83,9 @@ int			ft_char_input(t_pos *pos, char *k)
 		ft_fill_quotes(-1, pos->str, &pos->exp);
 		if (ft_changeline(pos->i, *pos, pos->str, 'n'))
 			ft_new_line(pos->tfd);
-		if (((int)ft_strlen(k) > 1 && !(ft_strequ(k, pos->str) == 1 && \
-			pos->hd == 2)) || pos->s == 1 || (((pos->i + \
-			(pos->uh - pos->h)) / pos->uh) != \
-			((pos->imax + (pos->uh - pos->h)) / pos->uh)))
+		if (((int)ft_strlen(k) > 1 && !(ft_strequ(k, pos->str) == 1 && pos->hd \
+			== 2)) || pos->s == 1 || (((pos->i + (pos->uh - pos->h)) / pos->uh)\
+			!= ((pos->imax + (pos->uh - pos->h)) / pos->uh)))
 		{
 			pos->s = 0;
 			return (2);
