@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:48:41 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/09 22:23:10 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/15 18:11:47 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int			vm_exec(t_cmd *cmd, int flags, t_vm *vm, int *out)
 	int		ret;
 
 	treat_var(&cmd->av, &vm->local, &vm->env);
-	if (vm_isbuiltin(cmd, vm, out))
+	if (!(flags & LFT_PIPE) && vm_isbuiltin(cmd, vm, out))
 		return (2);
 	path = NULL;
 	ret = 0;

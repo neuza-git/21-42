@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 13:38:16 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/08 11:52:08 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/15 19:02:37 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int					g_sig;
 
 void				tc_handle_signals(int sig);
 int					tc_sigstat(int reset);
-void				tc_stop_signals();
-void				tc_listen_signals();
+void				tc_stop_signals(t_engine *engine);
+void				tc_listen_signals(t_engine *engine);
 void				tc_check_sin();
 int					tc_check_caps();
 char				*poor_get_line(t_read_args args);

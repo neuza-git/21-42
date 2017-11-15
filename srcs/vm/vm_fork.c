@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 15:01:54 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/14 16:24:45 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/15 19:09:17 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int			vm_fork_builtin(t_cmd *cmd, t_vm *vm, \
 		(f)(cmd, -2, vm);
 		waitpid(cmd->pid, &res, 0);
 		(f)(cmd, cmd->pid, vm);
-		do_builtin(cmd, vm, 0);
 		return (WEXITSTATUS(res));
 	}
 	return (0);

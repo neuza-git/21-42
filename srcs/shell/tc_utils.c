@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 15:45:19 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/20 14:59:09 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/15 19:09:35 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,3 +52,29 @@ void		tc_check_sin(void)
 		exit(1);
 	}
 }
+
+t_engine	*en_init(int flags, char **env)
+{
+	t_engine	*engine;
+
+	if (!(engine = malloc(sizeof(t_engine))))
+		return (NULL);
+	if (!(engine->vm = vm_init(env)))
+	{
+		free(engine);
+		return (NULL);
+	}
+	g_out = 0;
+	engine->cp = NULL;
+	engine->rest = NULL;
+	engine->vm->hs = ft_create_history(engine->vm->env);
+	engine->vm->job = NULL;
+	engine->fds = NULL;
+	engine->vm->buffer = NULL;
+	engine->tfd = open(ttyname(0), O_WRONLY);
+	engine->buffer = NULL;
+	engine->flags = flags;
+	return (engine);
+}
+
+

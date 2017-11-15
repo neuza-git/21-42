@@ -6,7 +6,7 @@
 /*   By: nbeny <nbeny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 15:22:13 by nbeny             #+#    #+#             */
-/*   Updated: 2017/03/21 15:22:18 by nbeny            ###   ########.fr       */
+/*   Updated: 2017/11/14 17:18:24 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		ft_multibuf_nchar(t_fulist **begin_lst, int c, size_t size)
 
 size_t	ft_booster(const char *format, size_t i, t_fulist **begin_lst)
 {
-	size_t	n;
+	size_t		n;
 	t_fulist	*lst;
 
 	lst = *begin_lst;

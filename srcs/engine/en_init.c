@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 13:14:02 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/14 15:05:57 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/15 19:09:01 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,6 @@ static void	enx_free(t_lexer **lex, t_engine *engine)
 	ft_strdel(&engine->vm->buffer);
 	lx_free(lex);
 	engine->buffer = NULL;
-}
-
-t_engine	*en_init(int flags, char **env)
-{
-	t_engine	*engine;
-
-	if (!(engine = malloc(sizeof(t_engine))))
-		return (NULL);
-	if (!(engine->vm = vm_init(env)))
-	{
-		free(engine);
-		return (NULL);
-	}
-	g_out = 0;
-	engine->cp = NULL;
-	engine->rest = NULL;
-	engine->vm->hs = ft_create_history(engine->vm->env);
-	engine->vm->job = NULL;
-	engine->fds = NULL;
-	engine->vm->buffer = NULL;
-	engine->tfd = open(ttyname(0), O_WRONLY);
-	engine->buffer = NULL;
-	engine->flags = flags;
-	return (engine);
 }
 
 static void	clear_fds(t_engine *engine, t_lexer **lex)
@@ -84,9 +60,9 @@ void		en_loop(t_engine *engine, int *out)
 			if (lx_verifytokens(lex->tokens) && (ast = ast_build(lex->tokens)))
 			{
 				vm_loadast(engine->vm, ast);
-				tc_stop_signals();
+				tc_stop_signals(engine);
 				vm_readast(engine->vm, ast, out);
-				tc_listen_signals();
+				tc_listen_signals(engine);
 			}
 		}
 		clear_fds(engine, &lex);

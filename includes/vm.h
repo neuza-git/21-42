@@ -6,7 +6,7 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 20:10:12 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/14 16:25:18 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/15 19:00:47 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ typedef struct		s_vm
 	t_job			*job;
 	char			*buffer;
 	int				execm;
+	int				stdin;
+	int				stdout;
+	int				stderr;
 }					t_vm;
 
 typedef struct		s_sv
@@ -105,7 +108,7 @@ void				ft_history(char **av, t_vm *vm, t_envent *env, int m);
 void				ft_jobs(t_vm *vm);
 void				ft_fg(char *arg, t_vm *vm);
 void				ft_bg(char *arg, t_vm *vm);
-void				tc_ign_exec();
+void				tc_ign_exec(void);
 void				add_job(int g_pid, t_vm *vm, int res);
 void				del_job(int i, t_vm *vm);
 void				clear_job(t_vm *vm);
@@ -114,7 +117,7 @@ void				display_status(t_job *i);
 void				bgfg_error(char *arg, char *fct, t_job *job);
 void				wait_p(pid_t pid, pid_t pgid, int *res);
 
-void        		treat_var(char ***cmd, t_envent **locals, t_envent **env);
+void				treat_var(char ***cmd, t_envent **locals, t_envent **env);
 int					do_builtin(t_cmd *cmd, t_vm *vm, int m);
 
 #endif

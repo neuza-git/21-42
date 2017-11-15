@@ -6,7 +6,7 @@
 /*   By: nbeny <nbeny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 15:01:25 by nbeny             #+#    #+#             */
-/*   Updated: 2017/05/20 10:09:39 by nbeny            ###   ########.fr       */
+/*   Updated: 2017/11/14 17:19:04 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void			ft_free(t_fulist *begin_lst)
 int				ft_print_and_free(int fd, t_err *e, t_fulist *begin_lst,\
 									t_flag *f)
 {
-	size_t	ret;
+	size_t		ret;
 	t_fulist	*tmp;
 
 	ret = 0;
@@ -82,7 +82,7 @@ int				ft_fill_stdout(int fd, const char *format, va_list *ap)
 {
 	t_err		e;
 	t_flag		f;
-	t_fulist		*begin_lst;
+	t_fulist	*begin_lst;
 
 	e.i = -1;
 	f.neg = 0;
