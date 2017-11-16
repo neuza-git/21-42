@@ -6,7 +6,7 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 20:10:12 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/15 19:00:47 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/16 15:16:19 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,6 @@ void				wait_p(pid_t pid, pid_t pgid, int *res);
 
 void				treat_var(char ***cmd, t_envent **locals, t_envent **env);
 int					do_builtin(t_cmd *cmd, t_vm *vm, int m);
+int					extra_isbuiltin(t_cmd *cmd, t_vm *vm);
 
 #endif

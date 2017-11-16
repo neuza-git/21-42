@@ -6,25 +6,11 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:47:56 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/16 15:03:25 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/16 15:15:40 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-
-//A repenser  manque d'inspi .......
-int			extra_isbuiltin(t_cmd *cmd, t_vm *vm)
-{
-	if (ft_strequ(cmd->av[0], "env") && cmd->av[1])
-		ft_env(cmd, &vm->env, vm);
-	else if (ft_strequ(cmd->av[0], "setenv"))
-		ft_setenv(cmd->av, &vm->env, &vm->local, &vm->htable);
-	else if (ft_strequ(cmd->av[0], "unsetenv"))
-		ft_unsetenv(cmd->av, &vm->env, &vm->htable);
-	else
-		return (0);
-	return (1);
-}
 
 static int	do_built(t_cmd *cmd, t_vm *vm)
 {
