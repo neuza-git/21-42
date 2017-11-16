@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:48:41 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/16 15:15:42 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/16 15:20:25 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 extern int			g_pid;
 
-int         extra_isbuiltin(t_cmd *cmd, t_vm *vm)
+int			extra_isbuiltin(t_cmd *cmd, t_vm *vm)
 {
 	if (ft_strequ(cmd->av[0], "env") && cmd->av[1])
 		ft_env(cmd, &vm->env, vm);
