@@ -19,8 +19,7 @@ SRC = srcs/ast/ast_ast.c \
 	  srcs/ast/ast_build_cmd.c \
 	  srcs/ast/ast_cmd.c \
 	  srcs/ast/ast_insert.c \
-	  srcs/builtins/ft_cd_1.c \
-	  srcs/builtins/ft_cd_2.c \
+	  srcs/builtins/ft_cd.c \
 	  srcs/builtins/ft_echo.c \
 	  srcs/builtins/ft_set.c \
 	  srcs/builtins/ft_env_1.c \

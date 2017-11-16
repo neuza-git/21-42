@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:47:56 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/15 19:23:51 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/16 15:03:25 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int			do_builtin(t_cmd *cmd, t_vm *vm, int m)
 	else if (ft_strequ(cmd->av[0], "env") && m && !cmd->av[1])
 		ft_env(cmd, &vm->env, vm);
 	else if (ft_strequ((char *)cmd->av[0], "cd"))
-		return (ft_cd(cmd, &vm->env));
+		return (ft_cd(cmd->av, vm->env));
 	else if (extra_isbuiltin(cmd, vm))
 		return (1);
 	else if (ft_strequ(cmd->av[0], "unset"))
@@ -81,7 +81,7 @@ int			vm_isbuiltin(t_cmd *cmd, t_vm *vm, int *out)
 {
 	vm_exec_redir(cmd, cmd->redir, vm); //exec REDIR  IN FATHER
 	if (ft_strequ((char *)cmd->av[0], "cd"))
-		return (ft_cd(cmd, &vm->env));
+		return (ft_cd(cmd->av, vm->env));
 	else if (extra_isbuiltin(cmd, vm))
 		return (1);
 	else if (ft_strequ(cmd->av[0], "unset"))

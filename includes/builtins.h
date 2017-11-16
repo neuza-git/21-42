@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 13:43:37 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/01 14:50:50 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/16 15:03:10 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct	s_read_args
 	char		*d;
 }				t_read_args;
 
-int				ft_cd(t_cmd *cmd, t_envent **env);
+int				ft_cd(char **cstin, t_envent *env);
 int				check_dir(char *new, char *dir);
 void			ft_unset(char **av, t_envent **locals);
 int				ft_echo(t_cmd *cmd);

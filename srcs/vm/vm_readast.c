@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:47:00 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/14 21:14:54 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/16 14:56:50 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		vm_readast(t_vm *vm, t_ast *ptr, int *out)
 {
 	if (!vm || !vm->ast)
 		return (1);
-	while (ptr && !g_out)
+	while (ptr)
 	{
 		if (ptr->flags & LFT_AND)
 			vm->execm = BG;
