@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 15:04:58 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/17 21:10:00 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/17 22:08:12 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int			vm_fcb_piped(t_cmd *cmd, int pid, t_vm *vm)
 			close(cmd->sout);
 			cmd->sin = 0;
 		}
+		if (cmd->sin) //ferme certain fd de pipeline mais semble rester certain des commande infini et des pipeline mis en pause ..........................
+			close(cmd->sin);
 		if (cmd->next)
 		{
 			if (!vm_exec(cmd->next, LFT_PIPE, vm, 0))
