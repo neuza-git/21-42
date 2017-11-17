@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:48:41 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/17 13:28:21 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/17 13:43:31 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int			vm_exec(t_cmd *cmd, int flags, t_vm *vm, int *out)
 
 	fd_save(vm, 0);
 	treat_var(&cmd->av, &vm->local, &vm->env);
-	if (!(flags & LFT_PIPE) && vm_isbuiltin(cmd, vm, out))
+	if (!(flags & LFT_PIPE) && vm_isextbuiltin(cmd) && vm_isbuiltin(cmd, vm, out))
 	{
 		fd_save(vm, 1);
 		return (2);
