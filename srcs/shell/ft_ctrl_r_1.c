@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 11:12:52 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/17 15:19:19 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:26:44 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void			lookformatch(t_pos *pos, char *keys)
 	(tmp) ? ft_ctrl_r_clear(pos->i, *pos, tmp->cmd) : "";
 }
 
-int					ft_ctrl_r(t_pos *pos, char *keys)
+int					ft_ctrl_r(t_pos *pos, char *k)
 {
 	if (pos->hd == 0)
 	{
@@ -97,8 +97,7 @@ int					ft_ctrl_r(t_pos *pos, char *keys)
 		while (pos->rhs && pos->rhs->next)
 			pos->rhs = pos->rhs->next;
 	}
-	if (keys && !printable(keys) && keys[0] != 18 && keys[0] != 127 && \
-			keys[0] != 6)
+	if (k && !printable(k) && k[0] != 18 && k[0] != 127 && k[0] != 6)
 	{
 		if (pos->crstr)
 		{
@@ -111,9 +110,9 @@ int					ft_ctrl_r(t_pos *pos, char *keys)
 	}
 	else
 	{
-		(keys[0] == 127) ? (void)ft_key_bs(pos, &pos->i, &pos->str, 1) : "";
-		(keys[0] == 127) ? ft_fill_quotes(-1, pos->str, &pos->exp) : "";
-		lookformatch(pos, keys);
+		(k[0] == 127) ? (void)ft_key_bs(pos, &pos->i, &pos->str, 1) : "";
+		(k[0] == 127) ? ft_fill_quotes(-1, pos->str, &pos->exp) : "";
+		lookformatch(pos, k);
 		pos->hd = 4;
 	}
 	return (0);
