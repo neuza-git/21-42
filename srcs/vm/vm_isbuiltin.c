@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:47:56 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/17 14:04:27 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:36:14 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int			do_builtin(t_cmd *cmd, t_vm *vm, int m)
 
 int			vm_isbuiltin(t_cmd *cmd, t_vm *vm, int *out)
 {
-	vm_exec_redir(cmd, cmd->redir, vm); //exec REDIR  IN FATHER
+	vm_exec_redir(cmd, cmd->redir, vm);
 	if (ft_strequ((char *)cmd->av[0], "cd"))
 		return (ft_cd(cmd->av, vm->env));
 	else if (extra_isbuiltin(cmd, vm))
