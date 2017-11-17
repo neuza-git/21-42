@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 15:45:19 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/15 19:09:35 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/17 15:33:24 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,3 @@ t_engine	*en_init(int flags, char **env)
 	engine->flags = flags;
 	return (engine);
 }
-
-
