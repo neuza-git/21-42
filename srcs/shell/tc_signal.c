@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 15:45:36 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/17 13:28:53 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/17 13:52:26 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void		tc_ign_exec(void)
 	signal(SIGCHLD, SIG_DFL);
 }
 
-void		tc_stop_signals(t_engine *engine)
+void		tc_stop_signals(void)
 {
 	g_last_signal = 0;
 	g_waitsig = 0;
@@ -79,7 +79,7 @@ void		tc_stop_signals(t_engine *engine)
 	signal(SIGTTOU, SIG_IGN);
 }
 
-void		tc_listen_signals(t_engine *engine)
+void		tc_listen_signals(void)
 {
 	g_waitsig = 1;
 	signal(SIGINT, &tc_handle_signals);
