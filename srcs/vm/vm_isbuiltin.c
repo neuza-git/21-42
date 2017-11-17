@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:47:56 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/17 14:01:19 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/17 14:04:27 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int			vm_isextbuiltin(t_cmd *cmd)
 		return (1);
 	else if (ft_strequ((char *)cmd->av[0], "cd"))
 		return (1);
-	else if (ft_strequ(cmd->av[0], "env") && cmd->av[1])
+	else if (ft_strequ(cmd->av[0], "env"))
 		return (1);
 	else if (ft_strequ(cmd->av[0], "unsetenv"))
 		return (1);
