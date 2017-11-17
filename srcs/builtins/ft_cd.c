@@ -6,7 +6,7 @@
 /*   By: kbagot <kbagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:20:37 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/16 15:05:10 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 12:49:41 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	up_pwd(t_envent *pwd, t_envent *oldpwd, char **cstin)
 	tmp = NULL;
 	ft_strdel(&pwd->value);
 	if (oldpwd)
-		tmp =ft_str3join(ft_strdup(oldpwd->value), "/", cstin[1]);
+		tmp = ft_str3join(oldpwd->value, "/", cstin[1]);
 	if (oldpwd && (lstat(tmp, &buf) == 0) && S_ISLNK(buf.st_mode) == 1 &&
 			ft_strcmp(cstin[1], "-P") != 0)
 		pwd->value = tmp;
@@ -50,8 +50,8 @@ static void	update_env(t_envent *env, char **cstin)
 
 static void	tilde_it(char **cstin, t_envent *env)
 {
-	int		i;
-	char	*tmp;
+	int			i;
+	char		*tmp;
 	t_envent	*search;
 
 	i = -1;
@@ -69,7 +69,7 @@ static void	tilde_it(char **cstin, t_envent *env)
 int			ft_cd(char **cstin, t_envent *env)
 {
 	t_envent	*search;
-	int		i;
+	int			i;
 
 	i = 0;
 	while (cstin[i])

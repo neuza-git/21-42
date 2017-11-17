@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 11:12:52 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/31 13:08:19 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 13:04:28 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ int					ft_ctrl_r(t_pos *pos, char *keys)
 		while (pos->rhs && pos->rhs->next)
 			pos->rhs = pos->rhs->next;
 	}
-	if (!printable(keys) && keys[0] != 18 && keys[0] != 127 && keys[0] != 6)
+	if (keys && !printable(keys) && keys[0] != 18 && keys[0] != 127 && \
+			keys[0] != 6)
 	{
 		if (pos->crstr)
 		{
