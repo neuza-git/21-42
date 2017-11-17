@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 13:35:18 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/01 13:23:17 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 13:00:58 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ void		ft_fill_history(t_hs **oh, char **cur)
 	char	*str;
 	int		size;
 
-	if (!(cur && *cur && oh && *oh))
+	if (!cur || !*cur)
 		return ;
+	*oh = (oh == NULL) ? NULL : *oh;
 	str = *cur;
 	size = ft_strlen(str);
 	n = *oh;

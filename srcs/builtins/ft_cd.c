@@ -6,23 +6,11 @@
 /*   By: kbagot <kbagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:20:37 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/17 12:59:55 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/17 12:49:41 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-
-static char	*join(char *s1, char *s2, char *s3)
-{
-	char *tmp;
-	char		 *new;
-
-	tmp = ft_strjoin(s1, s2);
-	ft_strdel(&s1);
-	new = ft_strjoin(tmp, s3);
-	ft_strdel(&tmp);
-	return (new);
-}
 
 static void	up_pwd(t_envent *pwd, t_envent *oldpwd, char **cstin)
 {
@@ -32,7 +20,7 @@ static void	up_pwd(t_envent *pwd, t_envent *oldpwd, char **cstin)
 	tmp = NULL;
 	ft_strdel(&pwd->value);
 	if (oldpwd)
-		tmp = join(ft_strdup(oldpwd->value), "/", cstin[1]);
+		tmp = ft_str3join(oldpwd->value, "/", cstin[1]);
 	if (oldpwd && (lstat(tmp, &buf) == 0) && S_ISLNK(buf.st_mode) == 1 &&
 			ft_strcmp(cstin[1], "-P") != 0)
 		pwd->value = tmp;
@@ -62,8 +50,8 @@ static void	update_env(t_envent *env, char **cstin)
 
 static void	tilde_it(char **cstin, t_envent *env)
 {
-	int		i;
-	char	*tmp;
+	int			i;
+	char		*tmp;
 	t_envent	*search;
 
 	i = -1;
@@ -81,7 +69,7 @@ static void	tilde_it(char **cstin, t_envent *env)
 int			ft_cd(char **cstin, t_envent *env)
 {
 	t_envent	*search;
-	int		i;
+	int			i;
 
 	i = 0;
 	while (cstin[i])

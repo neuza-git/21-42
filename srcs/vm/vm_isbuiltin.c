@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:47:56 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/16 15:15:40 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 13:44:28 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ static int	do_built(t_cmd *cmd, t_vm *vm)
 
 int			do_builtin(t_cmd *cmd, t_vm *vm, int m)
 {
-	if (ft_strequ(cmd->av[0], "echo") && m)
+	if (ft_strequ(cmd->av[0], "echo"))
 		ft_echo(cmd);
 	else if (ft_strequ(cmd->av[0], "history"))
-		ft_history(cmd->av, vm, vm->env, m);
+		ft_history(cmd->av, vm, vm->env);
 	else if (ft_strequ(cmd->av[0], "env") && m && !cmd->av[1])
 		ft_env(cmd, &vm->env, vm);
 	else if (ft_strequ((char *)cmd->av[0], "cd"))
