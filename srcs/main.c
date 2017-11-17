@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 15:07:51 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/15 19:07:34 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/17 13:54:37 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		main(int ac, char **av, char **env)
 	engine = NULL;
 	ft_errset("ft_bash");
 	tc_check_sin(env);
-	tc_listen_signals(engine);
+	tc_listen_signals();
 	engine = en_init(0, env);
 	en_loop(engine, &out);
 	return (en_free(&engine, out));
