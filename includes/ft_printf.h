@@ -6,7 +6,7 @@
 /*   By: nbeny <nbeny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 14:57:47 by nbeny             #+#    #+#             */
-/*   Updated: 2017/03/22 13:10:48 by nbeny            ###   ########.fr       */
+/*   Updated: 2017/11/17 15:37:17 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,9 @@ void			ft_init_specs1(t_spec *specs);
 void			ft_init_specs2(t_spec *specs);
 int				ft_dispatcher(t_flag *f, va_list *ap, t_fulist **begin_lst);
 int				ft_pourcent_gestion(t_err *e, t_fulist **begin_lst,
-		t_flag *f, va_list *ap);
-int				ft_error_copy(t_err *e, const char *format, t_fulist **begin_lst);
+				t_flag *f, va_list *ap);
+int				ft_error_copy(t_err *e, const char *format, t_fulist \
+				**begin_lst);
 /*
 **check
 */

@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 13:38:16 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/17 13:53:42 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/17 15:37:26 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ typedef struct		s_pos
 
 char				*get_line(t_engine *engine, int hd, char *hdstr);
 void				ft_set_term(int tfd, int m);
-void				ft_get(char *new); //for debug purpose
+void				ft_get(char *new);
 
 int					ft_get_cursor(int m);
 int					ft_changeline(int index, t_pos pos, char *str, int m);

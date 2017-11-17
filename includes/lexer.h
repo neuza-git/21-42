@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 13:45:30 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/14 16:14:15 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:36:53 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ typedef struct		s_lexer
 	int				desc;
 }					t_lexer;
 
-//t_lexer				*lx_gettokens(t_lexer *lexer, t_engine *en);
 t_token				*lx_newtoken(char *value, int flag);
 int					lx_applytoken(t_token *tok);
 int					lx_verifytokens(t_token *tok);
