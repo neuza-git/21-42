@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:48:41 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/17 13:43:31 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/17 13:58:45 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int			extra_isbuiltin(t_cmd *cmd, t_vm *vm)
 		ft_setenv(cmd->av, &vm->env, &vm->local, &vm->htable);
 	else if (ft_strequ(cmd->av[0], "unsetenv"))
 		ft_unsetenv(cmd->av, &vm->env, &vm->htable);
+	else if (ft_strequ(cmd->av[0], "echo"))
+		ft_echo(cmd);
 	else
 		return (0);
 	return (1);
