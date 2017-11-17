@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:48:41 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/16 15:20:25 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 13:43:31 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,37 @@ static char	*xget_bin(char *cmd, t_vm *vm)
 	return (ht_getbin(cmd, vm->htable));
 }
 
+static void	fd_save(t_vm *vm, int i)
+{
+	if (i == 0)
+	{
+		vm->stdin = dup2(0, 10);
+		vm->stdout = dup2(1, 11);
+		vm->stderr = dup2(2, 12);
+	}
+	if (i == 1)
+	{
+		dup2(vm->stdin, 0);
+		close(vm->stdin);
+		dup2(vm->stdout, 1);
+		close(vm->stdout);
+		dup2(vm->stderr, 2);
+		close(vm->stderr);
+	}
+}
+
 int			vm_exec(t_cmd *cmd, int flags, t_vm *vm, int *out)
 {
 	char	*path;
 	int		ret;
 
+	fd_save(vm, 0);
 	treat_var(&cmd->av, &vm->local, &vm->env);
-	if (!(flags & LFT_PIPE) && vm_isbuiltin(cmd, vm, out))
+	if (!(flags & LFT_PIPE) && vm_isextbuiltin(cmd) && vm_isbuiltin(cmd, vm, out))
+	{
+		fd_save(vm, 1);
 		return (2);
+	}
 	path = NULL;
 	ret = 0;
 	if (!vm_isextbuiltin(cmd) && !(path = xget_bin((char *)cmd->av[0], vm)))
@@ -72,5 +95,6 @@ int			vm_exec(t_cmd *cmd, int flags, t_vm *vm, int *out)
 	else
 		ret = vm_fork_cmd(path, cmd, vm, &vm_fcb_def);
 	(path) ? free(path) : NULL;
+	fd_save(vm, 1);
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 15:45:36 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/15 19:07:32 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/17 13:28:53 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,6 @@ void		tc_stop_signals(t_engine *engine)
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGTTIN, SIG_IGN);
 	signal(SIGTTOU, SIG_IGN);
-	engine->vm->stdin = dup2(0, 10);
-	engine->vm->stdout = dup2(1, 11);
-	engine->vm->stderr = dup2(2, 12);
 }
 
 void		tc_listen_signals(t_engine *engine)
@@ -90,13 +87,4 @@ void		tc_listen_signals(t_engine *engine)
 	signal(SIGWINCH, &tc_handle_signals);
 	signal(SIGTSTP, SIG_IGN);
 	g_pid = 0;
-	if (engine)
-	{
-		dup2(engine->vm->stdin, 0);
-		close(engine->vm->stdin);
-		dup2(engine->vm->stdout, 1);
-		close(engine->vm->stdout);
-		dup2(engine->vm->stderr, 2);
-		close(engine->vm->stderr);
-	}
 }
