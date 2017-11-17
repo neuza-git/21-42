@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 15:04:58 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/15 17:11:42 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/17 21:10:00 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int			vm_fcb_piped(t_cmd *cmd, int pid, t_vm *vm)
 		{
 			if (!vm_exec(cmd->next, LFT_PIPE, vm, 0))
 			{
-				vm->reg |= VRF_LAST_KO;
+			//	vm->reg |= VRF_LAST_KO;//not sure  faut comprendre  avant de validere ce changement
+				vm->reg &= ~VRF_LAST_KO;
 				return (0);
 			}
 		}

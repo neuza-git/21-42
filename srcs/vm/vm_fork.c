@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 15:01:54 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/17 15:42:33 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 21:37:48 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	fork_status(t_cmd *cmd, t_vm *vm, int (*f)(t_cmd *cmd, int, t_vm *))
 		add_job(g_pid, vm, res);
 	else if (WIFSIGNALED(res))
 		ft_putchar('\n');
-	if (vm->execm == FG && !(WIFSTOPPED(res)))
+	if (vm->execm == FG && !(WIFSTOPPED(res)) && !cmd->next)
 		kill(-g_pid, SIGKILL);
 	(f)(cmd, cmd->pid, vm);
 	return (WEXITSTATUS(res));
