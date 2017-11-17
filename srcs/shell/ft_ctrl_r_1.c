@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 11:12:52 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/17 13:04:28 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:19:19 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void			lookformatch(t_pos *pos, char *keys)
 	ft_strdel(&new);
 	if (!pos->rhs)
 		pos->rhs = tmp;
-	ft_ctrl_r_clear(pos->i, *pos, tmp->cmd);
+	(tmp) ? ft_ctrl_r_clear(pos->i, *pos, tmp->cmd) : "";
 }
 
 int					ft_ctrl_r(t_pos *pos, char *keys)
