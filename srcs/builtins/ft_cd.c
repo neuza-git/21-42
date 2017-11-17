@@ -6,11 +6,23 @@
 /*   By: kbagot <kbagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:20:37 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/16 15:05:10 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 12:59:55 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+
+static char	*join(char *s1, char *s2, char *s3)
+{
+	char *tmp;
+	char		 *new;
+
+	tmp = ft_strjoin(s1, s2);
+	ft_strdel(&s1);
+	new = ft_strjoin(tmp, s3);
+	ft_strdel(&tmp);
+	return (new);
+}
 
 static void	up_pwd(t_envent *pwd, t_envent *oldpwd, char **cstin)
 {
@@ -20,7 +32,7 @@ static void	up_pwd(t_envent *pwd, t_envent *oldpwd, char **cstin)
 	tmp = NULL;
 	ft_strdel(&pwd->value);
 	if (oldpwd)
-		tmp =ft_str3join(ft_strdup(oldpwd->value), "/", cstin[1]);
+		tmp = join(ft_strdup(oldpwd->value), "/", cstin[1]);
 	if (oldpwd && (lstat(tmp, &buf) == 0) && S_ISLNK(buf.st_mode) == 1 &&
 			ft_strcmp(cstin[1], "-P") != 0)
 		pwd->value = tmp;
