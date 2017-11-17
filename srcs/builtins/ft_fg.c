@@ -6,7 +6,7 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 20:48:20 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/15 17:48:08 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/17 15:23:00 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	fg_launch(t_job *job, t_vm *vm)
 	{
 		if (WIFSIGNALED(res))
 			ft_putchar('\n');
-		kill(-job->id, SIGKILL); // for piped cmd
+		kill(-job->id, SIGKILL);
 		del_job(job->idc, vm);
 	}
 }
@@ -46,7 +46,7 @@ void		ft_fg(char *arg, t_vm *vm)
 			job = job->next;
 		if ((job->idc == i || !arg) && (WIFSTOPPED(job->status)
 		|| WIFCONTINUED(job->status)))
-		fg_launch(job, vm);
+			fg_launch(job, vm);
 		else
 			bgfg_error(arg, "fg", job);
 	}
