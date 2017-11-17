@@ -6,13 +6,12 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 17:06:43 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/26 13:29:12 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:40:20 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "shell.h"
-#include <stdio.h>
 
 static t_read_args	init_args(void)
 {

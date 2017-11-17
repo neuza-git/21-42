@@ -6,12 +6,11 @@
 /*   By: acorbeau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 16:11:00 by acorbeau          #+#    #+#             */
-/*   Updated: 2017/10/31 13:15:42 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:40:47 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
-#include <stdio.h>
 
 static char		**get_paths(t_envent *env)
 {

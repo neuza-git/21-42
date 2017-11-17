@@ -6,12 +6,11 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 13:12:26 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/14 14:57:21 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:39:26 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
-#include <stdio.h>
 #include <fcntl.h>
 
 t_ast	*ast_newast(void *data, t_ast *left, t_ast *right, int flag)

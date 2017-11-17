@@ -6,12 +6,11 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 16:20:32 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/31 16:20:32 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:41:34 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "htable.h"
-#include <stdio.h>
 
 static int		check_file(char *path, char *name)
 {

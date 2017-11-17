@@ -6,12 +6,11 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 13:12:35 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/14 14:57:30 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:39:41 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
-#include <stdio.h>
 #include <fcntl.h>
 
 static char	**get_avs(t_list *av)

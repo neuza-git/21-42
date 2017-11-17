@@ -6,13 +6,12 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 11:56:07 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/03 16:50:55 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:42:38 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vm.h>
 #include <shell.h>
-#include <stdio.h>
 #include <fcntl.h>
 
 static char	*ft_parse_var_name(char *cur, int *dollar)

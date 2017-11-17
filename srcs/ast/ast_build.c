@@ -6,12 +6,11 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 13:12:50 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/10 15:22:53 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:39:33 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
-#include <stdio.h>
 #include <fcntl.h>
 
 static void	cmd_addfront(t_cmd **cmd, t_cmd *new)

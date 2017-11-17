@@ -6,12 +6,11 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:49:12 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/14 21:14:53 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/17 15:42:24 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-#include <stdio.h>
 #include <fcntl.h>
 
 static int	rdout_andsetadd(t_ast *rd, t_list *av)

@@ -6,12 +6,11 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 15:31:42 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/17 11:00:16 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:40:06 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-#include <stdio.h>
 
 static void		ft_show_history(t_hs *h, int s)
 {

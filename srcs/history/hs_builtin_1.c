@@ -6,12 +6,11 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 13:12:09 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/09/19 13:42:07 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:40:54 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "history.h"
-#include <stdio.h>
 
 void	ft_a_args(char *fn, t_hs *h, t_envent *env)
 {

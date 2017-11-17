@@ -6,14 +6,13 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 16:22:44 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/14 16:21:13 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:41:49 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include "engine.h"
 #include "shell.h"
-#include <stdio.h>
 #include <fcntl.h>
 
 static void	set_tok(t_lexer *lx)

@@ -6,12 +6,11 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 17:30:04 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/14 14:56:04 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:42:08 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-#include <stdio.h>
 
 void			bgfg_error(char *arg, char *fct, t_job *job)
 {

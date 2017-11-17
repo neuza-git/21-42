@@ -6,12 +6,11 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 13:57:55 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/17 11:18:39 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:41:04 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-#include <stdio.h>
 
 void		ft_clear_history(t_hs **oh)
 {

@@ -6,14 +6,13 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 16:22:44 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/17 14:10:07 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:41:53 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include "engine.h"
 #include "shell.h"
-#include <stdio.h>
 #include <fcntl.h>
 
 void			put_charwd(t_lexer *lx)

@@ -6,12 +6,11 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 14:07:35 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/01 13:41:35 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:41:10 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "history.h"
-#include <stdio.h>
 
 static char	*get_x_param(int p, char *lcmd)
 {

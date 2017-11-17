@@ -6,12 +6,11 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:53:55 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/09 17:55:24 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/17 15:39:55 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-#include <stdio.h>
 
 void	ft_bg(char *arg, t_vm *vm)
 {

@@ -6,13 +6,12 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 16:21:17 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/14 15:56:59 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:41:43 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include <fcntl.h>
-#include <stdio.h>
 
 static int	lx_get_flag_ext(char *data)
 {

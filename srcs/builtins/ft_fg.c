@@ -6,12 +6,11 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 20:48:20 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/17 15:23:00 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/17 15:40:01 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-#include <stdio.h>
 
 static void	fg_launch(t_job *job, t_vm *vm)
 {

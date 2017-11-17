@@ -6,13 +6,12 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:48:41 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/17 15:35:08 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/17 15:42:15 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include "shell.h"
-#include <stdio.h>
 
 extern int			g_pid;
 

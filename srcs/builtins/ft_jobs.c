@@ -6,12 +6,11 @@
 /*   By: kbagot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 19:50:25 by kbagot            #+#    #+#             */
-/*   Updated: 2017/11/14 15:01:51 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:40:11 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-#include <stdio.h>
 
 void	update_jobs(t_vm *vm, int display)
 {
