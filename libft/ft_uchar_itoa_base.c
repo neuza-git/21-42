@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_uchar_itoa_base.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nbeny <nbeny@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/19 01:51:58 by nbeny             #+#    #+#             */
+/*   Updated: 2017/11/19 01:55:22 by nbeny            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static void		ft_init(char *s)
@@ -50,7 +62,7 @@ static char		*ft_special(unsigned char nb, int base)
 	return (NULL);
 }
 
-char	*ft_uchar_itoa_base(unsigned char nb, int base)
+char			*ft_uchar_itoa_base(unsigned char nb, int base)
 {
 	char				*itoa;
 	char				s[16];

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_short_itoa_base.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nbeny <nbeny@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/19 01:51:15 by nbeny             #+#    #+#             */
+/*   Updated: 2017/11/19 01:54:37 by nbeny            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static void		ft_init(char *s)
@@ -52,7 +64,7 @@ static char		*ft_special(short int nb, int base)
 	return (NULL);
 }
 
-char	*ft_short_itoa_base(short int nb, int base)
+char			*ft_short_itoa_base(short int nb, int base)
 {
 	char		*itoa;
 	char		s[16];
