@@ -6,12 +6,14 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:47:00 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/17 13:28:23 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/23 21:41:52 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include "shell.h"
+
+int		g_pid = 0;
 
 int		vm_execentry(t_ast *entry, t_vm *vm, int *out)
 {
@@ -66,7 +68,8 @@ int		vm_readast(t_vm *vm, t_ast *ptr, int *out)
 		return (1);
 	while (ptr)
 	{
-		if (ptr->flags & LFT_AND)
+		g_pid = 0;
+		if (ptr->flags & LFT_AND && ptr->flags != LXS_NONE)
 			vm->execm = BG;
 		else
 			vm->execm = FG;
@@ -77,6 +80,7 @@ int		vm_readast(t_vm *vm, t_ast *ptr, int *out)
 		else
 			vm_execentry(ptr->left, vm, out);
 		(ptr) ? ptr = ptr->right : NULL;
+		g_pid = 0;
 	}
 	return (1);
 }

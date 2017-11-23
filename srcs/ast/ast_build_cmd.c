@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 13:12:43 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/31 13:12:44 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/23 20:51:58 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static t_ast	*cmd_parse_redir(t_token **tk, t_ast **elem)
 	ret->left = ast_newast(rdav, NULL, NULL, LFD_LST);
 	ast_inright(elem, ret);
 	*tk = token;
-	if (token && ((token->flag & LFT_RDAV) || (ret->flags & LM_RDTOKEN)))
+	if (token)
 		cmd_parse_redir(tk, elem);
 	return (*elem);
 }

@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 15:45:36 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/17 13:52:26 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/23 21:40:17 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int			g_waitsig;
 int			g_last_signal = 0;
-int			g_pid = 0;
 
 void		display_status(t_job *i)
 {
@@ -86,5 +85,4 @@ void		tc_listen_signals(void)
 	signal(SIGQUIT, &tc_handle_signals);
 	signal(SIGWINCH, &tc_handle_signals);
 	signal(SIGTSTP, SIG_IGN);
-	g_pid = 0;
 }
