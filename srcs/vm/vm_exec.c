@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:48:41 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/17 15:42:15 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/23 23:16:02 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,8 @@ static int	fd_save(t_vm *vm, int i)
 	if (i == 1)
 	{
 		dup2(vm->stdin, 0);
-		close(vm->stdin);
 		dup2(vm->stdout, 1);
-		close(vm->stdout);
 		dup2(vm->stderr, 2);
-		close(vm->stderr);
 	}
 	return (1);
 }

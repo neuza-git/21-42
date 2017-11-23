@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:49:12 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/17 15:42:24 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/23 23:21:37 by kbagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	rdout_setadd(t_ast *rd, t_list *av)
 	if (av && av->next)
 	{
 		return (vm_open_dup((char *)av->next->content, \
-					(int)(*((char *)av->content)) - 48,
+					ft_atoi(av->content),
 					(rd->flags & LFT_RDOSET) ? 0 : VRDF_APPEND));
 	}
 	else if (av && rd->flags & RDF_RIGHTAV)
@@ -47,14 +47,14 @@ static int	rdout_setaddand(t_list *av)
 
 	if (av)
 	{
-		fds[0] = ((int)(*((char *)av->content)) - 48);
+		fds[0] = ft_atoi(av->content);
 		if (av->next && ((char *)av->next->content)[0] == '-')
 		{
 			close(fds[0]);
 			return (1);
 		}
 		else if (av->next)
-			fds[1] = ((int)(*((char *)av->next->content)) - 48);
+			fds[1] = ft_atoi(av->next->content);
 		else
 		{
 			fds[1] = fds[0];
