@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 13:47:00 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/23 21:41:52 by kbagot           ###   ########.fr       */
+/*   Updated: 2017/11/24 13:30:35 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ t_ast	*vm_exec_orentry(t_ast *entry, t_vm *vm, int *out)
 	entry = entry->right;
 	if (!res[0] || vm->reg & VRF_LAST_KO)
 		res[1] = vm_execentry(entry->left, vm, out);
-	while (entry->right && entry->flags & LFT_OROR && (res[0] || res[1]))
+	while (entry && entry->right \
+			&& entry->flags & LFT_OROR && (res[0] || res[1]))
 		entry = entry->right;
 	return (entry);
 }
@@ -52,7 +53,7 @@ t_ast	*vm_exec_andentry(t_ast *entry, t_vm *vm, int *out)
 	entry = entry->right;
 	if (res && !(vm->reg & VRF_LAST_KO))
 		res = vm_execentry(entry->left, vm, out);
-	while (entry->right && entry->flags & LFT_ANDAND)
+	while (entry && entry->right && entry->flags & LFT_ANDAND)
 	{
 		entry = entry->right;
 		if (res && !(vm->reg & VRF_LAST_KO))
