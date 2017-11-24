@@ -102,7 +102,7 @@ PATH_SRC = srcs
 
 OBJ = $(patsubst $(PATH_SRC)/%.c, obj/%.o, $(SRC))
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 LIBS = -L ./libft/ -lft -L ./ftprintf/ -lprintf -ltermcap
 
