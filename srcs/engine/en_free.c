@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 13:13:41 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/10/31 13:13:42 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/11/24 10:55:59 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int			en_free(t_engine **en, int out)
 		ft_clear_history(&((*en)->vm->hs));
 		vm_free(&(*en)->vm);
 	}
+	if ((*en)->cp)
+		ft_strdel(&(*en)->cp);
 	if ((*en)->buffer)
 		free((*en)->buffer);
 	(*en)->tfd = close((*en)->tfd);
