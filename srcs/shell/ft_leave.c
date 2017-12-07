@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 13:27:14 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/08 11:51:57 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/12/07 13:33:13 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,21 @@ static void	ft_yet_exp(unsigned int exp, int hd)
 	ft_perror(NULL, ERR_ENDOFF);
 }
 
+static int	last_nl(char *str)
+{
+	int		i;
+	int		p;
+
+	i = -1;
+	p = 0;
+	while (str[++i] != '\0')
+	{
+		if (str[i] == '\n')
+			p = i;
+	}
+	return (p + 1);
+}
+
 int			ft_leave_hd(char *str, char *hdstr)
 {
 	char	*new;
@@ -40,8 +55,9 @@ int			ft_leave_hd(char *str, char *hdstr)
 		new = ft_str3join("\n", hdstr, "\n");
 		snew = ft_strlen(hdstr);
 		sstr = ft_strlen(str);
-		if (ft_strstr(str, new) || ft_strnequ(str, new + 1, ft_strlen(new + 1))\
-			|| ((sstr - snew) > 0 && ft_strequ(str + (sstr - snew), hdstr)))
+		if (ft_strstr(str, new) || \
+				ft_strnequ(str, new + 1, ft_strlen(new + 1)) || \
+				((sstr - snew) > 0 && ft_strequ(str + last_nl(str), hdstr)))
 		{
 			ft_strdel(&new);
 			return (1);

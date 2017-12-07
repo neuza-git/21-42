@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 16:00:09 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/14 14:49:35 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/12/07 12:50:13 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_special_char(char *k, t_pos *p)
 		{
 			ft_key_end(&p->i, *p);
 			(p->exp) ? ft_putstr_fd("\n", p->tfd) : "";
-			return (1);
+			return (((p->hd == 2) ? 0 : 1));
 		}
 		if (k[0] == 10 && k[1] == '\0' && p->hd == 2)
 			return (!ft_leave_hd(p->str, p->hdstr) ? 0 : 1);

@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 16:45:22 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/11/14 16:51:01 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/12/07 12:55:33 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void			ft_perror(char *err, int flag)
 		ft_putstr_fd(err, 2);
 	if (flag && err)
 		ft_putstr_fd(": ", 2);
+	if (flag == ERR_NOACCESS)
+		ft_putstr_fd("cannot write in this fd", 2);
 	if (flag == ERR_NOCMD)
 		ft_putstr_fd("command not found", 2);
 	if (flag == ERR_NOFOUND)
