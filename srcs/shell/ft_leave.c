@@ -6,7 +6,7 @@
 /*   By: tgascoin <tgascoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 13:27:14 by tgascoin          #+#    #+#             */
-/*   Updated: 2017/12/07 13:33:13 by tgascoin         ###   ########.fr       */
+/*   Updated: 2017/12/07 13:48:59 by tgascoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	last_nl(char *str)
 		if (str[i] == '\n')
 			p = i;
 	}
-	return (p + 1);
+	return (p + ((p != 0) ? 1 : 0));
 }
 
 int			ft_leave_hd(char *str, char *hdstr)
